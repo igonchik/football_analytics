@@ -1,7 +1,7 @@
 from django.db import models
 from datetime import datetime
 from django.contrib.auth.models import User as TUser
-123
+
 
 class TLocalization(models.Model):
     langcode = models.CharField(max_length=5, primary_key=True)
