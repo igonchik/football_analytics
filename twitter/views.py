@@ -183,9 +183,9 @@ def index(request):
         Главная страница
     """
     auths = TTweetsAuthor.objects.all()
-    for rec_auth in auths:
-        try:
-            get_user_timeline(rec_auth)
-        except:
-            break
+    #for rec_auth in auths:
+    #    try:
+    #        get_user_timeline(rec_auth)
+    #    except:
+    #        break
     return render(request, 'main.html', {}, context_instance=RequestContext(request))

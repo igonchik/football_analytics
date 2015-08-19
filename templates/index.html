@@ -10,10 +10,18 @@
     <title>{% trans "SiteName" %}</title>
     <link href="{% static "favicon.png" %}" rel="icon" type="image/icon">
     <link rel="apple-touch-icon" href="{% static "apple-touch-favicon.png" %}"/>
-    <link href="{% static "css/home/page.css" %}" rel="icon" type="text/css">
+    <link href="{% static "css/home/page.css" %}" type="text/css" rel="stylesheet">
+    <link href="{% static "css/home/menu_style.css" %}" type="text/css" rel="stylesheet">
 </head>
 <body class="lang-{{ LANGUAGE_CODE }}">
 
+<div class="ph-line-nav nav">
+    <a href="#">Главная</a>
+    <a href="#">О нас</a>
+    <a href="#">Галерея</a>
+    <a href="#" id="settings"></a>
+    <div class="effect"></div>
+</div>
 
 {% if user.is_authenticated %}
     <p>Welcome, {{ user.username }}. Thanks for logging in.</p>
