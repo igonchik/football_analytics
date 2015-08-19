@@ -16,6 +16,9 @@ class TTweetsAuthor(models.Model):
     name = models.CharField(max_length=255)
     rating = models.PositiveIntegerField(default=500)
     maxid = models.PositiveIntegerField(default=0)
+    realname = models.CharField(max_length=255)
+    descr = models.TextField(blank=True, null=True)
+    logo = models.ImageField(upload_to='twitter/photo', blank=True, null=True)
 
 
 class TTweetsHashTag(models.Model):

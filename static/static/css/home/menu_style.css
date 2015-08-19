@@ -1,7 +1,3 @@
-body {
-  background: #f2f2f2;
-  text-shadow: 0 1px 0 white; }
-
 .nav {
   text-align: center;
   font-size: 1.5em;
@@ -26,11 +22,13 @@ body {
 }
 
 .nav a#settings:hover {
-  background: url("../../img/settings_hower.svg") no-repeat scroll 45px 1em;
+  background: url("../../img/settings_hower.svg") no-repeat scroll 45px 0.75em;
+  background-size: 1.5em;
 }
 
 .nav a#settings {
-  background: url("../../img/settings.svg") no-repeat scroll 45px 1em;
+  background: url("../../img/settings.svg") no-repeat scroll 45px 0.75em;
+  background-size: 1.5em;
 }
 
 .effect {
@@ -54,12 +52,11 @@ body {
 .ph-line-nav .effect {
   width: 90px;
   height: 2px;
-  bottom: 36px;
+  bottom: 1.5em;
   background: #c6342e;
   box-shadow: 0 1px 0 white;
   margin-left:-45px;
 }
-
 
 
 
