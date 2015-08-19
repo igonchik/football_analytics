@@ -11,10 +11,11 @@ class TLocalization(models.Model):
 
 
 class TTweetsAuthor(models.Model):
-    ta_id = models.PositiveIntegerField(primary_key=True)
+    ta_id = models.AutoField(primary_key=True)
     url = models.URLField()
     name = models.CharField(max_length=255)
     rating = models.PositiveIntegerField(default=500)
+    maxid = models.PositiveIntegerField(default=0)
 
 
 class TTweetsHashTag(models.Model):
@@ -25,7 +26,7 @@ class TTweetsHashTag(models.Model):
 
 
 class TTweetsTweet(models.Model):
-    tt_id = models.PositiveIntegerField(primary_key=True)
+    tt_id = models.AutoField(primary_key=True)
     ta_id = models.ForeignKey(TTweetsAuthor)
     text = models.TextField()
     created_at = models.DateTimeField()
@@ -36,7 +37,7 @@ class TTweetsTweet(models.Model):
 
 
 class TWorldPart(models.Model):
-    wp_id = models.PositiveIntegerField(primary_key=True)
+    wp_id = models.AutoField(primary_key=True)
     coordX = models.PositiveIntegerField()
     coordY = models.PositiveIntegerField()
 
@@ -51,7 +52,7 @@ class TWorldPartTr(models.Model):
 
 
 class TWorldRegion(models.Model):
-    wr_id = models.PositiveIntegerField(primary_key=True)
+    wr_id = models.AutoField(primary_key=True)
     wp_id = models.ForeignKey(TWorldPart)
     coordX = models.PositiveIntegerField()
     coordY = models.PositiveIntegerField()
@@ -67,7 +68,7 @@ class TWorldRegionTr(models.Model):
 
 
 class TWorldCountry(models.Model):
-    wc_id = models.PositiveIntegerField(primary_key=True)
+    wc_id = models.AutoField(primary_key=True)
     wr_id = models.ForeignKey(TWorldRegion)
     coordX = models.PositiveIntegerField()
     coordY = models.PositiveIntegerField()
@@ -83,7 +84,7 @@ class TWorldCountryTr(models.Model):
 
 
 class TWorldCity(models.Model):
-    wcity_id = models.PositiveIntegerField(primary_key=True)
+    wcity_id = models.AutoField(primary_key=True)
     wc_id = models.ForeignKey(TWorldCountry)
     coordX = models.PositiveIntegerField()
     coordY = models.PositiveIntegerField()
@@ -99,7 +100,7 @@ class TWorldCityTr(models.Model):
 
 
 class TContentVideoView(models.Model):
-    cvv_id = models.PositiveIntegerField(primary_key=True)
+    cvv_id = models.AutoField(primary_key=True)
     tstamp_update = models.DateTimeField(auto_now=True)
     content = models.FileField(upload_to='videoview')
     logo = models.ImageField(upload_to='videoview_image')
@@ -116,7 +117,7 @@ class TContentVideoViewTr(models.Model):
 
 
 class TContentVideo(models.Model):
-    cvv_id = models.PositiveIntegerField(primary_key=True)
+    cvv_id = models.AutoField(primary_key=True)
     tstamp_update = models.DateTimeField(auto_now=True)
     content = models.FileField(upload_to='video')
     logo = models.ImageField(upload_to='video_image', blank=True, null=True)
@@ -133,7 +134,7 @@ class TContentVideoTr(models.Model):
 
 
 class TContentPhoto(models.Model):
-    cvv_id = models.PositiveIntegerField(primary_key=True)
+    cvv_id = models.AutoField(primary_key=True)
     tstamp_update = models.DateTimeField(auto_now=True)
     content = models.ImageField(upload_to='photo')
     logo = models.ImageField(upload_to='photo', blank=True, null=True)
@@ -150,7 +151,7 @@ class TContentPhotoTr(models.Model):
 
 
 class TContentArticle(models.Model):
-    ca_id = models.PositiveIntegerField(primary_key=True)
+    ca_id = models.AutoField(primary_key=True)
     tstamp_update = models.DateTimeField(auto_now=True)
     content = models.TextField()
     logo = models.ImageField(upload_to='article', blank=True, null=True)
@@ -168,7 +169,7 @@ class TContentArticleTr(models.Model):
 
 
 class TFootballDiv(models.Model):
-    fd_id = models.PositiveIntegerField(primary_key=True)
+    fd_id = models.AutoField(primary_key=True)
     url = models.URLField(blank=True, null=True)
 
 
@@ -182,7 +183,7 @@ class TFootballDivTr(models.Model):
 
 
 class TFootballPlayer(models.Model):
-    fp_id = models.PositiveIntegerField(primary_key=True)
+    fp_id = models.AutoField(primary_key=True)
     official_url = models.URLField(null=True, blank=True)
     stat_url = models.URLField(null=True, blank=True)
     twitter = models.URLField(null=True, blank=True)
@@ -201,7 +202,7 @@ class TFootballPlayerTr(models.Model):
 
 
 class TFootballClub(models.Model):
-    fc_id = models.PositiveIntegerField(primary_key=True)
+    fc_id = models.AutoField(primary_key=True)
     stat_url = models.URLField(null=True, blank=True)
     official_url = models.URLField(null=True, blank=True)
     twitter = models.URLField(null=True, blank=True)
@@ -267,12 +268,12 @@ class TTweetsTweetHashTag(models.Model):
 
 
 class TTweetsClubHashTag(models.Model):
-    tch_id = models.PositiveIntegerField(primary_key=True)
+    tch_id = models.AutoField(primary_key=True)
     fc_id = models.ForeignKey(TFootballClub)
     th_id = models.ForeignKey(TTweetsHashTag)
 
 
 class TTweetsPlayerHashTag(models.Model):
-    tph_id = models.PositiveIntegerField(primary_key=True)
+    tph_id = models.AutoField(primary_key=True)
     fp_id = models.ForeignKey(TFootballPlayer)
     th_id = models.ForeignKey(TTweetsHashTag)

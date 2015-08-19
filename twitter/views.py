@@ -105,7 +105,7 @@ def never_ever_cache(decorated_function):
 
 @transaction.atomic
 def get_user_timeline(author):
-    last_id = 1
+    last_id = author.maxid
     if last_id != 0:
         try:
             user_timeline = twitter.get_user_timeline(screen_name=author.name, since_id=last_id)
@@ -113,61 +113,79 @@ def get_user_timeline(author):
             user_timeline = twitter.get_user_timeline(screen_name=author.name)
             for rec in user_timeline:
                 if int(rec['id_str']) >= last_id:
-                    last_id = last_id
+                    last_id = int(rec['id_str'])
                     break
             user_timeline = twitter.get_user_timeline(screen_name=author.name, since_id=last_id)
     else:
         user_timeline = twitter.get_user_timeline(screen_name=author.name)
-    msg = []
     for rec in user_timeline:
         hashtags = []
         for ht in rec['entities']['hashtags']:
             hashtags.append(ht['text'])
         try:
-            msg.append([int(rec['id_str']), rec['text'], hashtags,
-                        datetime.strptime(rec['created_at'], '%a %b %d %H:%M:%S %z %Y')])
+            msg = [int(rec['id_str']), rec['text'], hashtags,
+                        datetime.strptime(rec['created_at'], '%a %b %d %H:%M:%S %z %Y')]
         except:
             if '+' in rec['created_at']:
-                msg.append([int(rec['id_str']), rec['text'], hashtags,
+                msg = [int(rec['id_str']), rec['text'], hashtags,
                             datetime.strptime('{0}{1}'.format(rec['created_at'][:len(rec['created_at'])-11],
                                                               rec['created_at'][len(rec['created_at'])-5:]),
                                               '%a %b %d %H:%M:%S %Y') +
                             _datetime.timedelta(hours=int(rec['created_at'][len(rec['created_at'])-9:
                             len(rec['created_at'])-7]),
                                                 minutes=int(rec['created_at'][len(rec['created_at'])-7:
-                                                len(rec['created_at'])-5]))])
+                                                len(rec['created_at'])-5]))]
             else:
-                msg.append([int(rec['id_str']), rec['text'], hashtags,
+                 msg = [int(rec['id_str']), rec['text'], hashtags,
                             datetime.strptime('{0}{1}'.format(rec['created_at'][:len(rec['created_at'])-11],
                                                               rec['created_at'][len(rec['created_at'])-5:]),
                                               '%a %b %d %H:%M:%S %Y') -
                             _datetime.timedelta(hours=int(rec['created_at'][len(rec['created_at'])-9:
                             len(rec['created_at'])-7]),
                                                 minutes=int(rec['created_at'][len(rec['created_at'])-7:
-                                                len(rec['created_at'])-5]))])
-        tweet = TTweetsTweet(tt_id=msg[-1][0], ta_id=author, text=msg[-1][1], created_at=msg[-1][3])
-        tweet.save()
-        predicates = []
-        for word in hashtags:
-            predicates.append(('th_id__hashtag', word.upper()))
-            obj = TTweetsHashTag.objects.get_or_create(hashtag=word.upper())
-            TTweetsTweetHashTag(th_id=obj, tt_id=tweet).save()
-        for word in tweet.text:
-            predicates.append(('th_id__hashtag', word.upper()))
-        q_list = [Q(x) for x in predicates]
-        fc = TTweetsClubHashTag.objects.select_related('th_id').filter(reduce(or_, q_list)).values_list('fc_id_id')
-        fp = TTweetsPlayerHashTag.objects.select_related('th_id').filter(reduce(or_, q_list)).values_list('fp_id_id')
-        for fc_rec in fc:
-            tclubtweet = TTweetsClubTweetRel(fc_id_id=int(fc_rec), tt_id=tweet)
-            tclubtweet.save()
-        for fp_rec in fp:
-            tplayertweet = TTweetsPlayerTweetRel(fp_id_id=int(fp_rec), tt_id=tweet)
-            tplayertweet.save()
+                                                len(rec['created_at'])-5]))]
+        if not TTweetsTweet.objects.filter(tt_id=msg[0]).exists():
+            tweet = TTweetsTweet(tt_id=msg[0], ta_id=author, text=msg[1], created_at=msg[3])
+            tweet.save()
+            predicates = []
+            for word in hashtags:
+                predicates.append(('th_id__hashtag', word.upper()))
+                obj = TTweetsHashTag.objects.get_or_create(hashtag=word.upper())[0]
+                TTweetsTweetHashTag(th_id=obj, tt_id=tweet).save()
+            for word in tweet.text.split(' '):
+                predicates.append(('th_id__hashtag', word.upper()))
+            q_list = [Q(x) for x in predicates]
+            fc = TTweetsClubHashTag.objects.select_related('th_id').filter(reduce(or_, q_list)).values_list('fc_id_id')
+            fp = TTweetsPlayerHashTag.objects.select_related('th_id').filter(reduce(or_, q_list)).\
+                values_list('fp_id_id')
+            for fc_rec in fc:
+                tclubtweet = TTweetsClubTweetRel(fc_id_id=int(fc_rec), tt_id=tweet)
+                tclubtweet.save()
+            for fp_rec in fp:
+                tplayertweet = TTweetsPlayerTweetRel(fp_id_id=int(fp_rec), tt_id=tweet)
+                tplayertweet.save()
+            if rec['retweeted']:
+                msg = rec['retweeted_status']['user']
+                obj, created = TTweetsAuthor.objects.get_or_create(url=msg['url'], name=msg['screen_name'])
+                if not created and obj.rating < author.rating:
+                    author.rating = (author.rating-obj.rating)/4*3 + obj.rating
+                    obj.rating += (author.rating-obj.rating)/4
+                else:
+                    obj.rating = author.rating
+                obj.save()
+    if len(user_timeline) > 0:
+        author.maxid = int(user_timeline[0]['id'])
+        author.save()
 
 
 def index(request):
     """
         Главная страница
     """
-    #auth = twitter.get_authentication_tokens()
-    return render(request, 'main.html', {}, context_instance = RequestContext(request))
+    auths = TTweetsAuthor.objects.all()
+    for rec_auth in auths:
+        try:
+            get_user_timeline(rec_auth)
+        except:
+            break
+    return render(request, 'main.html', {}, context_instance=RequestContext(request))
