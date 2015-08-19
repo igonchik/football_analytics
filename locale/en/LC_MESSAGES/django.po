@@ -1,0 +1,38 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2015-08-15 10:52+0300\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: football_analytics/settings.py:30
+msgid "English"
+msgstr "English"
+
+#: football_analytics/settings.py:31
+msgid "Russian"
+msgstr "Russian"
+
+#: templates/index.html:9 templates/index.html.py:10
+msgid "SiteName"
+msgstr "My site"
+
+#: templates/index.html:43
+msgid "Corporate Information"
+msgstr ""
+
+#: templates/index.html:59
+msgid "globerror"
+msgstr "Ooops, error!"

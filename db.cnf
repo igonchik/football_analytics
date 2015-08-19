@@ -1,0 +1,5 @@
+[client]
+database = tweet_analytics_tweet_analytics
+user = tweet_analytics
+password = 3c5eb9
+default-character-set = utf8
