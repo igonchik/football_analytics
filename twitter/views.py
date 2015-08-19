@@ -31,7 +31,9 @@ twitter = Twython(app_key='wPVtiRIQ7fabNAUijdHRugaXI',
                   oauth_token_secret='igPf79C9sKxWM4KHXXUO27zBdKx8BJSaLCaHpGkoHFaAa')
 
 def set_language(request):
-    next = request.REQUEST.get('next', None)
+    next = None
+    if request.method == 'GET' and 'next' in request.GET:
+        next = request.GET['next']
     if not next:
         next = request.META.get('HTTP_REFERER', None)
     if not next:
