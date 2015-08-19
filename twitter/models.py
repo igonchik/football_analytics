@@ -17,6 +17,7 @@ class TTweetsAuthor(models.Model):
     rating = models.PositiveIntegerField(default=500)
 
 
+
 class TTweetsHashTag(models.Model):
     hashtag = models.CharField(max_length=255, primary_key=True)
 
