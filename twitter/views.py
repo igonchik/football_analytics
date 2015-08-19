@@ -30,6 +30,7 @@ twitter = Twython(app_key='wPVtiRIQ7fabNAUijdHRugaXI',
                   oauth_token='248080663-A6NXywiSlgNEdccrmPhM2gUwe74c86OkxLN6BufI',
                   oauth_token_secret='igPf79C9sKxWM4KHXXUO27zBdKx8BJSaLCaHpGkoHFaAa')
 
+
 def set_language(request):
     next = None
     if request.method == 'GET' and 'next' in request.GET:
