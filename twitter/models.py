@@ -275,4 +275,4 @@ class TTweetsClubHashTag(models.Model):
 class TTweetsPlayerHashTag(models.Model):
     tph_id = models.PositiveIntegerField(primary_key=True)
     fp_id = models.ForeignKey(TFootballPlayer)
-    th_id = models.ForeignKey(TTweetsHashTag)j
+    th_id = models.ForeignKey(TTweetsHashTag)j321
