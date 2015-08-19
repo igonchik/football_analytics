@@ -8,7 +8,7 @@ class TLocalization(models.Model):
 
     def __unicode__(self):
         return self.langcode
-123
+
 
 class TTweetsAuthor(models.Model):
     ta_id = models.PositiveIntegerField(primary_key=True)
