@@ -17,6 +17,13 @@ class TTweetsAuthor(models.Model):
     rating = models.PositiveIntegerField(default=500)
 
 
+class TTweetsHashTag(models.Model):
+    hashtag = models.CharField(max_length=500, primary_key=True)
+
+    def __unicode__(self):
+        return self.hashtag
+
+
 class TTweetsTweet(models.Model):
     tt_id = models.PositiveIntegerField(primary_key=True)
     ta_id = models.ForeignKey(TTweetsAuthor)
@@ -252,13 +259,6 @@ class TTweetsClubTweetRel(models.Model):
 class TTweetsPlayerTweetRel(models.Model):
     fp_id = models.ForeignKey(TFootballClub)
     tt_id = models.ForeignKey(TTweetsTweet)
-
-
-class TTweetsHashTag(models.Model):
-    hashtag = models.CharField(max_length=500, primary_key=True)
-
-    def __unicode__(self):
-        return self.hashtag
 
 
 class TTweetsTweetHashTag(models.Model):
