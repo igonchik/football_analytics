@@ -13,12 +13,12 @@ class TLocalization(models.Model):
 class TTweetsAuthor(models.Model):
     ta_id = models.PositiveIntegerField(primary_key=True)
     url = models.URLField()
-    name = models.CharField(max_length=500)
+    name = models.CharField(max_length=255)
     rating = models.PositiveIntegerField(default=500)
 
 
 class TTweetsHashTag(models.Model):
-    hashtag = models.CharField(max_length=500, primary_key=True)
+    hashtag = models.CharField(max_length=255, primary_key=True)
 
     def __unicode__(self):
         return self.hashtag
@@ -44,7 +44,7 @@ class TWorldPart(models.Model):
 class TWorldPartTr(models.Model):
     wp_id = models.ForeignKey(TWorldPart)
     langcode = models.ForeignKey(TLocalization)
-    wp_name = models.CharField(max_length=500)
+    wp_name = models.CharField(max_length=255)
 
     def __unicode__(self):
         return self.wp_name
@@ -60,7 +60,7 @@ class TWorldRegion(models.Model):
 class TWorldRegionTr(models.Model):
     wr_id = models.ForeignKey(TWorldRegion)
     langcode = models.ForeignKey(TLocalization)
-    wr_name = models.CharField(max_length=500)
+    wr_name = models.CharField(max_length=255)
 
     def __unicode__(self):
         return self.wr_name
@@ -76,7 +76,7 @@ class TWorldCountry(models.Model):
 class TWorldCountryTr(models.Model):
     wc_id = models.ForeignKey(TWorldCountry)
     langcode = models.ForeignKey(TLocalization)
-    wc_name = models.CharField(max_length=500)
+    wc_name = models.CharField(max_length=255)
 
     def __unicode__(self):
         return self.wc_name
@@ -92,7 +92,7 @@ class TWorldCity(models.Model):
 class TWorldCityTr(models.Model):
     wcity_id = models.ForeignKey(TWorldCity)
     langcode = models.ForeignKey(TLocalization)
-    wcity_name = models.CharField(max_length=500)
+    wcity_name = models.CharField(max_length=255)
 
     def __unicode__(self):
         return self.wcity_name
@@ -100,7 +100,7 @@ class TWorldCityTr(models.Model):
 
 class TContentVideoView(models.Model):
     cvv_id = models.PositiveIntegerField(primary_key=True)
-    tstamp_update = models.DateTimeField(default=datetime.now())
+    tstamp_update = models.DateTimeField(auto_now=True)
     content = models.FileField(upload_to='videoview')
     logo = models.ImageField(upload_to='videoview_image')
 
@@ -108,7 +108,7 @@ class TContentVideoView(models.Model):
 class TContentVideoViewTr(models.Model):
     cvv_id = models.ForeignKey(TContentVideoView)
     langcode = models.ForeignKey(TLocalization)
-    cvv_name = models.CharField(max_length=500)
+    cvv_name = models.CharField(max_length=255)
     cvv_desk = models.CharField(max_length=500, blank=True, null=True)
 
     def __unicode__(self):
@@ -117,7 +117,7 @@ class TContentVideoViewTr(models.Model):
 
 class TContentVideo(models.Model):
     cvv_id = models.PositiveIntegerField(primary_key=True)
-    tstamp_update = models.DateTimeField(default=datetime.now())
+    tstamp_update = models.DateTimeField(auto_now=True)
     content = models.FileField(upload_to='video')
     logo = models.ImageField(upload_to='video_image', blank=True, null=True)
 
@@ -125,8 +125,8 @@ class TContentVideo(models.Model):
 class TContentVideoTr(models.Model):
     cv_id = models.ForeignKey(TContentVideo)
     langcode = models.ForeignKey(TLocalization)
-    cv_name = models.CharField(max_length=500)
-    cv_desk = models.CharField(max_length=500)
+    cv_name = models.CharField(max_length=255)
+    cv_desk = models.CharField(max_length=255)
 
     def __unicode__(self):
         return self.cv_name
@@ -134,7 +134,7 @@ class TContentVideoTr(models.Model):
 
 class TContentPhoto(models.Model):
     cvv_id = models.PositiveIntegerField(primary_key=True)
-    tstamp_update = models.DateTimeField(default=datetime.now())
+    tstamp_update = models.DateTimeField(auto_now=True)
     content = models.ImageField(upload_to='photo')
     logo = models.ImageField(upload_to='photo', blank=True, null=True)
 
@@ -142,7 +142,7 @@ class TContentPhoto(models.Model):
 class TContentPhotoTr(models.Model):
     cp_id = models.ForeignKey(TContentPhoto)
     langcode = models.ForeignKey(TLocalization)
-    cp_name = models.CharField(max_length=500)
+    cp_name = models.CharField(max_length=255)
     cp_desk = models.CharField(max_length=500, blank=True, null=True)
 
     def __unicode__(self):
@@ -151,7 +151,7 @@ class TContentPhotoTr(models.Model):
 
 class TContentArticle(models.Model):
     ca_id = models.PositiveIntegerField(primary_key=True)
-    tstamp_update = models.DateTimeField(default=datetime.now())
+    tstamp_update = models.DateTimeField(auto_now=True)
     content = models.TextField()
     logo = models.ImageField(upload_to='article', blank=True, null=True)
     author = models.ForeignKey(TUser)
@@ -160,7 +160,7 @@ class TContentArticle(models.Model):
 class TContentArticleTr(models.Model):
     ca_id = models.ForeignKey(TContentArticle)
     langcode = models.ForeignKey(TLocalization)
-    ca_name = models.CharField(max_length=500)
+    ca_name = models.CharField(max_length=255)
     ca_desk = models.CharField(max_length=500, blank=True, null=True)
 
     def __unicode__(self):
@@ -175,7 +175,7 @@ class TFootballDiv(models.Model):
 class TFootballDivTr(models.Model):
     fd_id = models.ForeignKey(TFootballDiv)
     langcode = models.ForeignKey(TLocalization)
-    fd_name = models.CharField(max_length=500)
+    fd_name = models.CharField(max_length=255)
 
     def __unicode__(self):
         return self.fd_name
@@ -193,7 +193,7 @@ class TFootballPlayer(models.Model):
 class TFootballPlayerTr(models.Model):
     fp_id = models.ForeignKey(TFootballPlayer)
     langcode = models.ForeignKey(TLocalization)
-    fc_name = models.CharField(max_length=500)
+    fc_name = models.CharField(max_length=255)
     fc_desc = models.CharField(max_length=500, blank=True, null=True)
 
     def __unicode__(self):
@@ -217,7 +217,7 @@ class TFootballClub(models.Model):
 class TFootballClubTr(models.Model):
     fc_id = models.ForeignKey(TFootballClub)
     langcode = models.ForeignKey(TLocalization)
-    fc_name = models.CharField(max_length=500)
+    fc_name = models.CharField(max_length=255)
     fc_desc = models.CharField(max_length=500, blank=True, null=True)
 
     def __unicode__(self):
@@ -257,7 +257,7 @@ class TTweetsClubTweetRel(models.Model):
 
 
 class TTweetsPlayerTweetRel(models.Model):
-    fp_id = models.ForeignKey(TFootballClub)
+    fp_id = models.ForeignKey(TFootballPlayer)
     tt_id = models.ForeignKey(TTweetsTweet)
 
 
