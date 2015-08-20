@@ -22,6 +22,11 @@ import datetime as _datetime
 from functools import wraps
 from django.views.decorators.cache import patch_cache_control
 from django.db import connection, transaction
+from django.core.files import File
+import urllib
+import os
+from django.db.models import Count
+from football_analytics import config
 
 from forms import *
 
@@ -172,20 +177,57 @@ def get_user_timeline(author):
                     obj.rating += (author.rating-obj.rating)/4
                 else:
                     obj.rating = author.rating
+                obj.realname = msg['name']
+                obj.descr = msg['description']
+                if msg['profile_image_url'] != obj.logo_url:
+                    try:
+                        photo = urllib.urlretrieve(msg['profile_image_url'])
+                        obj.logo.save(os.path.basename(msg['profile_image_url']), File(open(photo[0], 'rb')))
+                        obj.logo_url = msg['profile_image_url']
+                    except:
+                        pass
                 obj.save()
     if len(user_timeline) > 0:
         author.maxid = int(user_timeline[0]['id'])
         author.save()
 
 
+def get_users_timeline():
+    auths = TTweetsAuthor.objects.all()
+    for rec_auth in auths:
+        try:
+            get_user_timeline(rec_auth)
+        except:
+            break
+
+
 def index(request):
     """
         Главная страница
     """
-    auths = TTweetsAuthor.objects.all()
-    #for rec_auth in auths:
-    #    try:
-    #        get_user_timeline(rec_auth)
-    #    except:
-    #        break
-    return render(request, 'main.html', {}, context_instance=RequestContext(request))
+    #get_users_timeline()
+    return render(request, 'main.html', {'index': True}, context_instance=RequestContext(request))
+
+
+def setting_req(request):
+    """
+        Страница настроек
+    """
+    return render(request, 'settings.html', {'settings': True}, context_instance=RequestContext(request))
+
+
+def setting_author(request):
+    """
+        Страница авторов
+    """
+    page = 1
+    if request.method == 'GET' and 'page' in request.GET:
+        try:
+            page = int(request.GET['page'])
+        except:
+            page = 1
+    pgs = (int(page)-1)*config.AUTHOR_ON_PAGE
+    pgs1 = int(page)*config.AUTHOR_ON_PAGE
+    auths = TTweetsAuthor.objects.all().annotate(num_tweets=Count('ttweetstweet'))[pgs:pgs1]
+    return render(request, 'authors.html', {'auths': auths, 'page': page},
+                  context_instance=RequestContext(request))

@@ -1,0 +1,120 @@
+h1 {
+    font-size: 1.5em;
+    /* 25px/16px */
+}
+/*CSS3 multiple columns.*/
+/* Get em size for colums: 184/16 */
+
+.columns {
+    -moz-column-width: 280px;
+    /* Firefox */
+
+    -webkit-column-width: 280px;
+    /* webkit, Safari, Chrome */
+
+    column-width: 280px;
+}
+/*remove standard list and bullet formatting from ul*/
+
+.columns ul {
+    margin: 0;
+    padding: 0;
+    list-style-type: none;
+}
+/* correct webkit/chrome uneven margin on the first column*/
+
+.columns ul li:first-child {
+    margin-top: 0;
+}
+
+.ProfileCard {
+    background-color: #fff;
+    border: 1px solid #e2e2e2;
+    border-radius: 5px;
+    box-sizing: border-box;
+    margin-bottom: 10px;
+}
+
+.ProfileCard-content
+{
+    margin: 13px 15px;
+    position: relative;
+}
+
+.ProfileCard-avatarLink {
+    background-color: #fff;
+    border-radius: 6px;
+    display: inline-block;
+    margin: -45px 2px 0 -3px;
+    padding: 3px;
+    position: relative;
+    vertical-align: bottom;
+    z-index: 1;
+}
+
+.ProfileCard-avatarImage {
+    border-radius: 5px;
+    display: block;
+    height: 70px;
+    width: 70px;
+}
+
+.ProfileCard-actions {
+    display: inline-block;
+    height: 35px;
+    margin: 0 0 -4px;
+    position: absolute;
+    right: 0;
+    vertical-align: bottom;
+}
+
+.ProfileCard-userFields {
+    color: #393939;
+    margin-top: 5px;
+}
+
+.ProfileNameTruncated-link
+{
+    color: #393939;
+    text-decoration: none;
+    font-size: 20px;
+}
+
+.ProfileNameTruncated {
+    height: 22px;
+    line-height: 1.3;
+    margin-top: -2px;
+}
+
+.ProfileCard-screenname {
+    height: 14px;
+    margin-bottom: 10px;
+}
+
+
+.ProfileCard .ProfileCard-screennameLink, .ProfileCard .ProfileCard-screennameLink:hover, .ProfileCard .ProfileCard-screennameLink:focus {
+    color: #66757f;
+    font-size: 12px;
+    font-weight: 400;
+}
+
+
+.ProfileCard-bio {
+    color: #66757f;
+    font-size: 14px;
+    font-weight: 400;
+    height: 5.5em;
+    line-height: 1.375em;
+    margin-top: 5px;
+    overflow: hidden;
+    word-wrap: break-word;
+    text-align: justify;
+}
+
+.ProfileCard-bg {
+    border-bottom: 1px solid #e2e2e2;
+    border-radius: 4px 4px 0 0;
+    display: block;
+    height: 95px;
+    background-color: #f2f2f2;
+}

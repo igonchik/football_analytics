@@ -1,0 +1,27 @@
+{% extends "index.html" %}
+{% load staticfiles %}
+{% load url from future %}
+{% load i18n %}
+
+{% block page %}
+    <link href="{% static "css/home/settings.css" %}" type="text/css" rel="stylesheet">
+    <div class="settings">
+        <!--Horizontal Tab-->
+        <div id="horizontalTab">
+            <ul class="resp-tabs-list">
+                <li>{% trans "rumorfrom" %}</li>
+                <li>{% trans "tworld" %}</li>
+                <li>{% trans "tfootball" %}</li>
+                <li>{% trans "thashtags" %}</li>
+            </ul>
+            <div class="resp-tabs-container">
+                <div class="tabs_page"></div>
+                <div class="tabs_page">123</div>
+                <div class="tabs_page"></div>
+                <div class="tabs_page"></div>
+            </div>
+        </div>
+    </div>
+    <script type="text/javascript" src="{% static "js/responsivetabs.js" %}"></script>
+    <script type="text/javascript" src="{% static "js/settings.js" %}"></script>
+{% endblock %}

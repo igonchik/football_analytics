@@ -1,0 +1,42 @@
+{% load staticfiles %}
+{% load url from future %}
+{% load i18n %}
+
+<div id="authors_content">
+    <h1>{% trans "authors" %}</h1>
+    <div class="columns">
+    <input type="hidden" id="auth_page" value="{{ page }}">
+        <ul>
+            {% for rec in auths %}
+                <li><div class="ProfileCard">
+                    <div class="ProfileCard-bg" aria-hidden="true" tabindex="-1">
+                        <div style="text-align: right; padding: 20px"><i>
+                            {% trans "alltweets" %}: {{ rec.num_tweets }} <br/>
+                            {% trans "auth_rating" %}: {{ rec.rating }} <br/>
+                            <a href="#">{% trans "more" %}</a></i>
+                        </div>
+                    </div>
+                    <div class="ProfileCard-content">
+                        <a class="ProfileCard-avatarLink" aria-hidden="true" tabindex="-1" href="{{ rec.url }}" target="_blank" data-original-title="{{ rec.realname }}">
+                            <img class="ProfileCard-avatarImage" alt="" {% if rec.logo %}src="{{ rec.logo.url }}"{% else %}src="{% static "img/nophoto.svg" %}"{% endif %}>
+                        </a>
+                        <div class="ProfileCard-actions">
+                            <button>{% trans "delete" %}</button>
+                        </div>
+                        <div class="ProfileCard-userFields">
+                            <div class="ProfileNameTruncated">
+                                <a class="ProfileNameTruncated-link" href="{{ rec.url }}" target="_blank"> {{ rec.realname }} </a>
+                            </div>
+                            <span class="ProfileCard-screenname">
+                                <a class="ProfileCard-screennameLink" data-aria-label-part="" href="{{ rec.url }}" target="_blank">
+                                    @<span class="u-linkComplex-target">{{ rec.name }}</span>
+                                </a>
+                            </span>
+                        </div>
+                        <p class="ProfileCard-bio">{{ rec.descr }}</p>
+                    </div>
+                </div></li>
+            {% endfor %}
+        </ul>
+    </div>
+</div>

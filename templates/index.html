@@ -12,30 +12,34 @@
     <link rel="apple-touch-icon" href="{% static "apple-touch-favicon.png" %}"/>
     <link href="{% static "css/home/page.css" %}" type="text/css" rel="stylesheet">
     <link href="{% static "css/home/menu_style.css" %}" type="text/css" rel="stylesheet">
+    <link href="{% static "css/loading.css" %}" type="text/css" rel="stylesheet">
+    <script type="text/javascript" src="{% static "js/jquery.js" %}"></script>
 </head>
 <body class="lang-{{ LANGUAGE_CODE }}">
 <div id="wrapper">
     <div id="header">
         <div class="ph-line-nav nav">
-            <a href="#">Главная</a>
-            <a href="#">О нас</a>
-            <a href="#">Галерея</a>
-            <a href="#" id="settings"></a>
-            <div class="effect"></div>
+            <div class="menu">
+                <a href="/" {% if index %}class="active"{% endif %}>Главная</a>
+                <a href="#">О нас</a>
+                <a href="#">Галерея</a>
+                <a href="/settings/" id="settings" {% if settings %}class="active"{% endif %}></a>
+                <div class="effect"></div>
+            </div>
+            <div id="account" class="outline-outward tooltip">
+                <span>
+                    <img class="callout" src="{% static "img/callout.gif" %}" />
+                    {% if user.is_authenticated %}
+                        <strong>{% trans "welcomeuser" %}, {{ user.username }}!</strong><br />
+                        This is the easy-to-use Tooltip driven purely by CSS.
+                    {% else %}
+                        <strong>{% trans "welcomenewuser" %}</strong><br />
+                        {% trans "pleaselogin" %} <a href="/accounts/login/">login</a> {% trans "orregistr" %}
+                            <a href="/accounts/registration/">registration</a>
+                    {% endif %}
+                </span>
+            </div>
         </div>
-
-        {% if user.is_authenticated %}
-            <p>Welcome, {{ user.username }}. Thanks for logging in.</p>
-        {% else %}
-            <p style="margin: 0">Welcome, new user. Please log in.</p>
-        {% endif %}
-
-        {% if 'foo' in perms %}
-            {% if 'foo.can_vote' in perms %}
-                <p>In lookup works, too.</p>
-            {% endif %}
-        {% endif %}
-
     </div>
 
     <div id="content">
@@ -43,22 +47,23 @@
     </div>
 
     <div id="footer">
-        <a href="#" id="eng_lang"></a>
-        <a href="#" id="rus_lang"></a>
+        <div id="copyright">
+            &copy; 2015 {% trans "copyright" %}
+        </div>
         {% get_language_info_list for LANGUAGES as languages %}
-        {% for language in languages %}
-            {% if language.code != LANGUAGE_CODE %}
-                {% with "img/flags/"|add:language.code|add:'.png' as flag_static %}
-                    <a href="/lang/?lang={{ language.code }}&next={{request.path}}"><img src="{% static flag_static %}" style="width: 2em;" title="{{ language.name_local }}"></a>
-                {% endwith %}
-            {% else %}
-                {% with "img/flags/"|add:language.code|add:'_push.png' as flag_static %}
-                    <a href="/lang/?lang={{ language.code }}&next={{request.path}}"><img src="{% static flag_static %}" style="width: 2em;" title="{{ language.name_local }}"></a>
-                {% endwith %}
-            {% endif %}
-        {% endfor %}
+        <div id="lang_table">
+            {% for language in languages %}
+                {% if language.code != LANGUAGE_CODE %}
+                    <a href="/lang/?lang={{ language.code }}&next={{request.path}}" id="{{ language.code }}" class="lang">{{ language.name_local }}</a>
+                {% else %}
+                    <a href="/lang/?lang={{ language.code }}&next={{request.path}}" id="{{ language.code }}" class="lang ch">{{ language.name_local }}</a>
+                {% endif %}
+            {% endfor %}
+        </div>
     </div>
 
 </div>
+
+
 </body>
 </html>

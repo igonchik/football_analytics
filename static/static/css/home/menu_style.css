@@ -1,61 +1,181 @@
 .nav {
-  text-align: center;
-  font-size: 1.5em;
-  overflow: hidden;
-  width: 480px;
-  position: relative;
-  float: right;
+    text-align: center;
+    font-size: 1.5em;
+    width: 100%;
+}
+
+.nav .menu {
+    width: 480px;
+    float: right;
+    position: relative;
+    overflow: hidden;
 }
 
 .nav a {
-  display: block;
-  position: relative;
-  float: left;
-  padding: 1em 0 2em;
-  width: 25%;
-  text-decoration: none;
-  color: #393939;
+    display: block;
+    position: relative;
+    float: left;
+    padding: 1em 0 2em;
+    width: 25%;
+    text-decoration: none;
+    color: #393939;
 }
 
 .nav a:hover {
-  color: #c6342e;
+    color: #c6342e;
 }
 
 .nav a#settings:hover {
-  background: url("../../img/settings_hower.svg") no-repeat scroll 45px 0.75em;
-  background-size: 1.5em;
+    background: url("../../img/settings_hower.svg") no-repeat scroll 45px 0.75em;
+    background-size: 1.5em;
 }
 
 .nav a#settings {
-  background: url("../../img/settings.svg") no-repeat scroll 45px 0.75em;
-  background-size: 1.5em;
+    background: url("../../img/settings.svg") no-repeat scroll 45px 0.75em;
+    background-size: 1.5em;
 }
 
 .effect {
-  position: absolute;
-  left: -12.5%;
-  -webkit-transition: 0.7s ease-in-out;
-  -moz-transition: 0.7s ease-in-out;
-  -o-transition: 0.7s ease-in-out;
-  -ms-transition: 0.7s ease-in-out;
-  transition: 0.7s ease-in-out; }
+    position: absolute;
+    left: -12.5%;
+    -webkit-transition: 0.7s ease-in-out;
+    -moz-transition: 0.7s ease-in-out;
+    -o-transition: 0.7s ease-in-out;
+    -ms-transition: 0.7s ease-in-out;
+    transition: 0.7s ease-in-out;
+}
 
-.nav a:nth-child(1):hover ~ .effect {
-  left: 12.5%; }
-.nav a:nth-child(2):hover ~ .effect {
-  left: 37.5%; }
-.nav a:nth-child(3):hover ~ .effect {
-  left: 62.5%; }
-.nav a:nth-child(4):hover ~ .effect {
-  left: 87.5%; }
+.nav div#account {
+    display: block;
+    position: relative;
+    float: left;
+    text-decoration: none;
+    color: #393939;
+    background: url("../../img/user.svg") no-repeat scroll 12px 8px;
+    background-size: 26px;
+    width: 50px;
+    margin-top: 10px;
+    margin-bottom: 20px;
+    padding: 0;
+    height: 50px;
+    margin-left: 16px;
+    cursor: pointer;
+}
 
-.ph-line-nav .effect {
-  width: 90px;
-  height: 2px;
-  bottom: 1.5em;
-  background: #c6342e;
-  box-shadow: 0 1px 0 white;
-  margin-left:-45px;
+.nav div#account:hover {
+    background: url("../../img/user_hower.svg") no-repeat scroll 12px 8px;
+    background-size: 26px;
+    width: 50px;
+    margin-top: 10px;
+    margin-bottom: 20px;
+    padding: 0;
+    height: 50px;
+}
+
+.outline-outward:hover:before, .outline-outward:focus:before, .outline-outward:active:before {
+    top: -3px;
+    right: -3px;
+    bottom: -3px;
+    left: -3px;
+    border: 1px solid #c6342e;
+    border-radius: 28px;
+    -moz-border-radius: 28px;
+    -webkit-border-radius: 28px;
+    -o-border-radius: 28px;
+}
+
+.outline-outward::before {
+    border: 1px solid #393939;
+    border-radius: 28px;
+    -moz-border-radius: 28px;
+    -webkit-border-radius: 28px;
+    -o-border-radius: 28px;
+    bottom: 0;
+    content: "";
+    left: 0;
+    position: absolute;
+    right: 0;
+    top: 0;
+    transition-duration: 0.3s;
+    transition-property: top, right, bottom, left;
+}
+.outline-outward {
+    box-shadow: 0 0 1px rgba(0, 0, 0, 0);
+    display: inline-block;
+    position: relative;
+    transform: translateZ(0px);
+}
+
+.menu a:nth-child(1):hover ~ .effect {
+    left: 12.5% !important; }
+.menu a:nth-child(2):hover ~ .effect {
+    left: 37.5% !important; }
+.menu a:nth-child(3):hover ~ .effect {
+    left: 62.5% !important; }
+.menu a:nth-child(4):hover ~ .effect {
+    left: 87.5% !important; }
+
+.menu a.active:nth-child(1) ~ .effect {
+    left: 12.5%; }
+.menu a.active:nth-child(2) ~ .effect {
+    left: 37.5%; }
+.menu a.active:nth-child(3) ~ .effect {
+    left: 62.5%; }
+.menu a.active:nth-child(4) ~ .effect {
+    left: 87.5%; }
+
+.menu .effect {
+    width: 90px;
+    height: 2px;
+    bottom: 1.5em;
+    background: #c6342e;
+    box-shadow: 0 1px 0 white;
+    margin-left:-45px;
+}
+
+
+
+.nav div.tooltip span{
+    margin-left: 40px !important;
+    margin-top: -8px !important;
+    width: 250px !important;
+    padding: 5px;
+    text-align: justify;
+}
+
+.nav .callout {
+    top:20px !important;
+}
+
+.nav div.tooltip strong {
+    line-height: 20px !important;
+}
+div.tooltip {outline:none;}
+.nav div.tooltip {font-size: 0.75em !important;}
+div.tooltip strong {line-height:30px;}
+div.tooltip:hover {text-decoration:none;}
+div.tooltip span {
+    z-index:10;display:none; padding:14px 20px;
+    margin-top:-30px; margin-left:28px;
+    width:300px; line-height:16px;cursor: default;color: #393939;
+}
+div.tooltip:hover span{
+    display:inline; position:absolute; color:#111;
+    border:1px solid #DCA; background:#fffAF0; transform: translateZ(0px);}
+
+/*CSS3 extras*/
+div.tooltip span
+{
+    border-radius:4px;
+    box-shadow: 5px 5px 8px #CCC;
+}
+
+div.tooltip a {
+    width: 0 !important;
+    display: inline !important;
+    padding: 0 !important;
+    position: relative !important;
+    float: none !important;
 }
 
 

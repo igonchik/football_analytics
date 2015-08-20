@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 from django.db import models
 from datetime import datetime
 from django.contrib.auth.models import User as TUser
@@ -16,9 +17,13 @@ class TTweetsAuthor(models.Model):
     name = models.CharField(max_length=255)
     rating = models.PositiveIntegerField(default=500)
     maxid = models.PositiveIntegerField(default=0)
-    realname = models.CharField(max_length=255)
+    realname = models.CharField(max_length=255, blank=True, null=True)
     descr = models.TextField(blank=True, null=True)
     logo = models.ImageField(upload_to='twitter/photo', blank=True, null=True)
+    logo_url = models.URLField(blank=True, null=True)
+
+    def __unicode__(self):
+        return self.realname
 
 
 class TTweetsHashTag(models.Model):

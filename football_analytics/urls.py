@@ -12,6 +12,8 @@ urlpatterns = patterns('',
                        url(r'^lang/', 'twitter.views.set_language'),
                        url(r'^accounts/login/$', 'twitter.views.u_login'),
                        url(r'^accounts/logout/$', 'twitter.views.u_logout'),
+                       url(r'^settings/$', 'twitter.views.setting_req'),
+                       url(r'^settings/tauthor/', 'twitter.views.setting_author'),
                        url(r'^$', 'twitter.views.index'),
                        ) + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT) + \
                            static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
