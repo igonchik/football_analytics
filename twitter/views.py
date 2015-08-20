@@ -182,7 +182,7 @@ def get_user_timeline(author):
                     try:
                         photo = urllib.urlretrieve(msg['profile_image_url'])
                         obj.logo.save(os.path.basename(msg['profile_image_url']), File(open(photo[0], 'rb')))
-                        obj.logo_url = msg['profile_image_url']
+                        obj.logo_url = msg['profile_image_url'].replace(' ','')
                     except:
                         pass
                 obj.save()
