@@ -42,7 +42,18 @@ body {
 }
 
 #eng_lang {
-    background: url("../../img/eng.svg") no-repeat scroll 1em 0.5em rgba(0, 0, 0, 0);
+    background: url("../../img/en.svg") no-repeat scroll 1em 0.5em rgba(0, 0, 0, 0);
+    display: block;
+    position: relative;
+    text-decoration: none;
+    padding: 1em 0 2em;
+    font-size: 1.5em;
+    background-size: 1.5em;
+    width: 45px;
+}
+
+#rus_lang {
+    background: url("../../img/ru.svg") no-repeat scroll 1em 0.5em rgba(0, 0, 0, 0);
     display: block;
     position: relative;
     text-decoration: none;
