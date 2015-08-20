@@ -1,0 +1,8 @@
+python manage.py makemessages
+manage.py compilemessages (language)
+
+
+
+@login_required
+
+@permission_required
