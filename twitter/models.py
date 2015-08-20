@@ -2,6 +2,7 @@
 from django.db import models
 from datetime import datetime
 from django.contrib.auth.models import User as TUser
+import os
 
 
 class TLocalization(models.Model):
@@ -21,6 +22,9 @@ class TTweetsAuthor(models.Model):
     descr = models.TextField(blank=True, null=True)
     logo = models.ImageField(upload_to='twitter/photo', blank=True, null=True)
     logo_url = models.URLField(blank=True, null=True)
+
+    def cache_logo(self):
+        return os.path.isfile(self.logo.path)
 
     def __unicode__(self):
         return self.realname

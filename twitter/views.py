@@ -24,9 +24,8 @@ from django.views.decorators.cache import patch_cache_control
 from django.db import connection, transaction
 from django.core.files import File
 import urllib
-import os
 from django.db.models import Count
-from football_analytics import config
+from football_analytics.config import AUTHOR_ON_PAGE
 
 from forms import *
 
@@ -226,8 +225,8 @@ def setting_author(request):
             page = int(request.GET['page'])
         except:
             page = 1
-    pgs = (int(page)-1)*config.AUTHOR_ON_PAGE
-    pgs1 = int(page)*config.AUTHOR_ON_PAGE
+    pgs = (int(page)-1)*AUTHOR_ON_PAGE
+    pgs1 = int(page)*AUTHOR_ON_PAGE
     auths = TTweetsAuthor.objects.all().annotate(num_tweets=Count('ttweetstweet'))[pgs:pgs1]
     return render(request, 'authors.html', {'auths': auths, 'page': page},
                   context_instance=RequestContext(request))

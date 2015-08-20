@@ -18,7 +18,7 @@
                     </div>
                     <div class="ProfileCard-content">
                         <a class="ProfileCard-avatarLink" aria-hidden="true" tabindex="-1" href="{{ rec.url }}" target="_blank" data-original-title="{{ rec.realname }}">
-                            <img class="ProfileCard-avatarImage" alt="" {% if rec.logo %}src="{{ rec.logo.url }}"{% else %}src="{% static "img/nophoto.svg" %}"{% endif %}>
+                            <img class="ProfileCard-avatarImage" alt="" {% if rec.logo %}{% if cache_logo %}src="{{ rec.logo.url }}"{% else %}src="{{ rec.logo_url }}"{% endif %}{% else %}src="{% static "img/nophoto.svg" %}"{% endif %}>
                         </a>
                         <div class="ProfileCard-actions">
                             <button>{% trans "delete" %}</button>
