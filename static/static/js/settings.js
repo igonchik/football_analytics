@@ -72,17 +72,21 @@ function get_authors(page){
                 $('.tabs_page').eq(0).html(html);
                 var pred = $('html').innerWidth();
                 var cols = pred/320>>0;
-                if ($(window).innerWidth() > 640)
-                    $('.ProfileCard').attr('style', 'width:'+(($(window).innerWidth()*0.9-30)/cols-14)+'px');
-                else
+                if ($(window).innerWidth() > 640) {
+                    $('.ProfileCard').attr('style', 'width:' + (($(window).innerWidth() * 0.9 - 30) / cols - 14) + 'px');
+                    $('#getnextauthor').attr('style', 'margin-left:10px; width:' + (($(window).innerWidth() * 0.9 - 30) - 14)+'px');
+                }
+                else {
                     $('.ProfileCard').attr('style', 'width: 100%; margin-left: 0');
+                    $('#getnextauthor').attr('style', 'width: 100%; margin-left: 0');
+                }
                 BackgroundImageResize('ProfileCard-bg-pic');
-                $('#getnextauthor').attr('style', 'margin-left:10px; width:'+($('#authors_content').innerWidth()-10)+'px');
                 $('#getnextauthor').click(function()
                 {
                     $('#auth_page').val(parseInt($('#auth_page').val())+1);
                     get_authors_page($('#auth_page').val())
                 });
+                $(window).resize();
             },
         error:
             function()
@@ -208,12 +212,16 @@ function get_tags(){
 $(window).bind('resize', function() {
     var pred = $('html').innerWidth();
     var cols = pred/320>>0;
-    if ($(window).innerWidth() > 640)
-        $('.ProfileCard').attr('style', 'width:'+(($(window).innerWidth()*0.9-30)/cols-14)+'px');
-    else
+    if ($(window).innerWidth() > 640) {
+        $('.ProfileCard').attr('style', 'width:' + (($(window).innerWidth() * 0.9 - 30) / cols - 14) + 'px');
+        $('#getnextauthor').attr('style', 'margin-left:10px; width:' + (($(window).innerWidth() * 0.9 - 30) - 14)+'px');
+    }
+    else {
         $('.ProfileCard').attr('style', 'width: 100%; margin-left: 0');
+        $('#getnextauthor').attr('style', 'width: 100%; margin-left: 0');
+    }
     BackgroundImageResize('ProfileCard-bg-pic');
-    $('#getnextauthor').attr('style', 'margin-left:10px; width:'+($('#authors_content').innerWidth()-10)+'px');
+
 
 }).trigger('resize');
 

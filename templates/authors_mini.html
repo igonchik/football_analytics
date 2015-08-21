@@ -5,11 +5,6 @@
         <div class="ProfileCard" id="profile_{{ rec.ta_id }}" style="width: 100%">
             <div class="ProfileCard-bg" aria-hidden="true" tabindex="-1">
                 <div class="ProfileCard-bg-pic" style="background-image:  url('{{ rec.banner_url }}');">
-                    <i class="author-stat">
-                        {% trans "alltweets" %}: {{ rec.num_tweets }} <br/>
-                        {% trans "auth_rating" %}: {{ rec.rating }} <br/>
-                        <a href="#" style="color: #66757f">{% trans "more" %}</a>
-                    </i>
                 </div>
             </div>
             <div class="ProfileCard-content">
@@ -21,6 +16,12 @@
                 </div>
                 <div class="ProfileCard-actions">
                     <button class="btn hollow delete" onclick="DeleteAuthor({{ rec.ta_id }})">{% trans "delete" %}</button>
+                    <br>
+                    <div class="author-stat">
+                        <i style="cursor: help" title="{% trans "alltweets" %}">{% trans "alltweetsshort" %}:</i> {{ rec.num_tweets }} <br/>
+                        <i style="cursor: help" title="{% trans "auth_rating" %}">{% trans "auth_ratingshort" %}:</i> {{ rec.rating }} <br/>
+                        <a href="#" style="color: #66757f">{% trans "more" %}</a>
+                    </div>
                 </div>
                 <div class="ProfileCard-userFields">
                     <div class="ProfileNameTruncated">
