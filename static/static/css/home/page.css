@@ -391,4 +391,5 @@ a.styled-button:active {
 
 .btn.delete {
     padding: 6px;
+    font-size: 1.05em;
 }

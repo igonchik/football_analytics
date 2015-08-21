@@ -47,12 +47,12 @@ h1 {
 .ProfileCard-avatarLink {
     border-radius: 6px;
     display: inline-block;
-    margin: -45px 2px 0 -3px;
+    margin: -39px 2px 0 -3px;
     padding: 3px;
     position: relative;
     vertical-align: bottom;
     z-index: 1;
-    background: #fff url("../../img/nophoto.svg") no-repeat scroll 2px 2px / 70px auto;
+    background: #fff url("../../img/nophoto.svg") no-repeat scroll 2px 2px / 48px auto;
 }
 
 .ProfileCard-avatarLink.logo {
@@ -62,8 +62,8 @@ h1 {
 .ProfileCard-avatarImage {
     border-radius: 5px;
     display: block;
-    height: 70px;
-    width: 70px;
+    height: 48px;
+    width: 48px;
 }
 
 .ProfileCard-avatarImage.logo_url:hover {
@@ -133,9 +133,9 @@ h1 {
 
 
 .ProfileCard-avatar-refreshbutton{
-    background: rgba(0, 0, 0, 0) url("../../img/refresh.svg") no-repeat scroll 15px 0 / 40px;
-    width: 70px;
-    height: 70px;
+    background: rgba(0, 0, 0, 0) url("../../img/refresh.svg") no-repeat scroll 11px 0 / 27.5px;
+    width: 48px;
+    height: 48px;
     opacity: 0;
 }
 
@@ -192,4 +192,13 @@ h1 {
 
 .add_author:hover ~ .effect_author {
     left: 85% !important;
+}
+
+.ProfileCard-bg-pic {
+    text-align: right;
+    padding: 20px;
+    background-color: rgba(0, 0, 0, 0);
+    background-repeat: no-repeat;
+    background-position: -25px 0;
+    background-size: 300px;
 }

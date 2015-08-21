@@ -4,16 +4,18 @@
     {% for rec in auths %}
         <div class="ProfileCard" id="profile_{{ rec.ta_id }}" style="width: 100%">
             <div class="ProfileCard-bg" aria-hidden="true" tabindex="-1">
-                <div style="text-align: right; padding: 20px; background: rgba(0, 0, 0, 0) url('https://pbs.twimg.com/profile_banners/2707514588/1439357700/600x200') repeat scroll -25px 0 / 300px auto"><i>
-                    {% trans "alltweets" %}: {{ rec.num_tweets }} <br/>
-                    {% trans "auth_rating" %}: {{ rec.rating }} <br/>
-                    <a href="#" style="color: #66757f">{% trans "more" %}</a></i>
+                <div class="ProfileCard-bg-pic" style="background-image:  url('{{ rec.banner_url }}');">
+                    <i>
+                        {% trans "alltweets" %}: {{ rec.num_tweets }} <br/>
+                        {% trans "auth_rating" %}: {{ rec.rating }} <br/>
+                        <a href="#" style="color: #66757f">{% trans "more" %}</a>
+                    </i>
                 </div>
             </div>
             <div class="ProfileCard-content">
                 <div class="ProfileCard-avatarLink {% if rec.logo %}{% if rec.cache_logo %}logo{% else %}{% if rec.logo_url %}logo{% endif %}{% endif %}{% endif %}" aria-hidden="true" tabindex="-1" data-original-title="{{ rec.realname }}">
                     <div id="logo_{{ rec.ta_id }}" class="ProfileCard-avatarImage {% if rec.logo_url %}logo_url{% endif %}"
-                         style="background: url({% if rec.logo %}{% if rec.cache_logo %}{{ rec.logo.url }}{% else %}{% if rec.logo_url %}{{ rec.logo_url }}{% else %}{% static "img/nophoto.svg" %}{% endif %}{% endif %}{% else %}{% static "img/nophoto.svg" %}{% endif %}) no-repeat scroll 0 0 / 70px">
+                         style="background: url({% if rec.logo %}{% if rec.cache_logo %}{{ rec.logo.url }}{% else %}{% if rec.logo_url %}{{ rec.logo_url }}{% else %}{% static "img/nophoto.svg" %}{% endif %}{% endif %}{% else %}{% static "img/nophoto.svg" %}{% endif %}) no-repeat scroll 0 0 / 48px">
                         {% if rec.logo_url %}<div id="logo_ref_{{ rec.ta_id }}" class="ProfileCard-avatar-refreshbutton" title="{% trans "renew" %}" onclick="RefreshAuthCache({{ rec.ta_id }});"></div>{% endif %}
                     </div>
                 </div>
