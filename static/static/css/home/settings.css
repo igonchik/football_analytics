@@ -196,9 +196,12 @@ h1 {
 
 .ProfileCard-bg-pic {
     text-align: right;
-    padding: 20px;
+    padding: 18px;
     background-color: rgba(0, 0, 0, 0);
     background-repeat: no-repeat;
-    background-position: -25px 0;
-    background-size: 300px;
+    background-position: 0 0;
+}
+
+.author-stat {
+    background-color: #f2f2f2;
 }

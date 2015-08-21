@@ -30,6 +30,30 @@ $(document).ready(function () {
 });
 
 
+function BackgroundImageResize(classname)
+{
+    $("."+classname).each(function(){
+        var image_url = $(this).css('background-image'), image;
+        image_url = image_url.match(/^url\("?(.+?)"?\)$/);
+        var bg = $(this);
+        if (image_url[1]) {
+            image_url = image_url[1];
+            image = new Image();
+            $(image).load(function () {
+                var h1 = $('.ProfileCard-bg').eq(0).innerHeight();
+                var l1 = $('.ProfileCard').eq(0).innerWidth()+2;
+                var h2 = image.height;
+                var l2 = image.width;
+                if (h1/l1 > h2/l2)
+                    $(bg).css('background-size', 'auto 100%');
+                else
+                    $(bg).css('background-size', '100% auto');
+            });
+            image.src = image_url;
+        }
+    });
+}
+
 function get_authors(page){
     $('.tabs_page').eq(0).html(loading);
     $.ajax({
@@ -46,13 +70,13 @@ function get_authors(page){
                     $('.ProfileCard').attr('style', 'width:'+(($(window).innerWidth()*0.9-30)/cols-14)+'px');
                 else
                     $('.ProfileCard').attr('style', 'width: 100%; margin-left: 0');
+                BackgroundImageResize('ProfileCard-bg-pic');
                 $('#getnextauthor').attr('style', 'margin-left:10px; width:'+($('#authors_content').innerWidth()-10)+'px');
                 $('#getnextauthor').click(function()
                 {
                     $('#auth_page').val(parseInt($('#auth_page').val())+1);
                     get_authors_page($('#auth_page').val())
                 });
-                $(window).resize();
             },
         error:
             function()
@@ -75,14 +99,14 @@ function RefreshAuthCache(id)
             function(html)
             {
                 $('#logo_'+id).html('<div id="logo_ref_'+id+'" class="ProfileCard-avatar-refreshbutton" onclick="RefreshAuthCache('+id+');"></div>');
-                $('#logo_'+id).attr('style', 'background: url('+html+') no-repeat scroll 0 0 / 70px');
+                $('#logo_'+id).attr('style', 'background: url('+html+') no-repeat scroll 0 0 / 48px');
                 $('#logo_'+id).addClass('logo_url');
             },
         error:
             function()
             {
                 $('#logo_'+id).html('<div id="logo_ref_'+id+'" class="ProfileCard-avatar-refreshbutton" onclick="RefreshAuthCache('+id+');"></div>');
-                $('#logo_'+id).attr('style', 'background: rgba(0, 0, 0, 0) url("/static/img/nophoto.svg") no-repeat scroll 0 0 / 70px auto;');
+                $('#logo_'+id).attr('style', 'background: rgba(0, 0, 0, 0) url("/static/img/nophoto.svg") no-repeat scroll 0 0 / 48px auto;');
                 $('#logo_'+id).addClass('logo_url');
             }
     });
@@ -105,6 +129,7 @@ function get_authors_page(page){
                     $('.ProfileCard').attr('style', 'width:'+(($(window).innerWidth()*0.9-30)/cols-14)+'px');
                 else
                     $('.ProfileCard').attr('style', 'width: 100%; margin-left: 0');
+                BackgroundImageResize('ProfileCard-bg-pic');
             },
         error:
             function()
@@ -181,6 +206,7 @@ $(window).bind('resize', function() {
         $('.ProfileCard').attr('style', 'width:'+(($(window).innerWidth()*0.9-30)/cols-14)+'px');
     else
         $('.ProfileCard').attr('style', 'width: 100%; margin-left: 0');
+    BackgroundImageResize('ProfileCard-bg-pic');
     $('#getnextauthor').attr('style', 'margin-left:10px; width:'+($('#authors_content').innerWidth()-10)+'px');
 
 }).trigger('resize');

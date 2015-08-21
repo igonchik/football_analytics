@@ -5,7 +5,7 @@
         <div class="ProfileCard" id="profile_{{ rec.ta_id }}" style="width: 100%">
             <div class="ProfileCard-bg" aria-hidden="true" tabindex="-1">
                 <div class="ProfileCard-bg-pic" style="background-image:  url('{{ rec.banner_url }}');">
-                    <i>
+                    <i class="author-stat">
                         {% trans "alltweets" %}: {{ rec.num_tweets }} <br/>
                         {% trans "auth_rating" %}: {{ rec.rating }} <br/>
                         <a href="#" style="color: #66757f">{% trans "more" %}</a>
