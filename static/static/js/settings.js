@@ -30,28 +30,34 @@ $(document).ready(function () {
 });
 
 
+function endsWith(str, suffix) {
+    return str.indexOf(suffix, str.length - suffix.length) !== -1;
+}
+
+
 function BackgroundImageResize(classname)
 {
     $("."+classname).each(function(){
         var image_url = $(this).css('background-image'), image;
-        image_url = image_url.match(/^url\("?(.+?)"?\)$/);
-        var bg = $(this);
-        if (image_url[1]) {
-            image_url = image_url[1];
-            image = new Image();
-            $(image).load(function () {
-                var h1 = $('.ProfileCard-bg').eq(0).innerHeight();
-                var l1 = $('.ProfileCard').eq(0).innerWidth()+2;
-                var h2 = image.height;
-                var l2 = image.width;
-                if (h1/l1 > h2/l2)
-                    $(bg).css('background-size', 'auto 100%');
-                else
-                    $(bg).css('background-size', '100% auto');
-            });
-            image.src = image_url;
-        }
-    });
+        if (!endsWith(image_url, '/None")')) {
+            image_url = image_url.match(/^url\("?(.+?)"?\)$/);
+            var bg = $(this);
+            if (image_url[1]) {
+                image_url = image_url[1];
+                image = new Image();
+                $(image).load(function () {
+                    var h1 = $('.ProfileCard-bg').eq(0).innerHeight();
+                    var l1 = $('.ProfileCard').eq(0).innerWidth()+2;
+                    var h2 = image.height;
+                    var l2 = image.width;
+                    if (h1/l1 > h2/l2)
+                        $(bg).css('background-size', 'auto 100%');
+                    else
+                        $(bg).css('background-size', '100% auto');
+                });
+                image.src = image_url;
+            }
+        }});
 }
 
 function get_authors(page){
