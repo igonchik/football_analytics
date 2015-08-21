@@ -3,9 +3,9 @@
 {% load i18n %}
 
 <div id="authors_content">
-    <h1>{% trans "authors" %}</h1>
+    <h1>{% trans "authors" %} ({{ count_a }})</h1>
     <div class="add_author_block">
-        <button onclick="AddAuthor()" class="add_author" title="{% trans "AddAuthor" %}"></button>
+        <label onclick="AddAuthor()" class="add_author" title="{% trans "AddAuthor" %}" for="modal-addauthor"></label>
         <div class="effect_author"></div>
     </div>
 
@@ -16,4 +16,15 @@
     {% if show_next %}
         <button id="getnextauthor" class="styled-button">{% trans "getnextauthor" %}</button>
     {% endif %}
+
+<input class="modal-state" id="modal-addauthor" type="checkbox" />
+<div class="modal">
+  <label class="modal__bg" for="modal-addauthor"></label>
+  <div class="modal__inner">
+    <label class="modal__close" for="modal-addauthor"></label>
+    <h2>Caaaats FTW!</h2>
+    <p><img src="http://i.imgur.com/HnrkBwB.gif" alt="" />Aliquam in sagittis nulla. Curabitur euismod diam eget risus venenatis, sed dictum lectus bibendum. Nunc nunc nisi, hendrerit eget nisi id, rhoncus rutrum velit. Nunc vel mauris dolor. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Aliquam fringilla quis nisi eget imperdiet.</p>
+  </div>
+</div>
+
 </div>

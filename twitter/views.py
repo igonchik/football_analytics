@@ -236,7 +236,7 @@ def setting_author(request):
     template = 'authors.html'
     if page > 1:
         template = 'authors_mini.html'
-    return render(request, template, {'auths': auths, 'page': page, 'show_next': show_next},
+    return render(request, template, {'auths': auths, 'page': page, 'show_next': show_next, 'count_a': count},
                   context_instance=RequestContext(request))
 
 

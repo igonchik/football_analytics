@@ -77,6 +77,7 @@ function get_authors(page){
                     $('#getnextauthor').attr('style', 'margin-left:10px; width:' + (($(window).innerWidth() * 0.9 - 30) - 14)+'px');
                 }
                 else {
+
                     $('.ProfileCard').attr('style', 'width: 100%; margin-left: 0');
                     $('#getnextauthor').attr('style', 'width: 100%; margin-left: 0');
                 }
