@@ -6,7 +6,7 @@ from datetime import datetime
 #Интервал запроса изменений с сервера в мс
 UPDATE_CHECK_TIMEOUT = 30000
 
-AUTHOR_ON_PAGE = 10
+AUTHOR_ON_PAGE = 3
 
 
 def getTime():

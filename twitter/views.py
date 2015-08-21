@@ -8,7 +8,7 @@ from django.utils.translation import ugettext_lazy as _
 from models import *
 from django.utils import translation
 from django.utils.translation import check_for_language
-from django.http import HttpResponseRedirect
+from django.http import HttpResponseRedirect, HttpResponse
 from football_analytics import settings
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
@@ -182,7 +182,7 @@ def get_user_timeline(author):
                     try:
                         photo = urllib.urlretrieve(msg['profile_image_url'])
                         obj.logo.save(os.path.basename(msg['profile_image_url']), File(open(photo[0], 'rb')))
-                        obj.logo_url = msg['profile_image_url'].replace(' ','')
+                        obj.logo_url = msg['profile_image_url'].replace(' ', '')
                     except:
                         pass
                 obj.save()
@@ -227,6 +227,54 @@ def setting_author(request):
             page = 1
     pgs = (int(page)-1)*AUTHOR_ON_PAGE
     pgs1 = int(page)*AUTHOR_ON_PAGE
+    count = TTweetsAuthor.objects.all().count()
+    show_next = False
+    if pgs1 < count:
+        show_next = True
     auths = TTweetsAuthor.objects.all().annotate(num_tweets=Count('ttweetstweet'))[pgs:pgs1]
-    return render(request, 'authors.html', {'auths': auths, 'page': page},
+    template = 'authors.html'
+    if page > 1:
+        template = 'authors_mini.html'
+    return render(request, template, {'auths': auths, 'page': page, 'show_next': show_next},
                   context_instance=RequestContext(request))
+
+
+def recache_photo(request, auth=0):
+    if auth == 0:
+        auths = TTweetsAuthor.objects.all()
+        path = os.path.join(settings.MEDIA_ROOT, 'twitter', 'photo')
+        for the_file in os.listdir(path):
+            file_path = os.path.join(path, the_file)
+            try:
+                if os.path.isfile(file_path):
+                    os.unlink(file_path)
+            except:
+                pass
+    else:
+        auths = TTweetsAuthor.objects.filter(ta_id=int(auth))
+        try:
+            if auths.exists() and auths[0].logo and os.path.isfile(auths[0].logo.path):
+                os.unlink(auths[0].logo.path)
+        except:
+            pass
+
+    for rec in auths:
+        if rec.logo_url:
+            try:
+                photo = urllib.urlretrieve(rec.logo_url)
+                rec.logo.save(os.path.basename(rec.logo_url), File(open(photo[0], 'rb')))
+                rec.save()
+            except:
+                pass
+
+    if auth > 0 and auths.exists():
+        return HttpResponse(auths[0].logo.url)
+    return HttpResponseRedirect(request.META['HTTP_REFERER'])
+
+
+def remove_auth(request, id):
+    id = int(id)
+    auth = TTweetsAuthor.objects.filter(ta_id=id)
+    if auth.exists():
+        auth[0].delete()
+    return HttpResponse('OK')

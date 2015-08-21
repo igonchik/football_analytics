@@ -1,16 +1,6 @@
 {% load staticfiles %}
 {% load url from future %}
 {% load i18n %}
-
-<div id="authors_content">
-    <h1>{% trans "authors" %}</h1>
-    <div class="add_author_block">
-        <button onclick="AddAuthor()" class="add_author" title="{% trans "AddAuthor" %}"></button>
-        <div class="effect_author"></div>
-    </div>
-
-    <input type="hidden" id="auth_page" value="{{ page }}">
-    <div id="authors_content_mini">
     {% for rec in auths %}
         <div class="ProfileCard" id="profile_{{ rec.ta_id }}" style="width: 100%">
             <div class="ProfileCard-bg" aria-hidden="true" tabindex="-1">
@@ -44,8 +34,8 @@
             </div>
         </div>
     {% endfor %}
-    </div>
-    {% if show_next %}
-        <button id="getnextauthor" class="styled-button">{% trans "getnextauthor" %}</button>
-    {% endif %}
-</div>
+{% if not show_next %}
+    <script type="text/javascript">
+        $('#getnextauthor').remove();
+    </script>
+{% endif %}
