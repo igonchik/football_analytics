@@ -39,6 +39,9 @@ function get_authors(page){
             function(html)
             {
                 $('.tabs_page').eq(0).html(html);
+                var pred = $('html').innerWidth();
+                var cols = pred/320>>0;
+                $('.ProfileCard').attr('style', 'width:'+(100/cols-2)+'%');
             },
         error:
             function()
@@ -106,3 +109,9 @@ function get_tags(){
             }
     });
 }
+
+$(window).bind('resize', function() {
+    var pred = $('html').innerWidth();
+    var cols = pred/320>>0;
+    $('.ProfileCard').attr('style', 'width:'+(100/cols-2)+'%');
+}).trigger('resize');

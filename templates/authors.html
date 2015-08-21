@@ -5,35 +5,34 @@
 <div id="authors_content">
     <h1>{% trans "authors" %}</h1>
     <input type="hidden" id="auth_page" value="{{ page }}">
-            {% for rec in auths %}
-                <div class="ProfileCard">
-                    <div class="ProfileCard-bg" aria-hidden="true" tabindex="-1">
-                        <div style="text-align: right; padding: 20px"><i>
-                            {% trans "alltweets" %}: {{ rec.num_tweets }} <br/>
-                            {% trans "auth_rating" %}: {{ rec.rating }} <br/>
-                            <a href="#" style="color: #66757f">{% trans "more" %}</a></i>
-                        </div>
+    {% for rec in auths %}
+        <div class="ProfileCard">
+            <div class="ProfileCard-bg" aria-hidden="true" tabindex="-1">
+                <div style="text-align: right; padding: 20px"><i>
+                    {% trans "alltweets" %}: {{ rec.num_tweets }} <br/>
+                    {% trans "auth_rating" %}: {{ rec.rating }} <br/>
+                    <a href="#" style="color: #66757f">{% trans "more" %}</a></i>
+                </div>
+            </div>
+            <div class="ProfileCard-content">
+                <a class="ProfileCard-avatarLink" aria-hidden="true" tabindex="-1" href="{{ rec.url }}" target="_blank" data-original-title="{{ rec.realname }}">
+                    <img class="ProfileCard-avatarImage" alt="" src="{% if rec.logo %}{% if rec.cache_logo %}{{ rec.logo.url }}{% else %}{% if rec.logo_url %}{{ rec.logo_url }}{% else %}{% static "img/nophoto.svg" %}{% endif %}{% endif %}{% else %}{% static "img/nophoto.svg" %}{% endif %}">
+                </a>
+                <div class="ProfileCard-actions">
+                    <button>{% trans "delete" %}</button>
+                </div>
+                <div class="ProfileCard-userFields">
+                    <div class="ProfileNameTruncated">
+                        <a class="ProfileNameTruncated-link" href="{{ rec.url }}" target="_blank"> {{ rec.realname }} </a>
                     </div>
-                    <div class="ProfileCard-content">
-                        <a class="ProfileCard-avatarLink" aria-hidden="true" tabindex="-1" href="{{ rec.url }}" target="_blank" data-original-title="{{ rec.realname }}">
-                            <img class="ProfileCard-avatarImage" alt="" src="{% if rec.logo %}{% if rec.cache_logo %}{{ rec.logo.url }}{% else %}{% if rec.logo_url %}{{ rec.logo_url }}{% else %}{% static "img/nophoto.svg" %}{% endif %}{% endif %}{% else %}{% static "img/nophoto.svg" %}{% endif %}">
-                        </a>
-                        <div class="ProfileCard-actions">
-                            <button>{% trans "delete" %}</button>
-                        </div>
-                        <div class="ProfileCard-userFields">
-                            <div class="ProfileNameTruncated">
-                                <a class="ProfileNameTruncated-link" href="{{ rec.url }}" target="_blank"> {{ rec.realname }} </a>
-                            </div>
                             <span class="ProfileCard-screenname">
                                 <a class="ProfileCard-screennameLink" data-aria-label-part="" href="{{ rec.url }}" target="_blank">
                                     @<span class="u-linkComplex-target">{{ rec.name }}</span>
                                 </a>
                             </span>
-                        </div>
-                        <p class="ProfileCard-bio">{{ rec.descr }}</p>
-                    </div>
                 </div>
-            {% endfor %}
-    </div>
+                <p class="ProfileCard-bio">{{ rec.descr }}</p>
+            </div>
+        </div>
+    {% endfor %}
 </div>
