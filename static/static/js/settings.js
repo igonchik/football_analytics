@@ -276,64 +276,6 @@ function get_authors_page(page){
 }
 
 
-function get_world(){
-    $('.tabs_page').eq(1).html(loading);
-    $.ajax({
-        type: "GET",
-        url: "/settings/tauthor/",
-        dataType: "text",
-        success:
-            function(html)
-            {
-                //$('.resp-tabs-container div').eq(1).html(html);
-            },
-        error:
-            function()
-            {
-                $('.tabs_page').eq(1).html(error);
-            }
-    });
-}
-
-function get_football(){
-    $('.tabs_page').eq(2).html(loading);
-    $.ajax({
-        type: "GET",
-        url: "/settings/tauthor/",
-        dataType: "text",
-        success:
-            function(html)
-            {
-                //$('.resp-tabs-container div').eq(2).html(html);
-            },
-        error:
-            function()
-            {
-                $('.tabs_page').eq(2).html(error);
-            }
-    });
-}
-
-
-function get_tags(){
-    $('.tabs_page').eq(3).html(loading);
-    $.ajax({
-        type: "GET",
-        url: "/settings/tauthor/",
-        dataType: "text",
-        success:
-            function(html)
-            {
-                //$('.resp-tabs-container div').eq(3).html(html);
-            },
-        error:
-            function()
-            {
-                $('.tabs_page').eq(3).html(error);
-            }
-    });
-}
-
 $(window).bind('resize', function() {
     resize();
 }).trigger('resize');
