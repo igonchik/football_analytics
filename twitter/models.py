@@ -16,7 +16,7 @@ class TTweetsAuthor(models.Model):
     ta_id = models.AutoField(primary_key=True)
     url = models.URLField()
     name = models.CharField(max_length=255)
-    rating = models.PositiveIntegerField(default=500)
+    rating = models.PositiveIntegerField(default=0)
     maxid = models.PositiveIntegerField(default=0)
     realname = models.CharField(max_length=255, blank=True, null=True)
     descr = models.TextField(blank=True, null=True)

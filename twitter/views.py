@@ -4,7 +4,7 @@ from datetime import datetime
 from twython import Twython
 from football_analytics.settings import SECRET_KEY
 from football_analytics.settings import KEY
-from django.utils.translation import ugettext_lazy as _
+from django.utils.translation import ugettext as _
 from models import *
 from django.utils import translation
 from django.utils.translation import check_for_language
@@ -170,6 +170,7 @@ def get_user_timeline(author):
                 tplayertweet.save()
             if rec['retweeted']:
                 msg = rec['retweeted_status']['user']
+                msg['url'] = 'https://twitter.com/{0}'.format(msg['screen_name'])
                 obj, created = TTweetsAuthor.objects.get_or_create(url=msg['url'], name=msg['screen_name'])
                 if not created and obj.rating < author.rating:
                     author.rating = (author.rating-obj.rating)/4*3 + obj.rating
@@ -182,6 +183,10 @@ def get_user_timeline(author):
                     try:
                         photo = urllib.urlretrieve(msg['profile_image_url'])
                         obj.logo.save(os.path.basename(msg['profile_image_url']), File(open(photo[0], 'rb')))
+                        if 'profile_banner_url' not in msg.keys():
+                            msg['profile_banner_url'] = None
+                        if 'logo_url' not in msg.keys():
+                            msg['logo_url'] = None
                         obj.banner_url = msg['profile_banner_url']
                         obj.logo_url = msg['profile_image_url'].replace(' ', '')
                     except:
@@ -251,7 +256,8 @@ def setting_author(request):
     if page > 1 or request.method == 'POST' and 'page' in request.POST:
         template = 'authors_mini.html'
     return render(request, template, {'auths': auths, 'page': page, 'show_next': show_next, 'count_a': count,
-                                      'ispost': (request.method == 'POST' and 'q' in request.POST), 'q': q},
+                                      'ispost': (request.method == 'POST' and 'q' in request.POST), 'q': q,
+                                      'actions': True},
                   context_instance=RequestContext(request))
 
 
@@ -298,5 +304,51 @@ def remove_auth(request, id):
 
 def add_auth(request):
     if request.method == 'POST' and 'url' in request.POST:
-        pass
+        try:
+            msg = twitter.show_user(screen_name=request.POST['url'])
+        except:
+            return HttpResponse(_("PageNotFound"))
+
+        if TTweetsAuthor.objects.filter(url=msg['url']).exists() or \
+                TTweetsAuthor.objects.filter(url='https://twitter.com/{0}'.format(msg['screen_name'])).exists():
+            return HttpResponse(_("AuthorExists"))
+        msg['url'] = 'https://twitter.com/{0}'.format(request.POST['url'])
+        if 'profile_banner_url' not in msg.keys():
+            msg['profile_banner_url'] = None
+        if 'logo_url' not in msg.keys():
+            msg['logo_url'] = None
+        auths = TTweetsAuthor(url=msg['url'], name=msg['screen_name'], realname=msg['name'],
+                                  descr=msg['description'],
+                                  banner_url=msg['profile_banner_url'],
+                                  logo_url=msg['profile_image_url'].replace(' ', ''))
+        try:
+            photo = urllib.urlretrieve(msg['profile_image_url'])
+            auths.logo.save(os.path.basename(msg['profile_image_url']), File(open(photo[0], 'rb')))
+            auths.save()
+        except:
+            return HttpResponse(_("ServerError"))
+        return HttpResponse('ok')
     return render(request, 'add_author.html', {}, context_instance=RequestContext(request))
+
+
+def get_author_from_url(request):
+    if request.method == 'GET' and 'url' in request.GET:
+        try:
+            msg = twitter.show_user(screen_name=request.GET['url'])
+            msg['url'] = 'https://twitter.com/{0}'.format(request.GET['url'])
+            if 'profile_banner_url' not in msg.keys():
+                msg['profile_banner_url'] = None
+            if 'logo_url' not in msg.keys():
+                msg['logo_url'] = None
+            auths = TTweetsAuthor(url=msg['url'], name=msg['screen_name'], realname=msg['name'],
+                                  descr=msg['description'],
+                                  banner_url=msg['profile_banner_url'],
+                                  logo_url=msg['profile_image_url'].replace(' ', ''))
+            exists = False
+            if TTweetsAuthor.objects.filter(url=msg['url']).exists():
+                exists = True
+            return render(request, 'author_preview.html', {'rec': auths, 'exists': exists},
+                          context_instance=RequestContext(request))
+        except:
+            pass
+    return HttpResponse('')

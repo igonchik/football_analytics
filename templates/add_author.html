@@ -1,0 +1,22 @@
+{% load staticfiles %}
+{% load url from future %}
+{% load i18n %}
+
+<h2>{% trans "AddAuthLabel" %}</h2>
+<form id="AddAuthForm" action="/settings/tauthor/add/" style="width: 100%" class="ajax-form" method="POST">
+    {% csrf_token %}
+    <label>{% trans "URLforAuthor" %}</label>
+    <input type="text" placeholder="{% trans "UrlAuthor" %}" class="danger" id="inputauthurl" name="url"
+           style="width: 68%">
+
+    <div id="preview_auth">
+
+    </div>
+
+    <div id="AuthorPreviewPage" class="msg error">
+        {% trans "AuthAddError" %}
+    </div>
+
+    <button id="submit" type="button" style="width:30%; margin-top: -41px"
+            class="btn submitbtn">{% trans "Submit" %}</button>
+</form>

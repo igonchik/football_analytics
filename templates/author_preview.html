@@ -1,0 +1,27 @@
+{% load staticfiles %}
+{% load url from future %}
+{% load i18n %}
+
+
+<div class="ProfileCard Preview" id="profile">
+    <div class="ProfileCard-content">
+        <div class="ProfileCard-actions">
+            <div class="ProfileCard-avatarLink {% if rec.logo_url %}logo{% endif %}" aria-hidden="true" tabindex="-1" data-original-title="{{ rec.realname }}">
+            <div id="logo" class="ProfileCard-avatarImage"
+                 style="background: url({{ rec.logo_url }}) no-repeat scroll 0 0 / 48px">
+            </div>
+        </div>
+        </div>
+        <div class="ProfileCard-userFields">
+            <div class="ProfileNameTruncated">
+                <a class="ProfileNameTruncated-link" href="{{ rec.url }}" target="_blank"> {{ rec.realname }} </a>
+            </div>
+                            <span class="ProfileCard-screenname">
+                                <a class="ProfileCard-screennameLink" data-aria-label-part="" href="{{ rec.url }}" target="_blank">
+                                    @<span class="u-linkComplex-target">{{ rec.name }}</span>
+                                </a>
+                            </span>
+        </div>
+        <p class="ProfileCard-bio">{{ rec.descr }}</p>
+    </div>
+</div>

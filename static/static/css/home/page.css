@@ -363,19 +363,19 @@ a.styled-button:active {
     color: #393939; }
 
 .hollow {
-  display: inline-block;
-  -webkit-transition-duration: 0.3s;
-  transition-duration: 0.3s;
-  -webkit-transition-property: background;
-  transition-property: background;
-  -webkit-transform: translateZ(0);
-  transform: translateZ(0);
-  box-shadow: inset 0 0 0 4px #c6342e, 0 0 1px rgba(0, 0, 0, 0);
-  /* Hack to improve aliasing on mobile/tablet devices */
+    display: inline-block;
+    -webkit-transition-duration: 0.3s;
+    transition-duration: 0.3s;
+    -webkit-transition-property: background;
+    transition-property: background;
+    -webkit-transform: translateZ(0);
+    transform: translateZ(0);
+    box-shadow: inset 0 0 0 4px #c6342e, 0 0 1px rgba(0, 0, 0, 0);
+    /* Hack to improve aliasing on mobile/tablet devices */
 }
 .hollow:hover, .hollow:focus, .hollow:active {
-  background: none;
-  color:#393939;
+    background: none;
+    color:#393939;
 }
 
 .btn {
@@ -405,78 +405,190 @@ a.styled-button:active {
 }
 
 .search input {
-	outline: none;
+    outline: none;
 }
 .search input[type=search] {
-	-webkit-appearance: textfield;
-	-webkit-box-sizing: content-box;
-	font-family: inherit;
-	font-size: 100%;
+    -webkit-appearance: textfield;
+    -webkit-box-sizing: content-box;
+    font-family: inherit;
+    font-size: 100%;
 }
 .search input::-webkit-search-decoration,
 .search input::-webkit-search-cancel-button {
-	display: none;
+    display: none;
 }
 
 .search input[type=search] {
-	background: rgba(0, 0, 0, 0) url(../../img/search.svg) no-repeat 2px 0 / 2.2em auto;
-	border: none;
-	padding: 9px 10px 9px 32px;
-	width: 55px;
-	-webkit-border-radius: 10em;
-	-moz-border-radius: 10em;
-	-webkit-transition: all .5s;
-	-moz-transition: all .5s;
-	transition: all .5s;
+    background: rgba(0, 0, 0, 0) url(../../img/search.svg) no-repeat 2px 0 / 2.2em auto;
+    border: none;
+    padding: 9px 10px 9px 32px;
+    width: 55px;
+    -webkit-border-radius: 10em;
+    -moz-border-radius: 10em;
+    -webkit-transition: all .5s;
+    -moz-transition: all .5s;
+    transition: all .5s;
 }
 
 .search input[type=search]:hover {
-	background: rgba(0, 0, 0, 0) url(../../img/search_hover.svg) no-repeat 2px 0 / 2.2em auto;
+    background: rgba(0, 0, 0, 0) url(../../img/search_hover.svg) no-repeat 2px 0 / 2.2em auto;
 }
 
 
 .search input[type=search]:focus {
-	width: 130px;
+    width: 130px;
     border: #66CC75 1px #66CC75;
-	-webkit-box-shadow: 0 0 5px rgba(109,207,246,.5);
-	-moz-box-shadow: 0 0 5px rgba(109,207,246,.5);
-	box-shadow: 0 0 5px rgba(109,207,246,.5);
+    -webkit-box-shadow: 0 0 5px rgba(109,207,246,.5);
+    -moz-box-shadow: 0 0 5px rgba(109,207,246,.5);
+    box-shadow: 0 0 5px rgba(109,207,246,.5);
     background: #fff url(../../img/search_hover.svg) no-repeat 2px 0 / 2.2em auto;
 }
 
 
 .search input:-moz-placeholder {
-	color: #999;
+    color: #999;
 }
 .search input::-webkit-input-placeholder {
-	color: #999;
+    color: #999;
 }
 
 /* Demo 2 */
 .search-2 input[type=search] {
-	width: 15px;
-	padding-left: 10px;
-	color: transparent;
-	cursor: pointer;
+    width: 15px;
+    padding-left: 10px;
+    color: transparent;
+    cursor: pointer;
 }
 .search-2 input[type=search]:hover {
-	background-color: #fff;
+    background-color: #fff;
 }
 .search-2 input[type=search]:focus {
-	width: 130px;
-	padding-left: 32px;
-	color: #000;
-	cursor: auto;
+    width: 130px;
+    padding-left: 32px;
+    color: #000;
+    cursor: auto;
     border: #66CC75 1px #66CC75;
     background: #fff url(../../img/search_hover.svg) no-repeat 0 0 / 2.2em auto;
 }
 .search-2 input:-moz-placeholder {
-	color: transparent;
+    color: transparent;
 }
 .search-2 input::-webkit-input-placeholder {
-	color: transparent;
+    color: transparent;
 }
 
 .inviz {
     display: none;
+}
+
+
+/* from elems */
+form *, *::before, *::after {
+    box-sizing: border-box;
+}
+
+form label {
+    display: block;
+    font-size: 16px;
+    font-weight: 600;
+    margin-bottom: 10px;
+}
+
+form input[type="text"] {
+    display: block;
+    margin: 0;
+    width: 100%;
+    font-family: "Open Sans", sans-serif;
+    font-size: 18px;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    -webkit-box-shadow: none;
+    -moz-box-shadow: none;
+    box-shadow: none;
+    -webkit-border-radius: none;
+    -moz-border-radius: none;
+    -ms-border-radius: none;
+    -o-border-radius: none;
+    border-radius: none;
+    color: #393939;
+}
+
+form input[type="text"]:focus {
+    outline: none;
+}
+
+form input[type="text"] {
+    padding: 10px;
+    border: solid 1px gainsboro;
+    -webkit-transition: box-shadow 0.3s, border 0.3s;
+    -moz-transition: box-shadow 0.3s, border 0.3s;
+    -o-transition: box-shadow 0.3s, border 0.3s;
+    transition: box-shadow 0.3s, border 0.3s;
+}
+
+form  input[type="text"]:focus {
+    border: solid 1px #707070;
+    -webkit-box-shadow: 0 0 5px 1px #969696;
+    -moz-box-shadow: 0 0 5px 1px #969696;
+    box-shadow: 0 0 5px 1px #969696;
+}
+
+form input[type="text"].danger:focus {
+    border: solid 1px #c6342e !important;
+    box-shadow: 0 0 5px 1px rgba(198, 52, 46, 0.33);
+}
+
+form input[type="text"].success:focus {
+    border: solid 1px #1dc674 !important;
+    box-shadow: 0 0 5px 1px rgba(29, 198, 116, 0.44);
+}
+
+form .submitbtn {
+    min-width: 65px;
+    max-width: 150px;
+    float: right;
+    height: 41px;
+    display: inline-block;
+    -webkit-transition-duration: 0.3s;
+    transition-duration: 0.3s;
+    -webkit-transition-property: background;
+    transition-property: background;
+    -webkit-transform: translateZ(0);
+    transform: translateZ(0);
+    box-shadow: inset 0 0 0 4px #00b366, 0 0 1px rgba(0, 0, 0, 0);
+}
+
+form .submitbtn:hover, form .submitbtn:focus, form .submitbtn:active {
+    background: none;
+    color:#393939;
+}
+
+.btn.submitbtn {
+    background: #00b366 none repeat scroll 0 0;
+}
+
+
+.msg.info, .msg.success, .msg.warning, .msg.error, .msg.validation {
+border: 1px solid;
+margin: 10px 0px;
+padding:10px 10px 10px 50px;
+background-repeat: no-repeat;
+background-position: 10px center;
+}
+.msg.info {
+color: #00529B;
+background-color: #BDE5F8;
+}
+.msg.success {
+color: #4F8A10;
+background-color: #DFF2BF;
+}
+.msg.warning {
+color: #9F6000;
+background-color: #FEEFB3;
+}
+.msg.error {
+color: #D8000C;
+background-color: #FFBABA;
 }

@@ -29,7 +29,7 @@ h1 {
 
 .ProfileCard {
     background-color: #fff;
-    border: 1px solid #e2e2e2;
+    border: 1px solid #393939;
     border-radius: 5px;
     box-sizing: border-box;
     margin-bottom: 10px;
@@ -208,6 +208,11 @@ h1 {
     background-color: rgba(0, 0, 0, 0);
     background-repeat: no-repeat;
     background-position: 0 0;
+    border-radius: 4px 4px 0 0;
+    -moz-border-radius: 4px 4px 0 0;
+    -o-border-radius: 4px 4px 0 0;
+    -webkit-border-radius: 4px 4px 0 0;
+    -ms-border-radius: 4px 4px 0 0;
 }
 
 .author-stat {
@@ -216,6 +221,19 @@ h1 {
     margin-left: 0.6em;
     padding-left: 0;
     position: absolute;
+}
+
+.ProfileCard.Preview {
+    width: 100%;
+    margin: 20px 0 0;
+    text-align: left;
+    background: #ebebeb;
+    opacity: 0.7;
+    border: 2px solid grey;
+}
+
+.ProfileCard.Preview .ProfileCard-avatarLink {
+    margin: -9px 2px 0 -3px;
 }
 
 

@@ -60,20 +60,21 @@ function BackgroundImageResize(classname)
         }});
 }
 
+
 function resize()
 {
     var pred = $('html').innerWidth();
     var cols = pred/320>>0;
     if ($(window).innerWidth() > 640) {
-        $('.ProfileCard').attr('style', 'width:' + (($(window).innerWidth() * 0.9 - 30) / cols - 14) + 'px');
+        $(".ProfileCard:not('.Preview')").attr('style', 'width:' + (($(window).innerWidth() * 0.9 - 30) / cols - 14) + 'px');
         $('#getnextauthor').attr('style', 'margin-left:10px; width:' + (($(window).innerWidth() * 0.9 - 30) - 14)+'px');
     }
     else {
 
-        $('.ProfileCard').attr('style', 'width: 100%; margin-left: 0');
+        $(".ProfileCard:not('.Preview')").attr('style', 'width: 100%; margin-left: 0');
         $('#getnextauthor').attr('style', 'width: 100%; margin-left: 0');
     }
-    BackgroundImageResize('ProfileCard-bg-pic');
+    BackgroundImageResize("ProfileCard-bg-pic:not('.Preview')");
 }
 
 function get_authors(page){
@@ -119,6 +120,106 @@ function get_authors(page){
     });
 }
 
+function AddAuthAction()
+{
+    var AddAuthForm = $('#AddAuthForm');
+    $('#AuthorPreviewPage').addClass('inviz');
+    $('#inputauthurl').keypress(function(event){
+        $('#AuthorPreviewPage').addClass('inviz');
+        $('#submit').css('margin-top', '-41px');
+        $('#preview_auth').html('');
+        var str = $('#inputauthurl').val();
+        $('#inputauthurl').removeClass();
+        if (isTweetUserValid(str)) {
+            $('#inputauthurl').addClass('success');
+        }
+        else {
+            $('#inputauthurl').addClass('danger');
+        }
+
+        if(event.keyCode == 13){
+            event.stopImmediatePropagation();
+            event.preventDefault();
+            var inpfiled = $('#inputauthurl').eq(0);
+            if (inpfiled.attr('class').indexOf('success') > -1)
+            {
+                $('#preview_auth').html(loading);
+                $('#submit').css('margin-top', '-211px');
+                $.ajax({
+                    type: "GET",
+                    url: "/settings/tauthor/find/?url="+inpfiled.val(),
+                    dataType: "text",
+                    success:
+                        function(html)
+                        {
+                            $('.element').remove();
+                            if (html.length == 0)
+                            {
+                                $('#submit').css('margin-top', '-103px');
+                                $('#AuthorPreviewPage').removeClass('inviz');
+                            } else {
+                                $('#preview_auth').html(html);
+                                $('#submit').css('margin-top', '-214px');
+                                if ($(window).innerWidth()>=754)
+                                    $('#submit').css('margin-top', '-215px');
+                            }
+                        },
+                    error:
+                        function()
+                        {
+                            $('.element').remove();
+                            $('#submit').css('margin-top', '-103px');
+                            $('#AuthorPreviewPage').removeClass('inviz');
+                        }
+                });
+            }
+            else
+            {
+                $('#preview_auth').html('');
+            }
+        }
+    });
+
+    AddAuthForm.submit(function(event) {
+        event.stopImmediatePropagation();
+        event.preventDefault();
+        $('#AuthorPreviewPage').addClass('inviz');
+        if (isTweetUserValid($('#inputauthurl').val())) {
+            var formData = AddAuthForm.serialize();
+            $('#preview_auth').html(loading);
+            $('#submit').css('margin-top', '-211px');
+            $.ajax({
+                type: 'POST',
+                url: AddAuthForm.attr('action'),
+                data: formData,
+                dataType: "text",
+                success: function(html)
+                {
+                    $('.element').remove();
+                    if (html!='ok') {
+                        $('#submit').css('margin-top', '-103px');
+                        $('#AuthorPreviewPage').removeClass('inviz');
+                    }
+                    else
+                    {
+                        get_authors(1);
+                        $('#modal-addauthor').attr('checked', false);
+                    }
+                },
+                error: function(html)
+                {
+                    $('.element').remove();
+                    $('#AuthorPreviewPage').removeClass('inviz');
+                    $('#submit').css('margin-top', '-103px');
+                }
+            })} else
+        {
+            $('#submit').css('margin-top', '-103px');
+            $('#AuthorPreviewPage').removeClass('inviz');
+        }
+    });
+}
+
 
 function RefreshAuthCache(id)
 {
@@ -156,6 +257,7 @@ function get_authors_page(page){
             {
                 $('.element').remove();
                 $('#authors_content_mini').eq(0).append(html);
+                $('#authors_content_mini > h1').eq(1).remove();
                 var pred = $('html').innerWidth();
                 var cols = pred/320>>0;
                 if ($(window).innerWidth() > 640)
@@ -265,6 +367,8 @@ function AddAuthor()
             function(html)
             {
                 $('#content-modal-addauthor').html(html);
+                AddAuthAction();
+                $('#submit').click(function(){$('#AddAuthForm').submit()});
             },
         error:
             function()

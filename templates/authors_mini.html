@@ -1,7 +1,7 @@
 {% load staticfiles %}
 {% load url from future %}
 {% load i18n %}
-<h1>{% trans "authors" %}{% if ispost %} "{{ q }}"{% endif %} ({{ count_a }})</h1>
+{% if actions %}<h1>{% trans "authors" %}{% if ispost %} "{{ q }}"{% endif %} ({{ count_a }})</h1>{% endif %}
 {% for rec in auths %}
     <div class="ProfileCard" id="profile_{{ rec.ta_id }}" style="width: 100%">
         <div class="ProfileCard-bg" aria-hidden="true" tabindex="-1">
@@ -16,13 +16,15 @@
                 </div>
             </div>
             <div class="ProfileCard-actions">
-                <button class="btn hollow delete" onclick="DeleteAuthor({{ rec.ta_id }})">{% trans "delete" %}</button>
-                <br>
-                <div class="author-stat">
-                    <i style="cursor: help" title="{% trans "alltweets" %}">{% trans "alltweetsshort" %}:</i> {{ rec.num_tweets }} <br/>
-                    <i style="cursor: help" title="{% trans "auth_rating" %}">{% trans "auth_ratingshort" %}:</i> {{ rec.rating }} <br/>
-                    <a href="/stats/author/{{ rec.ta_id }}/" style="color: #66757f">{% trans "more" %}</a>
-                </div>
+                {% if actions %}
+                    <button class="btn hollow delete" onclick="DeleteAuthor({{ rec.ta_id }})">{% trans "delete" %}</button>
+                    <br>
+                    <div class="author-stat">
+                        <i style="cursor: help" title="{% trans "alltweets" %}">{% trans "alltweetsshort" %}:</i> {{ rec.num_tweets }} <br/>
+                        <i style="cursor: help" title="{% trans "auth_rating" %}">{% trans "auth_ratingshort" %}:</i> {{ rec.rating }} <br/>
+                        <a href="/stats/author/{{ rec.ta_id }}/" style="color: #66757f">{% trans "more" %}</a>
+                    </div>
+                {% endif %}
             </div>
             <div class="ProfileCard-userFields">
                 <div class="ProfileNameTruncated">
