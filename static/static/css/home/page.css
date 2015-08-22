@@ -27,7 +27,7 @@ html, body {
 }
 
 #content {
-    padding-bottom: 4.5em;
+    padding-bottom: 67px;
     margin: auto;
     width: 90%;
     padding-top: 6em;
@@ -40,7 +40,7 @@ html, body {
 
 #footer {
     bottom: 0;
-    height: 4.5em;
+    height: 66px;
     left: 0;
     position: absolute;
     width: 100%;
@@ -84,7 +84,7 @@ body {
     overflow: hidden;
     position: relative;
     text-align: center;
-    padding-right: 5%;
+    padding-right: 20px;
 }
 
 a.tooltip {outline:none;}
@@ -113,8 +113,7 @@ a.tooltip span
     padding: 20px 40px 0;
     float: left;
     overflow: hidden;
-    max-width: 300px;
-    max-height: 56px;
+    max-height: 25px;
     line-height: 25px;
 }
 
@@ -392,4 +391,92 @@ a.styled-button:active {
 .btn.delete {
     padding: 6px;
     font-size: 1.05em;
+}
+
+
+.search {
+    border: medium none;
+    cursor: pointer;
+    display: block;
+    float: right;
+    height: 2.5em;
+    position: relative;
+    width: 40px;
+}
+
+.search input {
+	outline: none;
+}
+.search input[type=search] {
+	-webkit-appearance: textfield;
+	-webkit-box-sizing: content-box;
+	font-family: inherit;
+	font-size: 100%;
+}
+.search input::-webkit-search-decoration,
+.search input::-webkit-search-cancel-button {
+	display: none;
+}
+
+.search input[type=search] {
+	background: rgba(0, 0, 0, 0) url(../../img/search.svg) no-repeat 2px 0 / 2.2em auto;
+	border: none;
+	padding: 9px 10px 9px 32px;
+	width: 55px;
+	-webkit-border-radius: 10em;
+	-moz-border-radius: 10em;
+	-webkit-transition: all .5s;
+	-moz-transition: all .5s;
+	transition: all .5s;
+}
+
+.search input[type=search]:hover {
+	background: rgba(0, 0, 0, 0) url(../../img/search_hover.svg) no-repeat 2px 0 / 2.2em auto;
+}
+
+
+.search input[type=search]:focus {
+	width: 130px;
+    border: #66CC75 1px #66CC75;
+	-webkit-box-shadow: 0 0 5px rgba(109,207,246,.5);
+	-moz-box-shadow: 0 0 5px rgba(109,207,246,.5);
+	box-shadow: 0 0 5px rgba(109,207,246,.5);
+    background: #fff url(../../img/search_hover.svg) no-repeat 2px 0 / 2.2em auto;
+}
+
+
+.search input:-moz-placeholder {
+	color: #999;
+}
+.search input::-webkit-input-placeholder {
+	color: #999;
+}
+
+/* Demo 2 */
+.search-2 input[type=search] {
+	width: 15px;
+	padding-left: 10px;
+	color: transparent;
+	cursor: pointer;
+}
+.search-2 input[type=search]:hover {
+	background-color: #fff;
+}
+.search-2 input[type=search]:focus {
+	width: 130px;
+	padding-left: 32px;
+	color: #000;
+	cursor: auto;
+    border: #66CC75 1px #66CC75;
+    background: #fff url(../../img/search_hover.svg) no-repeat 0 0 / 2.2em auto;
+}
+.search-2 input:-moz-placeholder {
+	color: transparent;
+}
+.search-2 input::-webkit-input-placeholder {
+	color: transparent;
+}
+
+.inviz {
+    display: none;
 }

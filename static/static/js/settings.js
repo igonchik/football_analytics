@@ -1,6 +1,6 @@
 var loading = '<div class="element"><div class="loading3"><div></div><div></div><div></div><div></div><div></div></div></div>';
 var loading_small ='<div class="element-small"><div class="loading1"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div></div>';
-var error = '';
+var error = '<div class="error-div"></div>';
 var active_tab = '0';
 
 $(document).ready(function () {
@@ -60,6 +60,22 @@ function BackgroundImageResize(classname)
         }});
 }
 
+function resize()
+{
+    var pred = $('html').innerWidth();
+    var cols = pred/320>>0;
+    if ($(window).innerWidth() > 640) {
+        $('.ProfileCard').attr('style', 'width:' + (($(window).innerWidth() * 0.9 - 30) / cols - 14) + 'px');
+        $('#getnextauthor').attr('style', 'margin-left:10px; width:' + (($(window).innerWidth() * 0.9 - 30) - 14)+'px');
+    }
+    else {
+
+        $('.ProfileCard').attr('style', 'width: 100%; margin-left: 0');
+        $('#getnextauthor').attr('style', 'width: 100%; margin-left: 0');
+    }
+    BackgroundImageResize('ProfileCard-bg-pic');
+}
+
 function get_authors(page){
     $('.tabs_page').eq(0).html(loading);
     $.ajax({
@@ -70,24 +86,30 @@ function get_authors(page){
             function(html)
             {
                 $('.tabs_page').eq(0).html(html);
-                var pred = $('html').innerWidth();
-                var cols = pred/320>>0;
-                if ($(window).innerWidth() > 640) {
-                    $('.ProfileCard').attr('style', 'width:' + (($(window).innerWidth() * 0.9 - 30) / cols - 14) + 'px');
-                    $('#getnextauthor').attr('style', 'margin-left:10px; width:' + (($(window).innerWidth() * 0.9 - 30) - 14)+'px');
-                }
-                else {
-
-                    $('.ProfileCard').attr('style', 'width: 100%; margin-left: 0');
-                    $('#getnextauthor').attr('style', 'width: 100%; margin-left: 0');
-                }
-                BackgroundImageResize('ProfileCard-bg-pic');
+                resize();
+                $(window).resize();
+                $( "#tab1_search" ).focus(function() {
+                    $('.add_author_block').css('width', '162px');
+                    $('.effect_author').css('display', 'none');
+                });
+                $( "#tab1_search" ).focusout(function() {
+                    $('.add_author_block').css('width', '90px');
+                    $('.effect_author').css('display', 'block');
+                });
                 $('#getnextauthor').click(function()
                 {
-                    $('#auth_page').val(parseInt($('#auth_page').val())+1);
-                    get_authors_page($('#auth_page').val())
+                    if ($('#getnextauthor').attr('class').indexOf('postnextauthbtn') > -1)
+                    {
+                        $('#auth_post_page').val(parseInt($('#auth_post_page').val())+1);
+                        AuthSearch(1);
+                    } else {
+                        $('#auth_page').val(parseInt($('#auth_page').val())+1);
+                        get_authors_page($('#auth_page').val())
+                    }
                 });
-                $(window).resize();
+                $("#tab1_search").keydown(function(event){
+                    AuthSearch(event)
+                });
             },
         error:
             function()
@@ -211,19 +233,7 @@ function get_tags(){
 }
 
 $(window).bind('resize', function() {
-    var pred = $('html').innerWidth();
-    var cols = pred/320>>0;
-    if ($(window).innerWidth() > 640) {
-        $('.ProfileCard').attr('style', 'width:' + (($(window).innerWidth() * 0.9 - 30) / cols - 14) + 'px');
-        $('#getnextauthor').attr('style', 'margin-left:10px; width:' + (($(window).innerWidth() * 0.9 - 30) - 14)+'px');
-    }
-    else {
-        $('.ProfileCard').attr('style', 'width: 100%; margin-left: 0');
-        $('#getnextauthor').attr('style', 'width: 100%; margin-left: 0');
-    }
-    BackgroundImageResize('ProfileCard-bg-pic');
-
-
+    resize();
 }).trigger('resize');
 
 
@@ -245,5 +255,71 @@ function DeleteAuthor(id)
 
 function AddAuthor()
 {
+    $('#content-modal-addauthor').html(loading);
+    $('.element').attr('style', 'margin-top: 25%');
+    $.ajax({
+        type: "GET",
+        url: "/settings/tauthor/add/",
+        dataType: "text",
+        success:
+            function(html)
+            {
+                $('#content-modal-addauthor').html(html);
+            },
+        error:
+            function()
+            {
+                $('#content-modal-addauthor').html(error);
+            }
+    });
+}
 
+
+function AuthSearch(event) {
+    if (event == 1)
+    {
+        var q = $("#tab1_search").val();
+        if (q != '')
+        {
+            var csrf= $('.search.search-2.tab1 > input').eq(1).val();
+            $('#authors_content_mini').append(loading);
+            var posting = $.post("/settings/tauthor/", {q: q, page: $('#auth_post_page').val(),
+                csrfmiddlewaretoken: csrf});
+            posting.done(function(html) {
+                $('.element').remove();
+                $('#authors_content_mini').append(html);
+                $('#authors_content_mini > h1').eq(1).remove();
+                resize();
+                resize();
+            });
+            posting.fail(function() {
+                $('#authors_content_mini').html(error);
+            });
+        } else
+        {
+            get_authors(1);
+        }
+    }
+    else if(event.keyCode == 13){
+        var q = $("#tab1_search").val();
+        $('#auth_post_page').val(1);
+        if (q != '')
+        {
+            var csrf= $('.search.search-2.tab1 > input').eq(1).val();
+            $('#authors_content_mini').html(loading);
+            var posting = $.post("/settings/tauthor/", {q: q, page: $('#auth_post_page').val(),
+                csrfmiddlewaretoken: csrf});
+            posting.done(function(html) {
+                $('#authors_content_mini').html(html);
+                resize();
+                resize();
+            });
+            posting.fail(function() {
+                $('#authors_content_mini').html(error);
+            });
+        } else
+        {
+            get_authors(1);
+        }
+    }
 }

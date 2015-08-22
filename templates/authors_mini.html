@@ -1,44 +1,51 @@
 {% load staticfiles %}
 {% load url from future %}
 {% load i18n %}
-    {% for rec in auths %}
-        <div class="ProfileCard" id="profile_{{ rec.ta_id }}" style="width: 100%">
-            <div class="ProfileCard-bg" aria-hidden="true" tabindex="-1">
-                <div class="ProfileCard-bg-pic" style="background-image:  url('{{ rec.banner_url }}');">
+<h1>{% trans "authors" %}{% if ispost %} "{{ q }}"{% endif %} ({{ count_a }})</h1>
+{% for rec in auths %}
+    <div class="ProfileCard" id="profile_{{ rec.ta_id }}" style="width: 100%">
+        <div class="ProfileCard-bg" aria-hidden="true" tabindex="-1">
+            <div class="ProfileCard-bg-pic" style="background-image:  url('{{ rec.banner_url }}');">
+            </div>
+        </div>
+        <div class="ProfileCard-content">
+            <div class="ProfileCard-avatarLink {% if rec.logo %}{% if rec.cache_logo %}logo{% else %}{% if rec.logo_url %}logo{% endif %}{% endif %}{% endif %}" aria-hidden="true" tabindex="-1" data-original-title="{{ rec.realname }}">
+                <div id="logo_{{ rec.ta_id }}" class="ProfileCard-avatarImage {% if rec.logo_url %}logo_url{% endif %}"
+                     style="background: url({% if rec.logo %}{% if rec.cache_logo %}{{ rec.logo.url }}{% else %}{% if rec.logo_url %}{{ rec.logo_url }}{% else %}{% static "img/nophoto.svg" %}{% endif %}{% endif %}{% else %}{% static "img/nophoto.svg" %}{% endif %}) no-repeat scroll 0 0 / 48px">
+                    {% if rec.logo_url %}<div id="logo_ref_{{ rec.ta_id }}" class="ProfileCard-avatar-refreshbutton" title="{% trans "renew" %}" onclick="RefreshAuthCache({{ rec.ta_id }});"></div>{% endif %}
                 </div>
             </div>
-            <div class="ProfileCard-content">
-                <div class="ProfileCard-avatarLink {% if rec.logo %}{% if rec.cache_logo %}logo{% else %}{% if rec.logo_url %}logo{% endif %}{% endif %}{% endif %}" aria-hidden="true" tabindex="-1" data-original-title="{{ rec.realname }}">
-                    <div id="logo_{{ rec.ta_id }}" class="ProfileCard-avatarImage {% if rec.logo_url %}logo_url{% endif %}"
-                         style="background: url({% if rec.logo %}{% if rec.cache_logo %}{{ rec.logo.url }}{% else %}{% if rec.logo_url %}{{ rec.logo_url }}{% else %}{% static "img/nophoto.svg" %}{% endif %}{% endif %}{% else %}{% static "img/nophoto.svg" %}{% endif %}) no-repeat scroll 0 0 / 48px">
-                        {% if rec.logo_url %}<div id="logo_ref_{{ rec.ta_id }}" class="ProfileCard-avatar-refreshbutton" title="{% trans "renew" %}" onclick="RefreshAuthCache({{ rec.ta_id }});"></div>{% endif %}
-                    </div>
+            <div class="ProfileCard-actions">
+                <button class="btn hollow delete" onclick="DeleteAuthor({{ rec.ta_id }})">{% trans "delete" %}</button>
+                <br>
+                <div class="author-stat">
+                    <i style="cursor: help" title="{% trans "alltweets" %}">{% trans "alltweetsshort" %}:</i> {{ rec.num_tweets }} <br/>
+                    <i style="cursor: help" title="{% trans "auth_rating" %}">{% trans "auth_ratingshort" %}:</i> {{ rec.rating }} <br/>
+                    <a href="/stats/author/{{ rec.ta_id }}/" style="color: #66757f">{% trans "more" %}</a>
                 </div>
-                <div class="ProfileCard-actions">
-                    <button class="btn hollow delete" onclick="DeleteAuthor({{ rec.ta_id }})">{% trans "delete" %}</button>
-                    <br>
-                    <div class="author-stat">
-                        <i style="cursor: help" title="{% trans "alltweets" %}">{% trans "alltweetsshort" %}:</i> {{ rec.num_tweets }} <br/>
-                        <i style="cursor: help" title="{% trans "auth_rating" %}">{% trans "auth_ratingshort" %}:</i> {{ rec.rating }} <br/>
-                        <a href="#" style="color: #66757f">{% trans "more" %}</a>
-                    </div>
+            </div>
+            <div class="ProfileCard-userFields">
+                <div class="ProfileNameTruncated">
+                    <a class="ProfileNameTruncated-link" href="{{ rec.url }}" target="_blank"> {{ rec.realname }} </a>
                 </div>
-                <div class="ProfileCard-userFields">
-                    <div class="ProfileNameTruncated">
-                        <a class="ProfileNameTruncated-link" href="{{ rec.url }}" target="_blank"> {{ rec.realname }} </a>
-                    </div>
                             <span class="ProfileCard-screenname">
                                 <a class="ProfileCard-screennameLink" data-aria-label-part="" href="{{ rec.url }}" target="_blank">
                                     @<span class="u-linkComplex-target">{{ rec.name }}</span>
                                 </a>
                             </span>
-                </div>
-                <p class="ProfileCard-bio">{{ rec.descr }}</p>
             </div>
+            <p class="ProfileCard-bio">{{ rec.descr }}</p>
         </div>
-    {% endfor %}
-{% if not show_next %}
-    <script type="text/javascript">
-        $('#getnextauthor').remove();
-    </script>
-{% endif %}
+    </div>
+{% endfor %}
+
+<script type="text/javascript">
+    {% if not show_next %}
+        $('#getnextauthor').addClass('inviz');
+    {% else %}
+        $('#getnextauthor').removeClass('inviz')
+    {% endif %}
+    {% if ispost %}
+        $('#getnextauthor').addClass('postnextauthbtn');
+    {% endif %}
+</script>

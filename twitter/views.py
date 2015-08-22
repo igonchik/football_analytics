@@ -226,17 +226,32 @@ def setting_author(request):
             page = int(request.GET['page'])
         except:
             page = 1
+    if request.method == 'POST' and 'page' in request.POST:
+        try:
+            page = int(request.POST['page'])
+        except:
+            page = 1
     pgs = (int(page)-1)*AUTHOR_ON_PAGE
     pgs1 = int(page)*AUTHOR_ON_PAGE
-    count = TTweetsAuthor.objects.all().count()
     show_next = False
+    q = ""
+    if request.method == 'POST' and 'q' in request.POST:
+        auths = TTweetsAuthor.objects.filter(Q(name__icontains=request.POST['q']) |
+                                             Q(realname__icontains=request.POST['q']))\
+        .annotate(num_tweets=Count('ttweetstweet'))[pgs:pgs1]
+        count = TTweetsAuthor.objects.filter(Q(name__icontains=request.POST['q']) |
+                                             Q(realname__icontains=request.POST['q'])).count()
+        q = request.POST['q']
+    else:
+        auths = TTweetsAuthor.objects.all().annotate(num_tweets=Count('ttweetstweet'))[pgs:pgs1]
+        count = TTweetsAuthor.objects.all().count()
     if pgs1 < count:
         show_next = True
-    auths = TTweetsAuthor.objects.all().annotate(num_tweets=Count('ttweetstweet'))[pgs:pgs1]
     template = 'authors.html'
-    if page > 1:
+    if page > 1 or request.method == 'POST' and 'page' in request.POST:
         template = 'authors_mini.html'
-    return render(request, template, {'auths': auths, 'page': page, 'show_next': show_next, 'count_a': count},
+    return render(request, template, {'auths': auths, 'page': page, 'show_next': show_next, 'count_a': count,
+                                      'ispost': (request.method == 'POST' and 'q' in request.POST), 'q': q},
                   context_instance=RequestContext(request))
 
 
@@ -279,3 +294,9 @@ def remove_auth(request, id):
     if auth.exists():
         auth[0].delete()
     return HttpResponse('OK')
+
+
+def add_auth(request):
+    if request.method == 'POST' and 'url' in request.POST:
+        pass
+    return render(request, 'add_author.html', {}, context_instance=RequestContext(request))

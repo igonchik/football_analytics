@@ -24,7 +24,7 @@
                 <a href="/" {% if index %}class="active"{% endif %}>Главная</a>
                 <a href="#">О нас</a>
                 <a href="#">Галерея</a>
-                <a href="/settings/" id="settings" {% if settings %}class="active"{% endif %}></a>
+                <a href="/settings/" id="settings" {% if settings %}class="active"{% endif %} title="{% trans "control" %}"></a>
                 <div class="effect"></div>
             </div>
             <div id="account" class="outline-outward tooltip">
@@ -48,11 +48,11 @@
     </div>
 
     <div id="footer">
-        <div id="copyright">
+        <div id="copyright" style="display: inline-block;">
             &copy; 2015 {% trans "copyright" %}
         </div>
         {% get_language_info_list for LANGUAGES as languages %}
-        <div id="lang_table">
+        <div id="lang_table" style="display: inline-block;">
             {% for language in languages %}
                 {% if language.code != LANGUAGE_CODE %}
                     <a href="/lang/?lang={{ language.code }}&next={{request.path}}" id="{{ language.code }}" class="lang">{{ language.name_local }}</a>
@@ -65,6 +65,6 @@
 
 </div>
 
-
+<script type="text/javascript" src="{% static "js/main.js" %}"></script>
 </body>
 </html>

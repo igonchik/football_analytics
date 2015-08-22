@@ -16,6 +16,7 @@ urlpatterns = patterns('',
                        url(r'^settings/tauthor_recache/(?P<auth>\d+)/$', 'twitter.views.recache_photo'),
                        url(r'^settings/tauthor_recache/$', 'twitter.views.recache_photo'),
                        url(r'^settings/tauthor/remove/(?P<id>\d+)/$', 'twitter.views.remove_auth'),
+                       url(r'^settings/tauthor/add/$', 'twitter.views.add_auth'),
                        url(r'^settings/tauthor/', 'twitter.views.setting_author'),
                        url(r'^$', 'twitter.views.index'),
                        ) + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT) + \
