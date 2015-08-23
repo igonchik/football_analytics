@@ -160,7 +160,7 @@ function AddAuthAction()
                             } else {
                                 $('#preview_auth').html(html);
                                 $('#submit').css('margin-top', '-214px');
-                                if ($(window).innerWidth()>=754)
+                                if ($(window).innerWidth()<=640)
                                     $('#submit').css('margin-top', '-215px');
                             }
                         },

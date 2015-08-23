@@ -613,6 +613,7 @@ form .submitbtn:hover, form .submitbtn:focus, form .submitbtn:active {
 
 .btn.submitbtn {
     background: #00b366 none repeat scroll 0 0;
+    margin-right: 0;
 }
 
 

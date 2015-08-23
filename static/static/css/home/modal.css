@@ -84,7 +84,7 @@
   transform: rotate(-45deg);
 }
 
-@media screen and (max-width: 768px) {
+@media screen and (max-width: 640px) {
 
   .modal__inner {
     width: 90%;
