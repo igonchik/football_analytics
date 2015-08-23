@@ -4,7 +4,7 @@
  *
  * Licensed under the MIT license.
  * http://www.opensource.org/licenses/mit-license.php
- * 
+ *
  * Copyright 2013, Codrops
  * http://www.codrops.com
  */
@@ -69,7 +69,7 @@
 			this.$trigger = this.$el.children( '.dl-trigger' );
 			this.$menu = this.$el.children( 'ul.dl-menu' );
 			this.$menuitems = this.$menu.find( 'li:not(.dl-back)' );
-			this.$el.find( 'ul.dl-submenu' ).prepend( '<li class="dl-back"><a href="#">back</a></li>' );
+			this.$el.find( 'ul.dl-submenu' ).prepend( '<li class="dl-back">'+$('#dl-back-info').html()+'</li>' );
 			this.$back = this.$menu.find( 'li.dl-back' );
 		},
 		_initEvents : function() {

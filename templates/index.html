@@ -22,44 +22,10 @@
 <body class="lang-{{ LANGUAGE_CODE }}">
 <div id="wrapper">
     <div id="header">
+        <div id="dl-back-info" style="display: none"><a href="#">{% trans "back" %}</a></div>
         <div id="dl-menu" class="dl-menuwrapper">
             <button class="dl-trigger" title="{% trans "menu" %}">{% trans "menu" %}</button>
             <ul class="dl-menu">
-                <li>
-                    <a href="#">TEST</a>
-                    <ul class="dl-submenu">
-                        <li>
-                            <a href="#">Men</a>
-                            <ul class="dl-submenu">
-                                <li><a href="#">Shirts</a></li>
-                                <li><a href="#">Jackets</a></li>
-                                <li><a href="#">Chinos &amp; Trousers</a></li>
-                                <li><a href="#">Jeans</a></li>
-                                <li><a href="#">T-Shirts</a></li>
-                                <li><a href="#">Underwear</a></li>
-                            </ul>
-                        </li>
-                        <li>
-                            <a href="#">Women</a>
-                            <ul class="dl-submenu">
-                                <li><a href="#">Jackets</a></li>
-                                <li><a href="#">Knits</a></li>
-                                <li><a href="#">Jeans</a></li>
-                                <li><a href="#">Dresses</a></li>
-                                <li><a href="#">Blouses</a></li>
-                                <li><a href="#">T-Shirts</a></li>
-                                <li><a href="#">Underwear</a></li>
-                            </ul>
-                        </li>
-                        <li>
-                            <a href="#">Children</a>
-                            <ul class="dl-submenu">
-                                <li><a href="#">Boys</a></li>
-                                <li><a href="#">Girls</a></li>
-                            </ul>
-                        </li>
-                    </ul>
-                </li>
                 <li>
                     <a href="/" {% if index %}class="mobile-active"{% endif %}>Главная</a>
                 </li>
@@ -71,6 +37,16 @@
                 </li>
                 <li>
                     <a href="/settings/" {% if settings %}class="mobile-active"{% endif %} id="mobile-settings">{% trans "control" %}</a>
+                </li>
+                <li>
+                    <a href="#">{% trans "useraccount" %}</a>
+                    <ul class="dl-submenu">
+                        {% if user.is_authenticated %}
+                        {% else %}
+                            <a href="/accounts/login/">{% trans "login" %}</a>
+                            <a href="/accounts/registration/">{% trans "registration" %}</a>
+                        {% endif %}
+                    </ul>
                 </li>
             </ul>
         </div>
@@ -91,8 +67,8 @@
                         This is the easy-to-use Tooltip driven purely by CSS.
                     {% else %}
                         <strong>{% trans "welcomenewuser" %}</strong><br />
-                        {% trans "pleaselogin" %} <a href="/accounts/login/">login</a> {% trans "orregistr" %}
-                        <a href="/accounts/registration/">registration</a>
+                        {% trans "pleaselogin" %} <a href="/accounts/login/">{% trans "login" %}</a> {% trans "orregistr" %}
+                        <a href="/accounts/registration/">{% trans "registration" %}</a>
                     {% endif %}
                 </span>
             </div>
