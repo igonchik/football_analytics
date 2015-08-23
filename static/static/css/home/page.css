@@ -14,6 +14,16 @@
     background: rgba(0, 0, 0, 0) url("../../img/flags/en_ch.svg") no-repeat scroll 0 17px / 40px auto !important;
 }
 
+
+.dl-menuwrapper a {
+	color: #ccc;
+	text-decoration: none;
+}
+
+.dl-menuwrapper a:hover {
+	color: #fff;
+}
+
 html, body {
     height: 100%;
     padding: 0;
@@ -298,6 +308,10 @@ h2.resp-accordion:first-child {
     .resp-vtabs .resp-tab-content:last-child {
         border-bottom: 1px solid #cecece !important;
     }
+
+    .nav {
+        display:none;
+    }
 }
 
 /*----------------------------------------*/
@@ -570,25 +584,25 @@ form .submitbtn:hover, form .submitbtn:focus, form .submitbtn:active {
 
 
 .msg.info, .msg.success, .msg.warning, .msg.error, .msg.validation {
-border: 1px solid;
-margin: 10px 0px;
-padding:10px 10px 10px 50px;
-background-repeat: no-repeat;
-background-position: 10px center;
+    border: 1px solid;
+    margin: 10px 0px;
+    padding:10px 10px 10px 50px;
+    background-repeat: no-repeat;
+    background-position: 10px center;
 }
 .msg.info {
-color: #00529B;
-background-color: #BDE5F8;
+    color: #00529B;
+    background-color: #BDE5F8;
 }
 .msg.success {
-color: #4F8A10;
-background-color: #DFF2BF;
+    color: #4F8A10;
+    background-color: #DFF2BF;
 }
 .msg.warning {
-color: #9F6000;
-background-color: #FEEFB3;
+    color: #9F6000;
+    background-color: #FEEFB3;
 }
 .msg.error {
-color: #D8000C;
-background-color: #FFBABA;
+    color: #D8000C;
+    background-color: #FFBABA;
 }
