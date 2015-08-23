@@ -16,12 +16,12 @@
 
 
 .dl-menuwrapper a {
-	color: #ccc;
-	text-decoration: none;
+    color: #ccc;
+    text-decoration: none;
 }
 
 .dl-menuwrapper a:hover {
-	color: #fff;
+    color: #fff;
 }
 
 html, body {
@@ -311,6 +311,39 @@ h2.resp-accordion:first-child {
 
     .nav {
         display:none;
+    }
+
+    #footer {
+        height: 35px;
+    }
+
+    #copyright {
+        padding-top: 5px !important;
+    }
+
+    .lang {
+        padding-top: 5px !important;
+    }
+
+    #en {
+        background: rgba(0, 0, 0, 0) url("../../img/flags/en.svg") no-repeat scroll 0 3px / 40px auto;
+    }
+
+    #en.ch {
+        background: rgba(0, 0, 0, 0) url("../../img/flags/en_ch.svg") no-repeat scroll 0 3px / 40px auto;
+    }
+
+    #ru.ch {
+        background: rgba(0, 0, 0, 0) url("../../img/flags/ru_ch.svg") no-repeat scroll 0 -2px / 30px auto !important;
+    }
+
+    #ru {
+        background: rgba(0, 0, 0, 0) url("../../img/flags/ru.svg") no-repeat scroll 0 -2px / 30px auto !important;
+    }
+
+    #content
+    {
+        padding-bottom: 36px
     }
 }
 

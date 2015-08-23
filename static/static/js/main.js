@@ -12,16 +12,27 @@ function isTweetUserValid(name) {
 
 function resizeIndex()
 {
-    if ($('#copyright').innerWidth()+30+$('#lang_table').innerWidth() > $(window).innerWidth())
+    if ($('#copyright').innerWidth()+40+$('#lang_table').innerWidth() > $(window).innerWidth())
     {
         $('#copyright').css('padding-top', '5px');
         $('#copyright').css('padding-left', '10px');
+
         $('#lang_table').css('margin-top', '-14px');
+        if ($(window).innerWidth()<=640)
+        {
+            $('#lang_table').css('margin-top', '0');
+        }
+
+        $('#footer').css('height', '66px');
+        $('#content').css('padding-bottom', '67px');
     } else
     {
         $('#copyright').css('padding-top', '20px');
         $('#copyright').css('padding-left', '40px');
         $('#lang_table').css('margin-top', '0');
+        $('#footer').css('height', '');
+        $('#content').css('padding-bottom', '');
+
     }
 }
 
