@@ -1,0 +1,66 @@
+{% load staticfiles %}
+{% load l10n %}
+{% load i18n %}
+{% load url from future %}
+
+<link href="{% static "css/home/world.css" %}" type="text/css" rel="stylesheet">
+
+<div class="world-list">
+    <form>
+        <div id="country-list">
+            <input type="text" class="search-list" />
+            <ul class="list">
+                <li>
+                    <a  href="#" class="list-a">Jonny
+                        <span class="li-count" title="{% trans "count_clubs "%}">12</span></a>
+                    <div class="val-name inviz">Jonny</div>
+                </li>
+                <li>
+                    <a href="#" class="list-a">Jonas
+                        <span class="li-count" >12</span></a>
+                    <div class="val-name inviz">Jonas</div>
+                </li>
+            </ul>
+        </div>
+    </form>
+</div>
+<div class="world-list">
+    <form>
+        <div id="city-list">
+            <input type="text" class="search-list" />
+            <ul class="list">
+                <li>
+                    <h3 class="name">Jonny</h3>
+                </li>
+                <li>
+                    <h3 class="name">Jonas</h3>
+                </li>
+            </ul>
+        </div>
+    </form>
+</div>
+
+
+<script type="text/javascript">
+    var options = {
+        valueNames: [ 'val-name' ]
+    };
+    var countryList = new List('country-list', options);
+
+    var options1 = {
+        valueNames: [ 'val-name' ]
+    };
+    var cityList = new List('city-list', options);
+
+    $('.search-list').keypress(function(event){
+        if(event.keyCode == 13){
+        event.stopImmediatePropagation();
+        event.preventDefault();}
+    });
+
+    $('.list-a').keypress(function(event){
+        if(event.keyCode == 13){
+        event.stopImmediatePropagation();
+        event.preventDefault();}
+    });
+</script>

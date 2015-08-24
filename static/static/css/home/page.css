@@ -34,6 +34,7 @@ html, body {
 #wrapper {
     min-height: 100%;
     position: relative;
+    height: auto !important;
 }
 
 #content {
@@ -438,6 +439,7 @@ a.styled-button:active {
 .btn.delete {
     padding: 6px;
     font-size: 1.05em;
+    margin-left: 0;
 }
 
 
@@ -530,7 +532,7 @@ a.styled-button:active {
 
 
 /* from elems */
-form *, *::before, *::after {
+form *, form *::before, form *::after {
     box-sizing: border-box;
 }
 
@@ -572,6 +574,7 @@ form input[type="text"] {
     -moz-transition: box-shadow 0.3s, border 0.3s;
     -o-transition: box-shadow 0.3s, border 0.3s;
     transition: box-shadow 0.3s, border 0.3s;
+    height: 41px;
 }
 
 form  input[type="text"]:focus {

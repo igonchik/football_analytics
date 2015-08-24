@@ -218,7 +218,7 @@ def setting_req(request):
     """
         Страница настроек
     """
-    return render(request, 'settings.html', {'settings': True}, context_instance=RequestContext(request))
+    return render(request, 'settings/settings.html', {'settings': True}, context_instance=RequestContext(request))
 
 
 def setting_author(request):
@@ -252,9 +252,9 @@ def setting_author(request):
         count = TTweetsAuthor.objects.all().count()
     if pgs1 < count:
         show_next = True
-    template = 'authors.html'
+    template = 'settings/authors.html'
     if page > 1 or request.method == 'POST' and 'page' in request.POST:
-        template = 'authors_mini.html'
+        template = 'settings/authors_mini.html'
     return render(request, template, {'auths': auths, 'page': page, 'show_next': show_next, 'count_a': count,
                                       'ispost': (request.method == 'POST' and 'q' in request.POST), 'q': q,
                                       'actions': True},
@@ -328,7 +328,7 @@ def add_auth(request):
         except:
             return HttpResponse(_("ServerError"))
         return HttpResponse('ok')
-    return render(request, 'add_author.html', {}, context_instance=RequestContext(request))
+    return render(request, 'settings/add_author.html', {}, context_instance=RequestContext(request))
 
 
 def get_author_from_url(request):
@@ -347,8 +347,18 @@ def get_author_from_url(request):
             exists = False
             if TTweetsAuthor.objects.filter(url=msg['url']).exists():
                 exists = True
-            return render(request, 'author_preview.html', {'rec': auths, 'exists': exists},
+            return render(request, 'settings/author_preview.html', {'rec': auths, 'exists': exists},
                           context_instance=RequestContext(request))
         except:
             pass
     return HttpResponse('')
+
+
+def world_list(request):
+    lang_code = request.LANGUAGE_CODE
+    countries = TWorldCountryTr.objects.filter(langcode=
+                                               lang_code).annotate(country_count=Count('wc_id__tworldcity_'
+                                                                                       '_tfootballclub'))
+    cities = TWorldCityTr.objects.filter(langcode=lang_code).annotate(city_count=Count('wcity_id__tfootballclub'))
+    return render(request, 'settings/world/world_list.html', {'countries': countries, 'cities': cities},
+                  context_instance=RequestContext(request))

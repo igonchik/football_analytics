@@ -6,3 +6,11 @@ manage.py compilemessages (language)
 @login_required
 
 @permission_required
+
+
+
+ALTER TABLE `twitter_tfootballclub` ADD `wcity_id_id` INT(11) NOT NULL AFTER `logo`, ADD `fd_id_id` INT(11) NOT NULL AFTER `wcity_id_id`;
+ALTER TABLE `twitter_tfootballclub`
+ADD CONSTRAINT `t_twitter_tfootballclub_wcity` FOREIGN KEY (`wcity_id_id`) REFERENCES `twitter_tworldcity` (`wcity_id`),
+ADD CONSTRAINT `t_twitter_tfootballclub_fd` FOREIGN KEY (`fd_id_id`) REFERENCES `twitter_tfootballdiv` (`fd_id`);
+ALTER TABLE `twitter_tworldcountry` ADD `logo` VARCHAR(100);
