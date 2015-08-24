@@ -43,13 +43,17 @@
                     <ul class="dl-submenu">
                         {% if user.is_authenticated %}
                         {% else %}
-                            <a href="/accounts/login/">{% trans "login" %}</a>
-                            <a href="/accounts/registration/">{% trans "registration" %}</a>
+                            <li>
+                                <a href="/accounts/login/">{% trans "login" %}</a>
+                            </li>
+                            <li>
+                                <a href="/accounts/registration/">{% trans "registration" %}</a>
+                            </li>
                         {% endif %}
                     </ul>
                 </li>
             </ul>
-        </div>
+        </div><!-- /dl-menuwrapper -->
 
         <div class="ph-line-nav nav no-mobile">
             <div class="menu">
