@@ -8,6 +8,7 @@ function get_world(){
             function(html)
             {
                 $('.tabs_page').eq(1).html(html);
+                $('.list-a').click(alert(1));
             },
         error:
             function()

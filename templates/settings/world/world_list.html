@@ -6,18 +6,19 @@
 <link href="{% static "css/home/world.css" %}" type="text/css" rel="stylesheet">
 
 <div class="world-list">
+    <h1>{% trans "world_list" %}</h1>
     <form>
         <div id="country-list">
-            <input type="text" class="search-list" />
+            <input type="text" class="search-list" style="font-size: 13.5px; height: 36px"/>
             <ul class="list">
                 <li>
-                    <a  href="#" class="list-a">Jonny
-                        <span class="li-count" title="{% trans "count_clubs "%}">12</span></a>
+                    <button class="list-a">Jonny
+                        <span class="li-count" title="{% trans "count_clubs "%}">12</span></button>
                     <div class="val-name inviz">Jonny</div>
                 </li>
                 <li>
-                    <a href="#" class="list-a">Jonas
-                        <span class="li-count" >12</span></a>
+                    <button class="list-a">Jonas
+                        <span class="li-count" >12</span></button>
                     <div class="val-name inviz">Jonas</div>
                 </li>
             </ul>
@@ -25,6 +26,7 @@
     </form>
 </div>
 <div class="world-list">
+    <h1>{% trans "city_list" %}</h1>
     <form>
         <div id="city-list">
             <input type="text" class="search-list" />
@@ -59,9 +61,4 @@
         event.preventDefault();}
     });
 
-    $('.list-a').keypress(function(event){
-        if(event.keyCode == 13){
-        event.stopImmediatePropagation();
-        event.preventDefault();}
-    });
 </script>
