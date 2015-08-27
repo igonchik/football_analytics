@@ -34,6 +34,10 @@ function resizeIndex()
         $('#content').css('padding-bottom', '');
 
     }
+
+    var y  = $('body').innerHeight()-350;
+    $('.scr').css('height', y+'px');
+    $('.scr').scroller("reset");
 }
 
 $(document).ready(function () {

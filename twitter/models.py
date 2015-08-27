@@ -49,26 +49,10 @@ class TTweetsTweet(models.Model):
         return self.text
 
 
-class TWorldPart(models.Model):
-    wp_id = models.AutoField(primary_key=True)
-    coordX = models.PositiveIntegerField()
-    coordY = models.PositiveIntegerField()
-
-
-class TWorldPartTr(models.Model):
-    wp_id = models.ForeignKey(TWorldPart)
-    langcode = models.ForeignKey(TLocalization)
-    wp_name = models.CharField(max_length=255)
-
-    def __unicode__(self):
-        return self.wp_name
-
-
 class TWorldRegion(models.Model):
     wr_id = models.AutoField(primary_key=True)
-    wp_id = models.ForeignKey(TWorldPart)
-    coordX = models.PositiveIntegerField()
-    coordY = models.PositiveIntegerField()
+    coordX = models.PositiveIntegerField(default=0)
+    coordY = models.PositiveIntegerField(default=0)
 
 
 class TWorldRegionTr(models.Model):

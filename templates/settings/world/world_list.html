@@ -9,35 +9,38 @@
     <h1>{% trans "world_list" %}</h1>
     <form>
         <div id="country-list">
-            <input type="text" class="search-list" style="font-size: 13.5px; height: 36px"/>
-            <ul class="list">
-                <li>
-                    <button class="list-a">Jonny
-                        <span class="li-count" title="{% trans "count_clubs "%}">12</span></button>
-                    <div class="val-name inviz">Jonny</div>
-                </li>
-                <li>
-                    <button class="list-a">Jonas
-                        <span class="li-count" >12</span></button>
-                    <div class="val-name inviz">Jonas</div>
-                </li>
-            </ul>
+            <input type="text" class="search-list" style="font-size: 12.5px; height: 36px"/>
+            <div class="scr">
+                <ul class="list">
+                    {% for rec in countries %}
+                        <li>
+                            <button class="list-a" style="background-image: url({{ rec.wc_id.logo.url }})" type="button" onclick="find_clibs('wc={{ rec.wc_id_id }}')">{{ rec.wc_name }}
+                                <span class="li-count" title="{% trans "count_clubs "%}">{{ rec.country_count }}</span></button>
+                            <div class="val-name inviz">{{ rec.wc_name }}</div>
+                        </li>
+                    {% endfor %}
+                </ul>
+            </div>
         </div>
     </form>
 </div>
+
 <div class="world-list">
     <h1>{% trans "city_list" %}</h1>
     <form>
         <div id="city-list">
-            <input type="text" class="search-list" />
-            <ul class="list">
-                <li>
-                    <h3 class="name">Jonny</h3>
-                </li>
-                <li>
-                    <h3 class="name">Jonas</h3>
-                </li>
-            </ul>
+            <input type="text" class="search-list" style="font-size: 12.5px; height: 36px"/>
+            <div class="scr">
+                <ul class="list">
+                    {% for rec in cities %}
+                        <li>
+                            <button class="list-a" style="background-image: url({{ rec.wcity_id.wc_id.logo.url }})" type="button" onclick="find_clibs('wcity={{ rec.wcity_id_id }}')">{{ rec.wcity_name }}
+                                <span class="li-count" title="{% trans "count_clubs "%}">{{ rec.city_count }}</span></button>
+                            <div class="val-name inviz">{{ rec.wcity_name }}</div>
+                        </li>
+                    {% endfor %}
+                </ul>
+            </div>
         </div>
     </form>
 </div>
@@ -57,8 +60,7 @@
 
     $('.search-list').keypress(function(event){
         if(event.keyCode == 13){
-        event.stopImmediatePropagation();
-        event.preventDefault();}
+            event.stopImmediatePropagation();
+            event.preventDefault();}
     });
-
 </script>

@@ -8,9 +8,10 @@ manage.py compilemessages (language)
 @permission_required
 
 
+ALTER TABLE tweet_analytics_tweet_analytics.twitter_tworldregion DROP FOREIGN KEY twitter_tw_wp_id_id_36fa205ee50f42a8_fk_twitter_tworldpart_wp_id;
+DROP INDEX twitter_tw_wp_id_id_36fa205ee50f42a8_fk_twitter_tworldpart_wp_id ON tweet_analytics_tweet_analytics.twitter_tworldregion;
+ALTER TABLE tweet_analytics_tweet_analytics.twitter_tworldregion DROP wp_id_id;
+DROP TABLE tweet_analytics_tweet_analytics.twitter_tworldparttr;
+DROP TABLE tweet_analytics_tweet_analytics.twitter_tworldpart;
 
-ALTER TABLE `twitter_tfootballclub` ADD `wcity_id_id` INT(11) NOT NULL AFTER `logo`, ADD `fd_id_id` INT(11) NOT NULL AFTER `wcity_id_id`;
-ALTER TABLE `twitter_tfootballclub`
-ADD CONSTRAINT `t_twitter_tfootballclub_wcity` FOREIGN KEY (`wcity_id_id`) REFERENCES `twitter_tworldcity` (`wcity_id`),
-ADD CONSTRAINT `t_twitter_tfootballclub_fd` FOREIGN KEY (`fd_id_id`) REFERENCES `twitter_tfootballdiv` (`fd_id`);
-ALTER TABLE `twitter_tworldcountry` ADD `logo` VARCHAR(100);
+

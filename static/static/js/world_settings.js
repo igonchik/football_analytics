@@ -8,7 +8,9 @@ function get_world(){
             function(html)
             {
                 $('.tabs_page').eq(1).html(html);
-                $('.list-a').click(alert(1));
+                var y  = $('body').innerHeight()-350;
+                $('.scr').css('height', y+'px');
+                $('.scr').scroller();
             },
         error:
             function()
@@ -16,4 +18,10 @@ function get_world(){
                 $('.tabs_page').eq(1).html(error);
             }
     });
+}
+
+
+function find_clibs(val)
+{
+    alert(val);
 }

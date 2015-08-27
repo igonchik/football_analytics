@@ -357,8 +357,42 @@ def get_author_from_url(request):
 def world_list(request):
     lang_code = request.LANGUAGE_CODE
     countries = TWorldCountryTr.objects.filter(langcode=
-                                               lang_code).annotate(country_count=Count('wc_id__tworldcity_'
-                                                                                       '_tfootballclub'))
-    cities = TWorldCityTr.objects.filter(langcode=lang_code).annotate(city_count=Count('wcity_id__tfootballclub'))
+                                               lang_code).select_related('wc_id')\
+        .annotate(country_count=Count('wc_id__tworldcity__tfootballclub')).order_by('wc_name')
+    cities = TWorldCityTr.objects.filter(langcode=lang_code).select_related('wcity_id__wc_id')\
+        .annotate(city_count=Count('wcity_id__tfootballclub')).order_by('wcity_name')
     return render(request, 'settings/world/world_list.html', {'countries': countries, 'cities': cities},
                   context_instance=RequestContext(request))
+
+
+@transaction.atomic()
+def save(request):
+    local = TLocalization.objects.get(langcode='ru')
+    msg = urllib.urlopen('http://localhost:63342/football_analytics/works/spisok.htm')
+    msg = msg.read()
+    msg = msg[msg.index('<table>')+7:msg.index('</table>')].split('</tr>')
+    full = []
+    for rec in msg:
+        for elem in rec.split('</td>'):
+            elem = elem.replace('<td>', '').replace('</td>', '').replace('</tr>', '').replace('<tr>', '').replace('\r', '').replace('\n', '').replace('\t', '')
+            full.append(elem)
+        if len(full) > 4:
+            full.pop(4)
+        if len(full) == 4 and not TWorldRegionTr.objects.filter(wr_name=full[3]).exists():
+            bigtmp = TWorldRegion.objects.create(coordX=0, coordY=0)
+            bigtmp.save()
+            tmp = TWorldRegionTr.objects.create(langcode=local, wr_name=full[3], wr_id=bigtmp)
+            tmp.save()
+        elif len(full) == 4:
+            bigtmp = TWorldRegion.objects.get(wr_id=TWorldRegionTr.objects.filter(wr_name=full[3])[0].wr_id_id)
+        if len(full) == 4:
+            x1 = TWorldCountry.objects.create(wr_id=bigtmp, logo=full[0], coordX=0, coordY=0)
+            x1.save()
+            x2 = TWorldCountryTr.objects.create(wc_id=x1, langcode=local, wc_name=full[1])
+            x2.save()
+            x3 = TWorldCity.objects.create(wc_id=x1, coordX=0, coordY=0)
+            x3.save()
+            x4 = TWorldCityTr.objects.create(wcity_id=x3, langcode=local, wcity_name=full[2])
+            x4.save()
+        full = []
+    return HttpResponse('')
