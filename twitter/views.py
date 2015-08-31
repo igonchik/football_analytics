@@ -210,7 +210,7 @@ def index(request):
     """
         Главная страница
     """
-    get_users_timeline()
+    #get_users_timeline()
     return render(request, 'main.html', {'index': True}, context_instance=RequestContext(request))
 
 
