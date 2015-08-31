@@ -4,5 +4,157 @@
 {% load i18n %}
 
 {% block page %}
-    <img src="{% static "img/world.png" %}" alt="Ошибка" style="width: 100%">
+    <link href="{% static "map/index.css" %}" type="text/css" rel="stylesheet">
+
+    <div class="container_map">
+        <div class="map">
+            <div class="element">
+                <div class="loading3"><div></div><div></div><div></div><div></div><div></div></div>
+            </div>
+        </div>
+        <div class="areaLegend">
+        </div>
+    </div>
+
+    <script charset="utf-8" type="text/javascript" src="{% static "map/mousewheel.js" %}"></script>
+    <script charset="utf-8" type="text/javascript" src="{% static "map/raphael.js" %}"></script>
+    <script charset="utf-8" type="text/javascript" src="{% static "map/jquery.mapael.js" %}"></script>
+    <script charset="utf-8" type="text/javascript" src="{% static "map/world_countries.js" %}"></script>
+    <script charset="utf-8" type="text/javascript">
+        $(document).ready(function () {
+            $(".container_map").mapael({
+                map : {
+                    name : "world_countries"
+                    , zoom : {
+                        enabled : true,
+                        maxLevel : 24,
+                        step : 4
+                    }
+                    , defaultPlot : {
+                        attrs : {
+                            fill: "#004a9b"
+                            , opacity : 0.6
+                        }
+                        , attrsHover : {
+                            opacity : 1
+                        }
+                        , text : {
+                            attrs : {
+                                fill : "#505444"
+                            }
+                            , attrsHover : {
+                                fill : "#000"
+                            }
+                        }
+                    }
+                    , defaultArea: {
+                        attrsHover : {
+                            fill: "#E17D6B"
+                        }
+                        , text : {
+                            attrs : {
+                                fill : "#505444"
+                            }
+                            , attrsHover : {
+                                fill : "#000"
+                            }
+                        }
+                    }
+                },
+                legend : {
+                    area : {
+                        title :"{% trans "Count of transfer news" %}",
+                        slices : [
+                            {
+                                max :50,
+                                attrs : {
+                                    fill : "#393939"
+                                },
+                                label :"{% trans "Less than de 50 inhabitants" %}"
+                            },
+                            {
+                                min :50,
+                                max :200,
+                                attrs : {
+                                    fill : "#696969"
+                                },
+                                label :"{% trans "Between 50 and 200 inhabitants" %}"
+                            },
+                            {
+                                min :200,
+                                max :500,
+                                attrs : {
+                                    fill : "#838383"
+                                },
+                                label :"{% trans "Between 200 and 500 inhabitants" %}"
+                            },
+                            {
+                                min :500,
+                                max :1000,
+                                attrs : {
+                                    fill : "#9b9b9b"
+                                },
+                                label :"{% trans "Between 500 and 1000 inhabitants" %}"
+                            },
+                            {
+                                min :1000,
+                                max :5000,
+                                attrs : {
+                                    fill : "#BCBCBC"
+                                },
+                                label :"{% trans "Between 1000 and 5000 inhabitants" %}"
+                            },
+                            {
+                                min :5000,
+                                attrs : {
+                                    fill : "#E6E6E6"
+                                },
+                                label :"{% trans "More than 5000 inhabitants" %}"
+                            }
+                        ]
+                    }
+                },
+                areas: {
+                    {% for rec in countries %}
+                        "{{ rec.code }}": {
+                            value: {{ rec.tweets_count }},
+                            href: "/stats/country/{{ rec.id }}/",
+                            tooltip: {content: "<span style=\"font-weight:bold;\">{{ rec }}</span><br />{% trans "tweets count" %}: {{ rec.tweets_count }}"}
+                        }{% if not forloop.last %},{% endif %}
+                    {% endfor %}
+                },
+                plots : {
+                    {% for rec in cities %}
+                    '{{ rec }}': {
+                        latitude: {{ rec.wcity_id.coordX|stringformat:"f" }},
+                        longitude: {{ rec.wcity_id.coordY|stringformat:"f" }},
+                        size:{% if rec.tweets_count < 5 %}1{% elif rec.tweets_count >= 5 and rec.tweets_count < 20 %}2{% elif rec.tweets_count >= 20 and rec.tweets_count < 50 %}3{% elif rec.tweets_count >= 50 and rec.tweets_count < 100 %}4{% elif rec.tweets_count >= 100 and rec.tweets_count < 500 %}5{% else %}6{% endif %},
+                        tooltip: {content: "{{ rec }}<br />{% trans "tweets count" %}: {{ rec.tweets_count }}"}
+                    }{% if not forloop.last %},{% endif %}{% endfor %}
+                },
+                links: {
+                    {% for rec in country_links %}
+                    '{{ rec }}': {
+                        // The curve can be inverted by setting a negative factor
+                        factor: -0.3
+                        , between: ['paris', 'newyork']
+                        , attrs: {
+                            "stroke-width": 2
+                        }
+                        , tooltip: {content: "Paris - New-York"}
+                    }{% if not forloop.last or city_links|length > 0 %},{% endif %}{% endfor %}
+                    {% for rec in city_links %}
+                    '{{ rec }}': {
+                        // The curve can be inverted by setting a negative factor
+                        factor: -0.3
+                        , between: ['paris', 'newyork']
+                        , attrs: {
+                            "stroke-width": 2
+                        }
+                        , tooltip: {content: "Paris - New-York"}
+                    }{% if not forloop.last %},{% endif %}{% endfor %}
+                }
+            });
+        });
+    </script>
 {% endblock %}

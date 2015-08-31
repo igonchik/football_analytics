@@ -15,3 +15,9 @@ DROP TABLE tweet_analytics_tweet_analytics.twitter_tworldparttr;
 DROP TABLE tweet_analytics_tweet_analytics.twitter_tworldpart;
 
 
+
+-*- NEW
+
+ALTER TABLE `twitter_tworldcity` CHANGE `coordX` `coordX` FLOAT(10) UNSIGNED NOT NULL;
+ALTER TABLE `twitter_tworldcity` CHANGE `coordY` `coordY` FLOAT(10) UNSIGNED NOT NULL;
+

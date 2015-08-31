@@ -77,6 +77,9 @@ class TWorldCountryTr(models.Model):
     langcode = models.ForeignKey(TLocalization)
     wc_name = models.CharField(max_length=255)
 
+    def code(self):
+        return '{0}{1}'.format(chr(self.wc_id.coordX), chr(self.wc_id.coordY))
+
     def __unicode__(self):
         return self.wc_name
 
@@ -84,8 +87,8 @@ class TWorldCountryTr(models.Model):
 class TWorldCity(models.Model):
     wcity_id = models.AutoField(primary_key=True)
     wc_id = models.ForeignKey(TWorldCountry)
-    coordX = models.PositiveIntegerField()
-    coordY = models.PositiveIntegerField()
+    coordX = models.FloatField()
+    coordY = models.FloatField()
 
 
 class TWorldCityTr(models.Model):

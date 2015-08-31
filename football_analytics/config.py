@@ -8,6 +8,9 @@ UPDATE_CHECK_TIMEOUT = 30000
 
 AUTHOR_ON_PAGE = 3
 
+#Интервал показа графики на карте
+MAP_TIMEOUT = 4320000
+
 
 def getTime():
     millis = int(round(time.time() * 1000))

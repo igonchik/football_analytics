@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 from django.shortcuts import render
-from datetime import datetime
+from datetime import datetime, timedelta
 from twython import Twython
 from football_analytics.settings import SECRET_KEY
 from football_analytics.settings import KEY
@@ -25,7 +25,7 @@ from django.db import connection, transaction
 from django.core.files import File
 import urllib
 from django.db.models import Count
-from football_analytics.config import AUTHOR_ON_PAGE
+from football_analytics.config import AUTHOR_ON_PAGE, MAP_TIMEOUT
 
 from forms import *
 
@@ -211,7 +211,21 @@ def index(request):
         Главная страница
     """
     #get_users_timeline()
-    return render(request, 'main.html', {'index': True}, context_instance=RequestContext(request))
+    lang_code = request.LANGUAGE_CODE
+    countries = TWorldCountryTr.objects.filter(langcode=
+                                               lang_code).filter(wc_id__coordX__gt=0).select_related('wc_id')\
+        .annotate(tweets_count=Count('wc_id__tworldcity__tfootballclub__tweets'))
+    cities = TWorldCityTr.objects.filter(langcode=lang_code).filter(wcity_id__coordX__gt=0).select_related('wcity_id_'
+                                                                                                           '_wc_id')\
+        .annotate(tweets_count=Count('wcity_id__tfootballclub__tweets'))
+    country_links = TTweetsClubTweetRel.objects\
+        .filter(tt_id__created_at__gte=datetime.now()-
+                                       timedelta(milliseconds=MAP_TIMEOUT)).select_related('tt_id__ta_id')
+    #TODO: colculate vals
+    city_links = []
+    return render(request, 'main.html', {'index': True, 'countries': countries, 'cities': cities,
+                                         'country_links': country_links, 'city_links': city_links},
+                  context_instance=RequestContext(request))
 
 
 def setting_req(request):

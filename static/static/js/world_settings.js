@@ -20,7 +20,6 @@ function get_world(){
     });
 }
 
-
 function find_clibs(val)
 {
     alert(val);
