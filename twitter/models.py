@@ -207,12 +207,8 @@ class TFootballClub(models.Model):
     stat_url = models.URLField(null=True, blank=True)
     official_url = models.URLField(null=True, blank=True)
     twitter = models.URLField(null=True, blank=True)
-
-    #TODO: ADD TO DBASE
     wcity_id = models.ForeignKey(TWorldCity)
     fd_id = models.ForeignKey(TFootballDiv)
-    #
-
     logo = models.ImageField(null=True, blank=True, upload_to='images')
     players = models.ManyToManyField(TFootballPlayer, through='TFootballClubPlayerRel')
     videoviews = models.ManyToManyField(TContentVideoView, through='TContentClubVideoViewRel')

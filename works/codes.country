@@ -38,7 +38,7 @@ update twitter_tworldcountry set coordX = ord(substring('BI', 1, 1)), coordY = o
 update twitter_tworldcountry set coordX = ord(substring('BT', 1, 1)), coordY = ord(substring('BT', 2, 1)) where wc_id=(select wc_id_id from twitter_tworldcountrytr where wc_name like 'Бутан');
 update twitter_tworldcountry set coordX = ord(substring('VU', 1, 1)), coordY = ord(substring('VU', 2, 1)) where wc_id=(select wc_id_id from twitter_tworldcountrytr where wc_name like 'Вануату');
 update twitter_tworldcountry set coordX = ord(substring('VA', 1, 1)), coordY = ord(substring('VA', 2, 1)) where wc_id=(select wc_id_id from twitter_tworldcountrytr where wc_name like 'Ватикан');
-update twitter_tworldcountry set coordX = ord(substring('GB', 1, 1)), coordY = ord(substring('GB', 2, 1)) where wc_id=(select wc_id_id from twitter_tworldcountrytr where wc_name like 'Великобритания');
+update twitter_tworldcountry set coordX = ord(substring('GB', 1, 1)), coordY = ord(substring('GB', 2, 1)) where wc_id=(select wc_id_id from twitter_tworldcountrytr where wc_name like 'Англия');
 update twitter_tworldcountry set coordX = ord(substring('HU', 1, 1)), coordY = ord(substring('HU', 2, 1)) where wc_id=(select wc_id_id from twitter_tworldcountrytr where wc_name like 'Венгрия');
 update twitter_tworldcountry set coordX = ord(substring('VE', 1, 1)), coordY = ord(substring('VE', 2, 1)) where wc_id=(select wc_id_id from twitter_tworldcountrytr where wc_name like 'Венесуэла');
 update twitter_tworldcountry set coordX = ord(substring('TL', 1, 1)), coordY = ord(substring('TL', 2, 1)) where wc_id=(select wc_id_id from twitter_tworldcountrytr where wc_name like 'Восточный Тимор');
@@ -94,7 +94,7 @@ update twitter_tworldcountry set coordX = ord(substring('KE', 1, 1)), coordY = o
 update twitter_tworldcountry set coordX = ord(substring('CY', 1, 1)), coordY = ord(substring('CY', 2, 1)) where wc_id=(select wc_id_id from twitter_tworldcountrytr where wc_name like 'Кипр');
 update twitter_tworldcountry set coordX = ord(substring('KG', 1, 1)), coordY = ord(substring('KG', 2, 1)) where wc_id=(select wc_id_id from twitter_tworldcountrytr where wc_name like 'Киргизия');
 update twitter_tworldcountry set coordX = ord(substring('KI', 1, 1)), coordY = ord(substring('KI', 2, 1)) where wc_id=(select wc_id_id from twitter_tworldcountrytr where wc_name like 'Кирибати');
-update twitter_tworldcountry set coordX = ord(substring('CN', 1, 1)), coordY = ord(substring('CN', 2, 1)) where wc_id=(select wc_id_id from twitter_tworldcountrytr where wc_name like 'КНР');
+update twitter_tworldcountry set coordX = ord(substring('CN', 1, 1)), coordY = ord(substring('CN', 2, 1)) where wc_id=(select wc_id_id from twitter_tworldcountrytr where wc_name like 'Китай');
 update twitter_tworldcountry set coordX = ord(substring('CC', 1, 1)), coordY = ord(substring('CC', 2, 1)) where wc_id=(select wc_id_id from twitter_tworldcountrytr where wc_name like 'Кокосовые острова');
 update twitter_tworldcountry set coordX = ord(substring('CO', 1, 1)), coordY = ord(substring('CO', 2, 1)) where wc_id=(select wc_id_id from twitter_tworldcountrytr where wc_name like 'Колумбия');
 update twitter_tworldcountry set coordX = ord(substring('KM', 1, 1)), coordY = ord(substring('KM', 2, 1)) where wc_id=(select wc_id_id from twitter_tworldcountrytr where wc_name like 'Коморы');
