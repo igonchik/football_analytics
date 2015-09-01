@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+from __future__ import division
 from django.shortcuts import render
 from datetime import datetime, timedelta
 from twython import Twython
@@ -220,14 +221,79 @@ def index(request):
         .annotate(tweets_count=Count('wcity_id__tfootballclub__tweets'))
 
     vals = list(TTweetsTweet.objects.annotate(clubs_count=Count('ttweetsclubtweetrel')).\
-        filter(created_at__gte=datetime.now()-timedelta(milliseconds=MAP_TIMEOUT), clubs_count__gte=2).\
-        select_related('ta_id'))
-
-    country_links = list(TTweetsClubTweetRel.objects.filter(tt_id__in=vals).order_by('tt_id__tt_id')
-                         .select_related('fc_id'))
-    for rec in country_links:
-        pass
-    city_links = []
+        filter(created_at__lte=datetime.now()-timedelta(milliseconds=MAP_TIMEOUT), clubs_count__gte=2).\
+        select_related('ta_id').prefetch_related('ttweetsclubtweetrel_set__fc_id__wcity_id__tworldcitytr_set__langcode',
+                                                 'ttweetsclubtweetrel_set__fc_id__tfootballclubtr_set__langcode'))
+    link_dict = {}
+    club_dict = {}
+    for rec in vals:
+        key = u''
+        key_club = u''
+        for clubs in rec.ttweetsclubtweetrel_set.all():
+            ls = u''
+            ls_club = u''
+            for l in clubs.fc_id.wcity_id.tworldcitytr_set.all():
+                if l.langcode.langcode == lang_code:
+                    ls = l
+                    break
+            for l in clubs.fc_id.tfootballclubtr_set.all():
+                if l.langcode.langcode == lang_code:
+                    ls_club = l
+                    break
+            if len(key) == 0:
+                key = ls.wcity_name
+            elif '-' not in key:
+                key = u'{0}-{1}'.format(key, ls.wcity_name)
+            if len(key_club) == 0:
+                key_club = ls_club.fc_name
+            elif '-' not in key_club:
+                key_club = u'{0}-{1}'.format(key_club, ls_club.fc_name)
+        if key not in link_dict.keys():
+            link_dict.update({key: [rec.ta_id.rating, rec]})
+        else:
+            link_dict[key] = link_dict[key].append(rec.ta_id.rating, rec)
+        if key_club not in club_dict.keys():
+            club_dict.update({key_club: [rec.ta_id.rating, rec]})
+        else:
+            club_dict[key_club] = club_dict[key_club].append(rec.ta_id.rating, rec)
+    rez = []
+    for key, vals in link_dict.items():
+        main_rating = 1
+        tik = 1
+        tweets = {}
+        maxrt = 0
+        for rec in vals:
+            if tik % 2 != 0:
+                main_rating *= (100-rec)
+                if rec > maxrt:
+                    maxrt = rec
+                tik = 2
+            else:
+                if rec.ta_id.rating not in tweets.keys():
+                    tweets.update({rec.ta_id.rating: rec})
+                tik = 1
+        main_rating = 100 - main_rating
+        rez.append([key.split('-'), main_rating/33, tweets[maxrt]])
+    country_links = rez
+    rez = []
+    for key, vals in club_dict.items():
+        main_rating = 1
+        tik = 1
+        tweets = {}
+        maxrt = 0
+        for rec in vals:
+            if tik % 2 != 0:
+                main_rating *= (100-rec)
+                if rec > maxrt:
+                    maxrt = rec
+                tik = 2
+            else:
+                if rec.ta_id.rating not in tweets.keys():
+                    tweets.update({rec.ta_id.rating: rec})
+                tik = 1
+        main_rating = 100 - main_rating
+        rez.append([key.split('-'), main_rating/33, tweets[maxrt]])
+    city_links = rez
     return render(request, 'main.html', {'index': True, 'countries': countries, 'cities': cities,
                                          'country_links': country_links, 'city_links': city_links},
                   context_instance=RequestContext(request))

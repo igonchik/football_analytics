@@ -32,7 +32,6 @@ function resizeIndex()
         $('#lang_table').css('margin-top', '0');
         $('#footer').css('height', '');
         $('#content').css('padding-bottom', '');
-
     }
 
     var y  = $('body').innerHeight()-350;

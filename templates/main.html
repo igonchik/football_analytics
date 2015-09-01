@@ -2,10 +2,11 @@
 {% load staticfiles %}
 {% load url from future %}
 {% load i18n %}
+{% load twittertags %}
 
 {% block page %}
     <link href="{% static "map/index.css" %}" type="text/css" rel="stylesheet">
-
+    <h1>{% trans "Trasfer Activity Map" %}</h1>
     <div class="container_map">
         <div class="map">
             <div class="element">
@@ -128,33 +129,39 @@
                     '{{ rec }}': {
                         latitude: {{ rec.wcity_id.coordX|stringformat:"f" }},
                         longitude: {{ rec.wcity_id.coordY|stringformat:"f" }},
+                        attrs: {
+                            fill: "#c6342e"
+                        },
                         size:{% if rec.tweets_count < 5 %}1{% elif rec.tweets_count >= 5 and rec.tweets_count < 20 %}2{% elif rec.tweets_count >= 20 and rec.tweets_count < 50 %}3{% elif rec.tweets_count >= 50 and rec.tweets_count < 100 %}4{% elif rec.tweets_count >= 100 and rec.tweets_count < 500 %}5{% else %}6{% endif %},
                         tooltip: {content: "{{ rec }}<br />{% trans "tweets count" %}: {{ rec.tweets_count }}"}
                     }{% if not forloop.last %},{% endif %}{% endfor %}
                 },
                 links: {
-                    {% for rec in country_links %}
-                    '{{ rec }}': {
-                        // The curve can be inverted by setting a negative factor
-                        factor: -0.3
-                        , between: ['paris', 'newyork']
+                    {% for val in country_links %}
+                    '{% for x in val.0 %}{{ x }}{% if not forloop.last %}-{% endif %}{% endfor %}': {
+                        factor: -0.5
+                        , between: [{% for x in val.0 %}'{{ x }}'{% if not forloop.last %},{% endif %}{% endfor %}]
                         , attrs: {
-                            "stroke-width": 2
+                            stroke: "#c6342e",
+                            "stroke-width": {{ val.1|stringformat:"f" }},
+                            opacity:0.7
                         }
-                        , tooltip: {content: "Paris - New-York"}
+                        , tooltip: {content: "<div style='line-height: 13px; max-width: 200px'><b>{% for x in val.0 %}{{ x }}{% if not forloop.last %}-{% endif %}{% endfor %}</b><br>{% trans "veroyatnost" %}: {{ val.1|dev:3 }}<br>{{ val.2.ta_id }}: <i>{{ val.2 }}</i></div>"}
                     }{% if not forloop.last or city_links|length > 0 %},{% endif %}{% endfor %}
-                    {% for rec in city_links %}
-                    '{{ rec }}': {
-                        // The curve can be inverted by setting a negative factor
-                        factor: -0.3
-                        , between: ['paris', 'newyork']
-                        , attrs: {
-                            "stroke-width": 2
-                        }
-                        , tooltip: {content: "Paris - New-York"}
-                    }{% if not forloop.last %},{% endif %}{% endfor %}
+                    {% comment %}{% for val in city_links %}
+                            '{% for x in val.0 %}{{ x }}{% if not forloop.last %}-{% endif %}{% endfor %}': {
+                                factor: -0.5
+                                , between: [{% for x in val.0 %}'{{ x }}'{% if not forloop.last %},{% endif %}{% endfor %}]
+                                , attrs: {
+                                    stroke: "#c6342e",
+                                    "stroke-width": {{ val.1|stringformat:"f" }},
+                                    opacity:0.7
+                                }
+                                , tooltip: {content: "<div style='line-height: 13px; max-width: 200px'><b>{% for x in val.0 %}{{ x }}{% if not forloop.last %}-{% endif %}{% endfor %}</b><br>{% trans "veroyatnost" %}: {{ val.1|dev:3 }}<br>{{ val.2.ta_id }}: <i>{{ val.2 }}</i></div>"}
+                            }{% if not forloop.last %},{% endif %}{% endfor %} {% endcomment %}
                 }
             });
         });
     </script>
+    <script charset="utf-8" type="text/javascript" src="{% static "map/index.js" %}"></script>
 {% endblock %}
