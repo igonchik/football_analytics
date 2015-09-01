@@ -218,10 +218,13 @@ def index(request):
     cities = TWorldCityTr.objects.filter(langcode=lang_code).filter(wcity_id__coordX__gt=0).select_related('wcity_id_'
                                                                                                            '_wc_id')\
         .annotate(tweets_count=Count('wcity_id__tfootballclub__tweets'))
-    country_links = list(TTweetsClubTweetRel.objects\
-        .filter(tt_id__created_at__gte=datetime.now()-
-                                       timedelta(milliseconds=MAP_TIMEOUT)).order_by('tt_id__tt_id')
-                         .select_related('tt_id__ta_id', 'fc_id'))
+
+    vals = list(TTweetsTweet.objects.annotate(clubs_count=Count('ttweetsclubtweetrel')).\
+        filter(created_at__gte=datetime.now()-timedelta(milliseconds=MAP_TIMEOUT), clubs_count__gte=2).\
+        select_related('ta_id'))
+
+    country_links = list(TTweetsClubTweetRel.objects.filter(tt_id__in=vals).order_by('tt_id__tt_id')
+                         .select_related('fc_id'))
     for rec in country_links:
         pass
     city_links = []
