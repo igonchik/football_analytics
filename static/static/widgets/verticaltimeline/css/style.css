@@ -203,6 +203,7 @@ Main components
 #vert_tl .cd-timeline-content .cd-read-more {
     float: right;
     padding: 0.8em 0 0.8em 1em;
+
 }
 #vert_tl .no-touch .cd-timeline-content .cd-read-more:hover {
 }

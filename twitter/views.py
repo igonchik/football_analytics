@@ -224,6 +224,9 @@ def index(request):
         filter(created_at__lte=datetime.now()-timedelta(milliseconds=MAP_TIMEOUT), clubs_count__gte=2).\
         select_related('ta_id').prefetch_related('ttweetsclubtweetrel_set__fc_id__wcity_id__tworldcitytr_set__langcode',
                                                  'ttweetsclubtweetrel_set__fc_id__tfootballclubtr_set__langcode'))
+
+    tweets_feed = list(TTweetsTweet.objects.filter(created_at__lte=datetime.now()-timedelta(milliseconds=MAP_TIMEOUT))\
+         .select_related('ta_id').order_by('-created_at')[:10])
     link_dict = {}
     club_dict = {}
     for rec in vals:
@@ -296,7 +299,7 @@ def index(request):
     city_links = rez
     return render(request, 'main.html', {'index': True, 'countries': countries, 'cities': cities,
                                          'country_links': country_links, 'city_links': city_links,
-                                         'transfer_window': True},
+                                         'transfer_window': True, 'tweets': tweets_feed},
                   context_instance=RequestContext(request))
 
 
