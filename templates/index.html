@@ -30,13 +30,13 @@
             <button class="dl-trigger" title="{% trans "menu" %}">{% trans "menu" %}</button>
             <ul class="dl-menu">
                 <li>
-                    <a href="/" {% if index %}class="mobile-active"{% endif %}>Главная</a>
+                    <a href="/" {% if index %}class="mobile-active"{% endif %}>{% trans "main_menu" %}</a>
                 </li>
                 <li>
-                    <a href="#" >О нас</a>
+                    <a href="/news/" {% if news %}class="mobile-active"{% endif %}>{% trans "news_menu" %}</a>
                 </li>
                 <li>
-                    <a href="#" >Галерея</a>
+                    <a href="/gallery/" {% if gallery %}class="mobile-active"{% endif %}>{% trans "gallery_menu" %}</a>
                 </li>
                 <li>
                     <a href="/settings/" {% if settings %}class="mobile-active"{% endif %} id="mobile-settings">{% trans "control" %}</a>
@@ -47,10 +47,10 @@
                         {% if user.is_authenticated %}
                         {% else %}
                             <li>
-                                <a href="/accounts/login/">{% trans "login" %}</a>
+                                <a href="/accounts/login/">{% trans "login_mini" %}</a>
                             </li>
                             <li>
-                                <a href="/accounts/registration/">{% trans "registration" %}</a>
+                                <a href="/accounts/registration/">{% trans "registration_mini" %}</a>
                             </li>
                         {% endif %}
                     </ul>
@@ -60,9 +60,9 @@
 
         <div class="ph-line-nav nav no-mobile">
             <div class="menu">
-                <a href="/" {% if index %}class="active"{% endif %}>Главная</a>
-                <a href="#">О нас</a>
-                <a href="#">Галерея</a>
+                <a href="/" {% if index %}class="active"{% endif %}>{% trans "main_menu" %}</a>
+                <a href="/news/" {% if news %}class="active"{% endif %}>{% trans "news_menu" %}</a>
+                <a href="/gallery/" {% if gallery %}class="active"{% endif %}>{% trans "gallery_menu" %}</a>
                 <a href="/settings/" id="settings" {% if settings %}class="active"{% endif %} title="{% trans "control" %}"></a>
                 <div class="effect"></div>
             </div>
@@ -74,8 +74,8 @@
                         This is the easy-to-use Tooltip driven purely by CSS.
                     {% else %}
                         <strong>{% trans "welcomenewuser" %}</strong><br />
-                        {% trans "pleaselogin" %} <a href="/accounts/login/">{% trans "login" %}</a> {% trans "orregistr" %}
-                        <a href="/accounts/registration/">{% trans "registration" %}</a>
+                        {% trans "pleaselogin" %} <b><a href="/accounts/login/">{% trans "login" %}</a></b> {% trans "orregistr" %}
+                        <b><a href="/accounts/registration/">{% trans "registration" %}</a></b>
                     {% endif %}
                 </span>
             </div>
@@ -84,6 +84,7 @@
 
     <div id="content">
         {% block page %}{% endblock %}
+        {% include "column.html" %}
     </div>
 
     <div id="footer" style="z-index: 999">

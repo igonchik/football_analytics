@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-08-15 10:52+0300\n"
+"POT-Creation-Date: 2015-09-20 10:36+0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -17,22 +17,226 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: football_analytics/settings.py:30
+#: football_analytics/settings.py:31
 msgid "English"
 msgstr "English"
 
-#: football_analytics/settings.py:31
+#: football_analytics/settings.py:32
 msgid "Russian"
 msgstr "Russian"
 
-#: templates/index.html:9 templates/index.html.py:10
+#: templates/index.html:9 templates/index.html.py:11
 msgid "SiteName"
 msgstr "My site"
 
-#: templates/index.html:43
-msgid "Corporate Information"
+#: templates/index.html:28
+msgid "back"
 msgstr ""
 
-#: templates/index.html:59
-msgid "globerror"
-msgstr "Ooops, error!"
+#: templates/index.html:30
+msgid "menu"
+msgstr ""
+
+#: templates/index.html:33 templates/index.html.py:63
+msgid "main_menu"
+msgstr ""
+
+#: templates/index.html:36 templates/index.html.py:64
+msgid "news_menu"
+msgstr ""
+
+#: templates/index.html:39 templates/index.html.py:65
+msgid "gallery_menu"
+msgstr ""
+
+#: templates/index.html:42 templates/index.html.py:66
+msgid "control"
+msgstr ""
+
+#: templates/index.html:45
+msgid "useraccount"
+msgstr ""
+
+#: templates/index.html:50
+msgid "login_mini"
+msgstr ""
+
+#: templates/index.html:53
+msgid "registration_mini"
+msgstr ""
+
+#: templates/index.html:73
+msgid "welcomeuser"
+msgstr ""
+
+#: templates/index.html:76
+msgid "welcomenewuser"
+msgstr ""
+
+#: templates/index.html:77
+msgid "pleaselogin"
+msgstr ""
+
+#: templates/index.html:77
+msgid "login"
+msgstr ""
+
+#: templates/index.html:77
+msgid "orregistr"
+msgstr ""
+
+#: templates/index.html:78
+msgid "registration"
+msgstr ""
+
+#: templates/index.html:92
+msgid "copyright"
+msgstr ""
+
+#: templates/main.html:10
+msgid "Trasfer Activity Map"
+msgstr ""
+
+#: templates/main.html:68
+msgid "Count of transfer news"
+msgstr ""
+
+#: templates/main.html:75
+msgid "Less than de 50 inhabitants"
+msgstr ""
+
+#: templates/main.html:83
+msgid "Between 50 and 200 inhabitants"
+msgstr ""
+
+#: templates/main.html:91
+msgid "Between 200 and 500 inhabitants"
+msgstr ""
+
+#: templates/main.html:99
+msgid "Between 500 and 1000 inhabitants"
+msgstr ""
+
+#: templates/main.html:107
+msgid "Between 1000 and 5000 inhabitants"
+msgstr ""
+
+#: templates/main.html:114
+msgid "More than 5000 inhabitants"
+msgstr ""
+
+#: templates/main.html:124 templates/main.html.py:137
+msgid "tweets count"
+msgstr ""
+
+#: templates/main.html:150
+msgid "veroyatnost"
+msgstr ""
+
+#: templates/settings/add_author.html:5
+msgid "AddAuthLabel"
+msgstr ""
+
+#: templates/settings/add_author.html:8
+msgid "URLforAuthor"
+msgstr ""
+
+#: templates/settings/add_author.html:9
+msgid "UrlAuthor"
+msgstr ""
+
+#: templates/settings/add_author.html:17
+msgid "AuthAddError"
+msgstr ""
+
+#: templates/settings/add_author.html:21
+msgid "Submit"
+msgstr ""
+
+#: templates/settings/authors.html:7
+msgid "AddAuthor"
+msgstr ""
+
+#: templates/settings/authors.html:9
+msgid "Search"
+msgstr ""
+
+#: templates/settings/authors.html:21
+msgid "getnextauthor"
+msgstr ""
+
+#: templates/settings/authors_mini.html:4
+msgid "authors"
+msgstr ""
+
+#: templates/settings/authors_mini.html:15
+msgid "renew"
+msgstr ""
+
+#: templates/settings/authors_mini.html:20
+msgid "delete"
+msgstr ""
+
+#: templates/settings/authors_mini.html:23
+msgid "alltweets"
+msgstr ""
+
+#: templates/settings/authors_mini.html:23
+msgid "alltweetsshort"
+msgstr ""
+
+#: templates/settings/authors_mini.html:24
+msgid "auth_rating"
+msgstr ""
+
+#: templates/settings/authors_mini.html:24
+msgid "auth_ratingshort"
+msgstr ""
+
+#: templates/settings/authors_mini.html:25
+msgid "more"
+msgstr ""
+
+#: templates/settings/settings.html:12
+msgid "rumorfrom"
+msgstr ""
+
+#: templates/settings/settings.html:13
+msgid "tworld"
+msgstr ""
+
+#: templates/settings/settings.html:14
+msgid "tfootball"
+msgstr ""
+
+#: templates/settings/settings.html:15
+msgid "thashtags"
+msgstr ""
+
+#: templates/settings/world/world_list.html:9
+msgid "world_list"
+msgstr ""
+
+#: templates/settings/world/world_list.html:18
+#: templates/settings/world/world_list.html:38
+msgid "count_clubs "
+msgstr ""
+
+#: templates/settings/world/world_list.html:29
+msgid "city_list"
+msgstr ""
+
+#: twitter/views.py:395
+msgid "PageNotFound"
+msgstr ""
+
+#: twitter/views.py:399
+msgid "AuthorExists"
+msgstr ""
+
+#: twitter/views.py:414
+msgid "ServerError"
+msgstr ""
+
+#~ msgid "globerror"
+#~ msgstr "Ooops, error!"

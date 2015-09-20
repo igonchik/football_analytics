@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-08-15 10:52+0300\n"
+"POT-Creation-Date: 2015-09-20 10:36+0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -19,22 +19,226 @@ msgstr ""
 "Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n"
 "%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
 
-#: football_analytics/settings.py:30
+#: football_analytics/settings.py:31
 msgid "English"
 msgstr "Английский"
 
-#: football_analytics/settings.py:31
+#: football_analytics/settings.py:32
 msgid "Russian"
 msgstr "Русский"
 
-#: templates/index.html:9 templates/index.html.py:10
+#: templates/index.html:9 templates/index.html.py:11
 msgid "SiteName"
-msgstr "Мой сайт"
+msgstr "Футбольная аналитика"
 
-#: templates/index.html:43
-msgid "Corporate Information"
-msgstr ""
+#: templates/index.html:28
+msgid "back"
+msgstr "Назад"
 
-#: templates/index.html:59
-msgid "globerror"
-msgstr "Ох, беда..."
+#: templates/index.html:30
+msgid "menu"
+msgstr "Меню"
+
+#: templates/index.html:33 templates/index.html.py:63
+msgid "main_menu"
+msgstr "Главная"
+
+#: templates/index.html:36 templates/index.html.py:64
+msgid "news_menu"
+msgstr "Новости"
+
+#: templates/index.html:39 templates/index.html.py:65
+msgid "gallery_menu"
+msgstr "Галерея"
+
+#: templates/index.html:42 templates/index.html.py:66
+msgid "control"
+msgstr "Настройки"
+
+#: templates/index.html:45
+msgid "useraccount"
+msgstr "Пользователь"
+
+#: templates/index.html:50
+msgid "login_mini"
+msgstr "Авторизация"
+
+#: templates/index.html:53
+msgid "registration_mini"
+msgstr "Регистрация"
+
+#: templates/index.html:73
+msgid "welcomeuser"
+msgstr "Добро пожаловать"
+
+#: templates/index.html:76
+msgid "welcomenewuser"
+msgstr "Добро пожаловать!"
+
+#: templates/index.html:77
+msgid "pleaselogin"
+msgstr "Пожалуйста"
+
+#: templates/index.html:77
+msgid "login"
+msgstr "авторизируйтесь"
+
+#: templates/index.html:77
+msgid "orregistr"
+msgstr "или"
+
+#: templates/index.html:78
+msgid "registration"
+msgstr "зарегистрируйтесь"
+
+#: templates/index.html:92
+msgid "copyright"
+msgstr "Все права защищены. GonDevelopment 2015"
+
+#: templates/main.html:10
+msgid "Trasfer Activity Map"
+msgstr "Карта трансферной активности"
+
+#: templates/main.html:68
+msgid "Count of transfer news"
+msgstr "Количество трансферных слухов"
+
+#: templates/main.html:75
+msgid "Less than de 50 inhabitants"
+msgstr "Менее 50 слухов"
+
+#: templates/main.html:83
+msgid "Between 50 and 200 inhabitants"
+msgstr "Более 50 и менее 200 слухов"
+
+#: templates/main.html:91
+msgid "Between 200 and 500 inhabitants"
+msgstr "Более 200 и менее 500 слухов"
+
+#: templates/main.html:99
+msgid "Between 500 and 1000 inhabitants"
+msgstr "Более 500 и менее 1000 слухов"
+
+#: templates/main.html:107
+msgid "Between 1000 and 5000 inhabitants"
+msgstr "Более 1000 и менее 5000 слухов"
+
+#: templates/main.html:114
+msgid "More than 5000 inhabitants"
+msgstr "Более 5000 слухов"
+
+#: templates/main.html:124 templates/main.html.py:137
+msgid "tweets count"
+msgstr "Количество твитов"
+
+#: templates/main.html:150
+msgid "veroyatnost"
+msgstr "Достоверность"
+
+#: templates/settings/add_author.html:5
+msgid "AddAuthLabel"
+msgstr "Добавить источник"
+
+#: templates/settings/add_author.html:8
+msgid "URLforAuthor"
+msgstr "Адрес источника"
+
+#: templates/settings/add_author.html:9
+msgid "UrlAuthor"
+msgstr "Адрес источника"
+
+#: templates/settings/add_author.html:17
+msgid "AuthAddError"
+msgstr "Ошибка при добавлении источника"
+
+#: templates/settings/add_author.html:21
+msgid "Submit"
+msgstr "Добавить"
+
+#: templates/settings/authors.html:7
+msgid "AddAuthor"
+msgstr "Добавить источник"
+
+#: templates/settings/authors.html:9
+msgid "Search"
+msgstr "Поиск..."
+
+#: templates/settings/authors.html:21
+msgid "getnextauthor"
+msgstr "Еще..."
+
+#: templates/settings/authors_mini.html:4
+msgid "authors"
+msgstr "Источники слухов"
+
+#: templates/settings/authors_mini.html:15
+msgid "renew"
+msgstr "Обновить"
+
+#: templates/settings/authors_mini.html:20
+msgid "delete"
+msgstr "Удалить"
+
+#: templates/settings/authors_mini.html:23
+msgid "alltweets"
+msgstr "Всего слухов"
+
+#: templates/settings/authors_mini.html:23
+msgid "alltweetsshort"
+msgstr "Всего"
+
+#: templates/settings/authors_mini.html:24
+msgid "auth_rating"
+msgstr "Достоверность"
+
+#: templates/settings/authors_mini.html:24
+msgid "auth_ratingshort"
+msgstr "Дост."
+
+#: templates/settings/authors_mini.html:25
+msgid "more"
+msgstr "Еще"
+
+#: templates/settings/settings.html:12
+msgid "rumorfrom"
+msgstr "Источники слухов"
+
+#: templates/settings/settings.html:13
+msgid "tworld"
+msgstr "Мир"
+
+#: templates/settings/settings.html:14
+msgid "tfootball"
+msgstr "Футбол"
+
+#: templates/settings/settings.html:15
+msgid "thashtags"
+msgstr "Хеш-тэги"
+
+#: templates/settings/world/world_list.html:9
+msgid "world_list"
+msgstr "Список стран"
+
+#: templates/settings/world/world_list.html:18
+#: templates/settings/world/world_list.html:38
+msgid "count_clubs "
+msgstr "Количество клубов"
+
+#: templates/settings/world/world_list.html:29
+msgid "city_list"
+msgstr "Список городов"
+
+#: twitter/views.py:395
+msgid "PageNotFound"
+msgstr "Страница не найдена"
+
+#: twitter/views.py:399
+msgid "AuthorExists"
+msgstr "Источник уже существует"
+
+#: twitter/views.py:414
+msgid "ServerError"
+msgstr "Ошибка сервера"
+
+#~ msgid "globerror"
+#~ msgstr "Ох, беда..."

@@ -5,8 +5,9 @@
 {% load twittertags %}
 
 {% block page %}
+    <div id="transfermap">
     <link href="{% static "map/index.css" %}" type="text/css" rel="stylesheet">
-    <h1>{% trans "Trasfer Activity Map" %}</h1>
+    <h1 style="margin-top: 0">{% trans "Trasfer Activity Map" %}</h1>
     <div class="container_map">
         <div class="map">
             <div class="element">
@@ -164,4 +165,5 @@
         });
     </script>
     <script charset="utf-8" type="text/javascript" src="{% static "map/index.js" %}"></script>
+    </div>
 {% endblock %}

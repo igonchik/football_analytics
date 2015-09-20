@@ -295,7 +295,8 @@ def index(request):
         rez.append([key.split('-'), main_rating/33, tweets[maxrt]])
     city_links = rez
     return render(request, 'main.html', {'index': True, 'countries': countries, 'cities': cities,
-                                         'country_links': country_links, 'city_links': city_links},
+                                         'country_links': country_links, 'city_links': city_links,
+                                         'transfer_window': True},
                   context_instance=RequestContext(request))
 
 
@@ -441,11 +442,11 @@ def get_author_from_url(request):
 
 def world_list(request):
     lang_code = request.LANGUAGE_CODE
-    countries = TWorldCountryTr.objects.filter(langcode=
+    countries = list(TWorldCountryTr.objects.filter(langcode=
                                                lang_code).select_related('wc_id')\
-        .annotate(country_count=Count('wc_id__tworldcity__tfootballclub')).order_by('wc_name')
-    cities = TWorldCityTr.objects.filter(langcode=lang_code).select_related('wcity_id__wc_id')\
-        .annotate(city_count=Count('wcity_id__tfootballclub')).order_by('wcity_name')
+        .annotate(country_count=Count('wc_id__tworldcity__tfootballclub')).order_by('wc_name'))
+    cities = list(TWorldCityTr.objects.filter(langcode=lang_code).select_related('wcity_id__wc_id')\
+        .annotate(city_count=Count('wcity_id__tfootballclub')).order_by('wcity_name'))
     return render(request, 'settings/world/world_list.html', {'countries': countries, 'cities': cities},
                   context_instance=RequestContext(request))
 
@@ -459,7 +460,8 @@ def save(request):
     full = []
     for rec in msg:
         for elem in rec.split('</td>'):
-            elem = elem.replace('<td>', '').replace('</td>', '').replace('</tr>', '').replace('<tr>', '').replace('\r', '').replace('\n', '').replace('\t', '')
+            elem = elem.replace('<td>', '').replace('</td>', '').replace('</tr>', '').replace('<tr>', '').\
+                replace('\r', '').replace('\n', '').replace('\t', '')
             full.append(elem)
         if len(full) > 4:
             full.pop(4)

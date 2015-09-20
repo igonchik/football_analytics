@@ -40,7 +40,7 @@ html, body {
 #content {
     padding-bottom: 67px;
     margin: auto;
-    width: 90%;
+    width: 96%;
     padding-top: 6em;
 }
 
@@ -349,7 +349,44 @@ h2.resp-accordion:first-child {
 }
 
 /*----------------------------------------*/
+#transfermap {
+    width: 70%;
+    display: inline-block;
+    vertical-align: top;
+    position: fixed;
+}
 
+#rightcolumn {
+    width: 29%;
+    display: inline-block;
+    margin-left: 73%;
+}
+
+@media only screen and (max-width: 640px) {
+    #transfermap {
+        width: 100%;
+        position: relative;
+    }
+
+    #rightcolumn {
+        width: 100%;
+        margin-left: 0;
+    }
+}
+
+@media only screen and (max-width: 480px) {
+    #transfermap {
+        width: 100%;
+        position: relative;
+        display: none;
+    }
+
+    #rightcolumn {
+        width: 100%;
+        margin-left: 0;
+        margin-top: -1em;
+    }
+}
 
 button::-moz-focus-inner {
     border: 0; }

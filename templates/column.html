@@ -1,0 +1,18 @@
+{% load staticfiles %}
+{% load l10n %}
+{% load i18n %}
+{% load url from future %}
+
+<div id="rightcolumn">
+{% if user.is_authenticated %}
+    {% include "widgets/calendar.html" %}
+{% endif %}
+
+{% if transfer_window %}
+    {% include "widgets/transfers.html" %}
+{% endif %}
+
+    {% include "widgets/news.html" %}
+
+    {% include "widgets/dates.html" %}
+</div>
