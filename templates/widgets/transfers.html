@@ -9,15 +9,21 @@
     <section id="cd-timeline" class="cd-container">
         {% for rec in tweets %}
             <div class="cd-timeline-block">
-                <div class="cd-timeline-img cd-picture">
+                <div class="cd-timeline-img {% if rec.ta_id.rating <= 33 %}cd-movie{% elif rec.ta_id.rating <= 67 %}cd-location{% else %}cd-picture{% endif %}">
                     <a href="{{ rec.ta_id.url }}" target="_blank">
-                        <img src="{% static "img/news.svg" %}" style="height: 34px; width: 34px; margin-left: -17px; margin-top: -17px" alt="{{ rec.ta_id.name }}">
+                        {% if rec.ta_id.rating <= 33 %}
+                            <img src="{% static "img/news.svg" %}" style="height: 34px; width: 34px; margin-left: -17px; margin-top: -17px" alt="{{ rec.ta_id.name }}">
+                        {% elif rec.ta_id.rating <= 67 %}
+                            <img src="{% static "img/news-icon.svg" %}" style="height: 42px; width: 42px; margin-left: -20px; margin-top: -20px" alt="{{ rec.ta_id.name }}">
+                        {% else %}
+                            <img src="{% static "img/coin-money.svg" %}" style="height: 30px; width: 30px; margin-left: -15px; margin-top: -15px" alt="{{ rec.ta_id.name }}">
+                        {% endif %}
                     </a>
                 </div>
                 <div class="cd-timeline-content">
                     <h2>{{ rec.ta_id.realname }}</h2>
                     <p>{{ rec }}</p>
-                    <a href="#0" class="cd-read-more">Read more...</a>
+                    <a href="/stats/author/{{ rec.ta_id_id }}/" target="_blank" class="cd-read-more">{% trans "Read more..." %}</a>
                     <span class="cd-date">{{ rec.created_at }}</span>
                 </div>
             </div>

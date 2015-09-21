@@ -84,7 +84,9 @@
 
     <div id="content">
         {% block page %}{% endblock %}
-        {% include "column.html" %}
+        {% if transfer_window %}
+            {% include "tr_column.html" %}
+        {% endif %}
     </div>
 
     <div id="footer" style="z-index: 999">

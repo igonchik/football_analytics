@@ -356,7 +356,7 @@ h2.resp-accordion:first-child {
     position: fixed;
 }
 
-#rightcolumn {
+#tr_column {
     width: 29%;
     display: inline-block;
     margin-left: 73%;
@@ -368,7 +368,7 @@ h2.resp-accordion:first-child {
         position: relative;
     }
 
-    #rightcolumn {
+    #tr_column {
         width: 100%;
         margin-left: 0;
     }
@@ -381,7 +381,7 @@ h2.resp-accordion:first-child {
         display: none;
     }
 
-    #rightcolumn {
+    #tr_column {
         width: 100%;
         margin-left: 0;
         margin-top: -1em;
@@ -679,5 +679,57 @@ form .submitbtn:hover, form .submitbtn:focus, form .submitbtn:active {
 .msg.error {
     color: #D8000C;
     background-color: #FFBABA;
+}
+
+
+#leftcolumn::before {
+    clear: both;
+    content: "";
+    display: table;
+}
+
+
+#leftcolumn::after {
+    background: #d7e4ed none repeat scroll 0 0;
+    content: "";
+    height: 100%;
+    width: 2px;
+    position: absolute;
+    top: 0;
+    left: 100%;
+}
+
+#leftcolumn {
+    width: 20%;
+    padding-top: 100px;
+    padding-bottom: 100px;
+    position: relative;
+    display: inline-block;
+    height: 100%;
+}
+
+#rightcolumn::after {
+    clear: both;
+    content: "";
+    display: table;
+}
+
+#rightcolumn::before {
+    background: #d7e4ed none repeat scroll 0 0;
+    content: "";
+    height: 100%;
+    width: 2px;
+    position: absolute;
+    top: 0;
+}
+
+#rightcolumn {
+    width: 20%;
+    padding-top: 100px;
+    padding-bottom: 100px;
+    position: relative;
+    margin-left: 59%;
+    display: inline-block;
+    height: 100%;
 }
 

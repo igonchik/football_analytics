@@ -1,0 +1,11 @@
+{% extends "index.html" %}
+{% load staticfiles %}
+{% load url from future %}
+{% load i18n %}
+{% load twittertags %}
+
+{% block page %}
+    {% include "leftcolumn.html" %}
+
+    {% include "rightcolumn.html" %}
+{% endblock %}

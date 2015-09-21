@@ -8,16 +8,4 @@ manage.py compilemessages (language)
 @permission_required
 
 
-ALTER TABLE tweet_analytics_tweet_analytics.twitter_tworldregion DROP FOREIGN KEY twitter_tw_wp_id_id_36fa205ee50f42a8_fk_twitter_tworldpart_wp_id;
-DROP INDEX twitter_tw_wp_id_id_36fa205ee50f42a8_fk_twitter_tworldpart_wp_id ON tweet_analytics_tweet_analytics.twitter_tworldregion;
-ALTER TABLE tweet_analytics_tweet_analytics.twitter_tworldregion DROP wp_id_id;
-DROP TABLE tweet_analytics_tweet_analytics.twitter_tworldparttr;
-DROP TABLE tweet_analytics_tweet_analytics.twitter_tworldpart;
-
-
-
--*- NEW
-
-ALTER TABLE `twitter_tworldcity` CHANGE `coordX` `coordX` FLOAT(10) UNSIGNED NOT NULL;
-ALTER TABLE `twitter_tworldcity` CHANGE `coordY` `coordY` FLOAT(10) UNSIGNED NOT NULL;
-
+twetter.reated at - len from 6 to 0

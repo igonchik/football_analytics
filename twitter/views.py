@@ -486,3 +486,7 @@ def save(request):
             x4.save()
         full = []
     return HttpResponse('')
+
+
+def news(request):
+    return render(request, 'news.html', {'news': True}, context_instance=RequestContext(request))

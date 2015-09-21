@@ -20,6 +20,7 @@ urlpatterns = patterns('',
                        url(r'^settings/tauthor/find/', 'twitter.views.get_author_from_url'),
                        url(r'^settings/tauthor/', 'twitter.views.setting_author'),
                        url(r'^$', 'twitter.views.index'),
+                       url(r'^news/$', 'twitter.views.news'),
                        url(r'^settings/worldlist/', 'twitter.views.world_list'),
                        ) + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT) + \
                            static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

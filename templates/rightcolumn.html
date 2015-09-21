@@ -1,0 +1,11 @@
+{% load staticfiles %}
+{% load url from future %}
+{% load i18n %}
+{% load twittertags %}
+
+<div id="rightcolumn">
+    {% if user.is_authenticated %}
+        {% include "widgets/calendar.html" %}
+    {% endif %}
+    {% include "widgets/dates.html" %}
+</div>
