@@ -90,7 +90,7 @@ function get_authors(page){
                 resize();
                 $(window).resize();
                 $( "#tab1_search" ).focus(function() {
-                    $('.add_author_block').css('width', '162px');
+                    $('.add_author_block').css('width', '130px');
                     $('.effect_author').css('display', 'none');
                 });
                 $( "#tab1_search" ).focusout(function() {

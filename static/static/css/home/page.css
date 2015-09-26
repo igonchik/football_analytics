@@ -540,14 +540,11 @@ a.styled-button:active {
 
 /* Demo 2 */
 .search-2 input[type=search] {
-    width: 15px;
     padding-left: 10px;
     color: transparent;
     cursor: pointer;
 }
-.search-2 input[type=search]:hover {
-    background-color: #fff;
-}
+
 .search-2 input[type=search]:focus {
     width: 130px;
     padding-left: 32px;
