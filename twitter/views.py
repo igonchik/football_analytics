@@ -211,6 +211,7 @@ def index(request):
     """
         Главная страница
     """
+    return render(request, 'flowers.html', {}, context_instance=RequestContext(request))
     #get_users_timeline()
     lang_code = request.LANGUAGE_CODE
     countries = TWorldCountryTr.objects.filter(langcode=

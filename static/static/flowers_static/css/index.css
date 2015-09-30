@@ -1,0 +1,139 @@
+html, body {
+    height: 100%;
+    padding: 0;
+    margin: 0;
+    width: 100%;
+    background-color: #f2f2f2;
+}
+
+#wrapper {
+    min-height: 100%;
+    position: relative;
+    height: auto !important;
+    background-image: url("../img/flowers.png");
+    max-width: 1280px;
+    margin: auto;
+}
+
+#content {
+    padding-bottom: 67px;
+    margin: auto;
+    width: 100%;
+}
+
+#footer {
+    bottom: 0;
+    left: 0;
+    position: absolute;
+    width: 100%;
+    background-image: url("../img/footter.png");
+    background-repeat: repeat-x;
+    height: 66px;
+}
+
+#header {
+    background-image: url("../img/top.png");
+    background-repeat: repeat-x;
+    height: 180px;
+    background-position: 0 -80px;
+}
+
+
+#copyright {
+    background-image: url("../img/cp.png");
+    background-repeat: no-repeat;
+    background-size: 100% 33px;
+    width: 640px;
+    height: 33px;
+    margin-top: 28px;
+    margin-left: 30px;
+    display: block;
+}
+
+#name {
+    background-image: url("../img/name.png");
+    background-repeat: no-repeat;
+    height: 157px;
+    background-size: 658px 107px;
+    width: 100%;
+    background-position: center 40px;
+    display: block;
+}
+
+#logo {
+    background-image: url("../img/logo.png");
+    background-repeat: no-repeat;
+    height: 150px;
+    background-size: 119px 150px;
+    width: 119px;
+    float: left;
+    margin-left: 20px;
+    margin-top: 15px;
+    display: block;
+}
+
+#header .tel {
+    background-image: url("../img/tel.png");
+    background-repeat: no-repeat;
+    height: 21px;
+    width: 153px;
+    float: right;
+    margin: 50px 20px 0 0;
+}
+
+#footer .tel {
+    background-image: url("../img/tel.png");
+    background-repeat: no-repeat;
+    height: 21px;
+    width: 153px;
+    float: right;
+    margin: 33px 20px 0 0;
+}
+
+
+#time {
+    text-align: right;
+    font-size: 18px;
+    width: 175px;
+    margin: 40px 0 0 0;
+    float: right;
+}
+
+.project-info h2 {
+    margin: 0;
+}
+
+.project-info p {
+    margin: 0;
+}
+
+.project-info p {
+    margin: 0;
+}
+
+.slides-in a {
+    text-decoration: none;
+}
+
+
+@media only screen and (max-width: 1100px) {
+    #logo {
+        display: none;
+    }
+
+    #name {
+        background-position: 20px 40px;
+    }
+}
+
+@media only screen and (max-width: 868px) {
+    #copyright {
+        display: none;
+    }
+}
+
+@media only screen and (max-width: 612px) {
+    #name {
+        display: none;
+    }
+}
