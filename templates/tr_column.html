@@ -4,8 +4,5 @@
 {% load url from future %}
 
 <div id="tr_column">
-{% if user.is_authenticated %}
-    {% include "widgets/calendar.html" %}
-{% endif %}
     {% include "widgets/transfers.html" %}
 </div>

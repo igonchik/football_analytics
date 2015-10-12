@@ -1,0 +1,14 @@
+{% load staticfiles %}
+{% load url from future %}
+{% load i18n %}
+{% load twittertags %}
+
+<link rel="stylesheet" type="text/css" href="{% static "css/news.css" %}" />
+<div class="tree">
+    <ul>
+        {% load contenttags %}
+        {% tree cpath|astree:"path" %}
+            {{ item }}
+        {% endtree %}
+    </ul>
+</div>

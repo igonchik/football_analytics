@@ -1,0 +1,9 @@
+.tree li {
+    list-style-type: none;
+    margin: 0;
+}
+
+
+.tree li span {
+    width: 100%;
+}

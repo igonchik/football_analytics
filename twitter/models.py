@@ -100,11 +100,27 @@ class TWorldCityTr(models.Model):
         return self.wcity_name
 
 
+class TPath(models.Model):
+    cp_id = models.AutoField(primary_key=True)
+    logo = models.ImageField(upload_to='contentpath_image')
+    path = models.ForeignKey('self', blank=True, null=True, related_name='children')
+
+
+class TPathTr(models.Model):
+    cp_id = models.ForeignKey(TPath)
+    langcode = models.ForeignKey(TLocalization)
+    cp_name = models.CharField(max_length=255)
+
+    def __unicode__(self):
+        return self.cp_name
+
+
 class TContentVideoView(models.Model):
     cvv_id = models.AutoField(primary_key=True)
     tstamp_update = models.DateTimeField(auto_now=True)
     content = models.FileField(upload_to='videoview')
     logo = models.ImageField(upload_to='videoview_image')
+    cp_id = models.ForeignKey(TPath)
 
 
 class TContentVideoViewTr(models.Model):
@@ -122,6 +138,7 @@ class TContentVideo(models.Model):
     tstamp_update = models.DateTimeField(auto_now=True)
     content = models.FileField(upload_to='video')
     logo = models.ImageField(upload_to='video_image', blank=True, null=True)
+    cp_id = models.ForeignKey(TPath)
 
 
 class TContentVideoTr(models.Model):
@@ -139,6 +156,7 @@ class TContentPhoto(models.Model):
     tstamp_update = models.DateTimeField(auto_now=True)
     content = models.ImageField(upload_to='photo')
     logo = models.ImageField(upload_to='photo', blank=True, null=True)
+    cp_id = models.ForeignKey(TPath)
 
 
 class TContentPhotoTr(models.Model):
@@ -157,6 +175,7 @@ class TContentArticle(models.Model):
     content = models.TextField()
     logo = models.ImageField(upload_to='article', blank=True, null=True)
     author = models.ForeignKey(TUser)
+    cp_id = models.ForeignKey(TPath)
 
 
 class TContentArticleTr(models.Model):

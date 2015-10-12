@@ -211,7 +211,6 @@ def index(request):
     """
         Главная страница
     """
-    return render(request, 'flowers.html', {}, context_instance=RequestContext(request))
     #get_users_timeline()
     lang_code = request.LANGUAGE_CODE
     countries = TWorldCountryTr.objects.filter(langcode=
@@ -489,5 +488,35 @@ def save(request):
     return HttpResponse('')
 
 
-def news(request):
-    return render(request, 'news.html', {'news': True}, context_instance=RequestContext(request))
+def news(request, page=1, path=0):
+    lang_code = request.LANGUAGE_CODE
+    cpath = TPathTr.objects.filter(langcode=lang_code).select_related('cp_id')
+    content = TContentArticleTr.objects.filter(langcode=lang_code).select_related('ca_id')
+    if int(path) > 0:
+        content = content.filter(ca_id__cp_id_id=path)
+
+    page = int(page)
+    count = content.count()
+    if count % 10 == 0:
+        pg = count / 10
+    else:
+        pg = count / 10 + 1
+    pages = []
+    if page <= 0 or page > pg:
+        pages = [1]
+    else:
+        if page > 2:
+            pages = [page-2, page-1]
+        elif page > 1:
+            pages = [page-1]
+        pages.append(page)
+        diff = pg - page
+        if diff >= 2:
+            pages.append(page+1, page+2)
+        elif diff >= 1:
+            pages.append(page+1)
+    content = list(content[(page-1)*10+1:page*10])
+    tweets = [1,3,4,5]
+    return render(request, 'news/news.html', {'news': True, 'cpath': cpath, 'page': page, 'content': content,
+                                              'pages': pages, 'path': path, 'tweets': tweets},
+                  context_instance=RequestContext(request))

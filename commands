@@ -9,3 +9,39 @@ manage.py compilemessages (language)
 
 
 twetter.reated at - len from 6 to 0
+
+
+CREATE TABLE IF NOT EXISTS `twitter_tpath` (
+  `cp_id`        INT(11)      NOT NULL,
+  `logo`          VARCHAR(100) DEFAULT NULL,
+  `path_id`         INT(11)  DEFAULT NULL
+)
+  ENGINE = InnoDB
+  DEFAULT CHARSET = utf8;
+
+
+CREATE TABLE IF NOT EXISTS `twitter_tpathtr` (
+  `id`          INT(11)      NOT NULL,
+  `cp_id_id`    INT(11)      NOT NULL,
+  `langcode_id` VARCHAR(5)   NOT NULL,
+  `cp_name`     VARCHAR(255) NOT NULL
+)
+  ENGINE = InnoDB
+  DEFAULT CHARSET = utf8;
+
+
+ALTER TABLE `twitter_tpath` ADD PRIMARY KEY (`cp_id`);
+ALTER TABLE `twitter_tpathtr`
+ADD PRIMARY KEY (`id`),
+ADD CONSTRAINT `twitte_tp_cp_id` FOREIGN KEY(`cp_id_id`) REFERENCES `twitter_tpath` (`cp_id`),
+ADD CONSTRAINT `twitte_lang_cp_id` FOREIGN KEY(`langcode_id`) REFERENCES `twitter_tlocalization` (`langcode`);
+
+
+ALTER TABLE `twitter_tcontentarticle` ADD COLUMN `cp_id_id`    INT(11)      NOT NULL;
+ALTER TABLE `twitter_tcontentarticle` ADD CONSTRAINT `twitte_twitter_tcontentarticle_cp_id` FOREIGN KEY(`cp_id_id`) REFERENCES `twitter_tpath` (`cp_id`);
+ALTER TABLE `twitter_tcontentphoto` ADD COLUMN `cp_id_id`    INT(11)      NOT NULL;
+ALTER TABLE `twitter_tcontentphoto` ADD CONSTRAINT `twitte_twitter_tcontentphoto_cp_id` FOREIGN KEY(`cp_id_id`) REFERENCES `twitter_tpath` (`cp_id`);
+ALTER TABLE `twitter_tcontentvideo` ADD COLUMN `cp_id_id`    INT(11)      NOT NULL;
+ALTER TABLE `twitter_tcontentvideo` ADD CONSTRAINT `twitte_twitter_tcontentvideo_cp_id` FOREIGN KEY(`cp_id_id`) REFERENCES `twitter_tpath` (`cp_id`);
+ALTER TABLE `twitter_tcontentvideoview` ADD COLUMN `cp_id_id`    INT(11)      NOT NULL;
+ALTER TABLE `twitter_tcontentvideoview` ADD CONSTRAINT `twitte_twitter_tcontentvideoview_cp_id` FOREIGN KEY(`cp_id_id`) REFERENCES `twitter_tpath` (`cp_id`);

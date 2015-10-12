@@ -1,0 +1,43 @@
+{% extends "index.html" %}
+{% load staticfiles %}
+{% load url from future %}
+{% load i18n %}
+{% load twittertags %}
+
+{% block page %}
+
+    <link rel="stylesheet" type="text/css" href="{% static "widgets/verticaltimeline/css/style.css" %}" />
+
+    <table style="width: 100%; margin-bottom: 2em">
+        <tr>
+            <td style="border-right: 3px solid #d7e4ed; width: 20%; padding-right: 5px; vertical-align: top">{% include "news/leftcolumn.html" %}</td>
+            <td style="width: 60%;; vertical-align: top">
+                <div id="vert_tl" style="margin-left: 0; margin-top: 13px">
+                    <section class="cd-container" style="width: 98%">
+                        {% for rec in tweets %}
+                            <div class="cd-timeline-block">
+                                <div class="cd-timeline-img" style="width: 70px; height: 70px">
+                                    <a href="{{ rec.ta_id.url }}" target="_blank">
+                                        {% if rec.ta_id.rating <= 33 %}
+                                            <img src="{% static "img/news.svg" %}" style="height: 70px; width: 70px; margin-left: -35px; margin-top: -35px" alt="{{ rec.ta_id.name }}">
+                                        {% elif rec.ta_id.rating <= 67 %}
+                                            <img src="{% static "img/news-icon.svg" %}" style="height: 70px; width: 70px; margin-left: -35px; margin-top: -35px" alt="{{ rec.ta_id.name }}">
+                                        {% else %}
+                                            <img src="{% static "img/coin-money.svg" %}" style="height: 70px; width: 70px; margin-left: -35px; margin-top: -35px" alt="{{ rec.ta_id.name }}">
+                                        {% endif %}
+                                    </a>
+                                </div>
+                                <div class="cd-timeline-content" style="margin-left: 85px; min-height: 60px">
+                                    <h2>{{ rec.ta_id.realname }}</h2>
+                                    <p>{{ rec }}</p>
+                                    <span class="cd-date">{{ rec.created_at }}</span>
+                                </div>
+                            </div>
+                        {% endfor %}
+                    </section> <!-- cd-timeline -->
+                </div>
+            </td>
+            <td style="border-left: 3px solid #d7e4ed; width: 20%; vertical-align: top">{% include "news/rightcolumn.html" %}</td>
+        </tr>
+    </table>
+{% endblock %}
