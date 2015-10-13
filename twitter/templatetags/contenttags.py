@@ -34,9 +34,7 @@ class TreeNode(template.Node):
         self.node_list = node_list
 
     def render(self, context):
-        #tree = astree(context['tree'], 'parent')
         lm = self.tree.resolve(context)
-        #raise RuntimeError(lm)
 
         # итератор по входному списку, выдающий пары вида
         # (элемент списка, его подсписок), причём одного из элемента пары
@@ -68,13 +66,11 @@ class TreeNode(template.Node):
         # для подсписка рекурсивно вызывается render_items
         def render_item(item, sub_items, level):
             return ''.join([
-                    '<li class="parent_li" id=group'+str(item.cp_id_id)+
-                    '><span name="node" id=choise_'+str(item.cp_id_id)+
-                    '><i id="iconic_'+str(item.cp_id_id)+'" class="cus-chart-organisation"></i>',
-                    item and self.node_list.render(template.Context({'item': item, 'level': level})) or '',
-                    sub_items and '</span><ul>%s</ul>' % ''.join(render_items(sub_items, level + 1)) or '',
-                    '</li>'
-                    ])
+                    '<li class="parent_li" id=group'+str(item.cp_id_id)+'><a href="/news/1/'+str(item.cp_id_id)
+                    +'/" name="node" id=choise_'
+                    +str(item.id)+'>', item and self.node_list.render(template.Context({'item': item,
+                                                                                              'level': level})) or '',
+                    sub_items and '</a><ul style="padding-left: 15px">%s</ul>' % ''.join(render_items(sub_items, level + 1)) or '', '</li>'])
 
         # вывод списка элементов
         def render_items(items, level):

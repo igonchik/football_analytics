@@ -490,12 +490,23 @@ def save(request):
 
 def news(request, page=1, path=0):
     lang_code = request.LANGUAGE_CODE
+    path = int(path)
     cpath = TPathTr.objects.filter(langcode=lang_code).select_related('cp_id')
-    content = TContentArticleTr.objects.filter(langcode=lang_code).select_related('ca_id')
+    content = TContentArticleTr.objects.filter(langcode=lang_code).select_related('ca_id__author')
     if int(path) > 0:
-        content = content.filter(ca_id__cp_id_id=path)
-
+        ppath = [path]
+        try:
+            if TPath.objects.get(cp_id=path).path_id is None:
+                for xx in TPath.objects.filter(path_id=path).values_list('cp_id', flat=True):
+                    ppath.append(xx)
+        except:
+            pass
+        ek = []
+        for rec in content:
+            ek.append(rec.ca_id.cp_id_id)
+        content = content.filter(ca_id__cp_id_id__in=ppath)
     page = int(page)
+
     count = content.count()
     if count % 10 == 0:
         pg = count / 10
@@ -515,8 +526,44 @@ def news(request, page=1, path=0):
             pages.append(page+1, page+2)
         elif diff >= 1:
             pages.append(page+1)
-    content = list(content[(page-1)*10+1:page*10])
-    tweets = [1,3,4,5]
+    content = list(content[(page-1)*1:page*10-1])
     return render(request, 'news/news.html', {'news': True, 'cpath': cpath, 'page': page, 'content': content,
-                                              'pages': pages, 'path': path, 'tweets': tweets},
+                                              'pages': pages, 'path': path},
                   context_instance=RequestContext(request))
+
+
+def news_search(request, page=1):
+    lang_code = request.LANGUAGE_CODE
+    page = int(page)
+    path = 0
+    if request.method == 'POST' and 'search_news' in request.POST:
+        cpath = TPathTr.objects.filter(langcode=lang_code).select_related('cp_id')
+        content = TContentArticleTr.objects.filter(langcode=lang_code).select_related('ca_id__author')
+        qstring = request.POST['search_news'].strip()
+        content = content.filter(Q(ca_name__icontains=qstring) | Q(content__icontains=qstring))
+        count = content.count()
+        if count % 10 == 0:
+            pg = count / 10
+        else:
+            pg = count / 10 + 1
+        pages = []
+        if page <= 0 or page > pg:
+            pages = [1]
+        else:
+            if page > 2:
+                pages = [page-2, page-1]
+            elif page > 1:
+                pages = [page-1]
+            pages.append(page)
+            diff = pg - page
+            if diff >= 2:
+                pages.append(page+1, page+2)
+            elif diff >= 1:
+                pages.append(page+1)
+        content = list(content[(page-1)*1:page*10-1])
+        return render(request, 'news/news.html', {'news': True, 'cpath': cpath, 'page': page, 'content': content,
+                                                  'pages': pages, 'path': path,
+                                                  'post': request.POST['search_news'].strip()},
+                      context_instance=RequestContext(request))
+    else:
+        return HttpResponseRedirect('/news/')

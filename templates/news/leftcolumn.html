@@ -5,10 +5,13 @@
 
 <link rel="stylesheet" type="text/css" href="{% static "css/news.css" %}" />
 <div class="tree">
-    <ul>
+    <input type="hidden" id="cur_path" value="{{ path }}">
+    <ul style="padding: 0; width: 96%" id="tree_ul">
         {% load contenttags %}
         {% tree cpath|astree:"path" %}
             {{ item }}
         {% endtree %}
     </ul>
 </div>
+
+<script type="text/javascript" src="{% static "js/news.js" %}"></script>

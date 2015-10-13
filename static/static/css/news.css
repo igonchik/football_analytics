@@ -1,9 +1,135 @@
 .tree li {
     list-style-type: none;
-    margin: 0;
+    margin: 5px 0 0;
+    position: relative;
+    overflow-x: hidden;
 }
 
 
-.tree li span {
+.tree li a {
+    color: #393939;
+    font-size: 16px;
+    cursor: pointer;
+    text-decoration: none;
+
+}
+
+
+.news_effect {
+    position: absolute;
+    right: -100%;
+    -webkit-transition: 0.7s ease-in-out;
+    -moz-transition: 0.7s ease-in-out;
+    -o-transition: 0.7s ease-in-out;
+    -ms-transition: 0.7s ease-in-out;
+    transition: 0.7s ease-in-out;
+}
+
+
+.parent_li a:hover ~ .news_effect {
+    right: 0 !important;
+}
+
+
+.news_effect {
+    background: #c6342e none repeat scroll 0 0;
+    box-shadow: 0 1px 0 white;
+    height: 2px;
     width: 100%;
+    top: 18px;
+}
+
+
+.tree li a.active_span ~ .news_effect {
+    right: 0 !important;
+}
+
+.news_logo {
+    height: 70px !important;
+    width: 70px !important;
+    margin-left: -35px !important;
+    margin-top: -35px !important;
+    border-radius: 35px !important;
+    -moz-border-radius: 35px !important;
+    -webkit-border-radius: 35px !important;
+    -o-border-radius: 35px !important;
+    -ms-border-radius: 35px !important;
+}
+
+.news_control {
+    position: relative;
+    height: 25px;
+    background: #d7e4ed;
+    border-radius: 0.25em;
+    padding: 1em;
+    box-shadow: 5px 5px 8px #CCC;
+    padding-bottom: 0;
+    margin-bottom: 15px;
+}
+
+.add_author_block {
+    float: right;
+    overflow: hidden;
+    position: relative;
+    width: 90px;
+    text-align: center;
+    height: 2.5em;
+    -o-transition: all .5s;
+    -webkit-transition: all .5s;
+	-moz-transition: all .5s;
+    -ms-transition: all .5s;
+	transition: all .5s;
+    margin-top: -10px; margin-right: 10px
+}
+
+.add_author {
+    display: block;
+    position: relative;
+    float: right;
+    border: none;
+    background: rgba(0, 0, 0, 0) url("../img/calendar-add.svg") no-repeat scroll 0 0 / 2.3em auto;
+    cursor: pointer;
+    width: 40px;
+    height: 2.5em;
+}
+
+.add_author:hover {
+    background: rgba(0, 0, 0, 0) url("../img/calendar-add_hover.svg") no-repeat scroll 0 0 / 2.3em auto;
+}
+
+.effect_author {
+    position: absolute;
+    left: -30%;
+    -webkit-transition: 0.7s ease-in-out;
+    -moz-transition: 0.7s ease-in-out;
+    -o-transition: 0.7s ease-in-out;
+    -ms-transition: 0.7s ease-in-out;
+    transition: 0.7s ease-in-out;
+    width: 46px;
+    height: 2px;
+    bottom: 0;
+    background: #c6342e;
+    box-shadow: 0 1px 0 white;
+    margin-left:-40px;
+}
+
+.tab1:nth-child(2):hover ~ .effect_author {
+    left: 40% !important; }
+.tab1:nth-child(2):focus ~ .effect_author {
+    left: 60% !important; }
+.tab1:nth-child(1):hover ~ .effect_author {
+    left: 92% !important; }
+
+
+.search input[type=search]:focus {
+    width: 180px !important;
+    background-color: #d7e4ed;
+}
+
+.search-2 input[type="search"] {
+    padding-left: 30px !important;
+}
+
+a:focus {
+    color: red;
 }

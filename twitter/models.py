@@ -172,7 +172,6 @@ class TContentPhotoTr(models.Model):
 class TContentArticle(models.Model):
     ca_id = models.AutoField(primary_key=True)
     tstamp_update = models.DateTimeField(auto_now=True)
-    content = models.TextField()
     logo = models.ImageField(upload_to='article', blank=True, null=True)
     author = models.ForeignKey(TUser)
     cp_id = models.ForeignKey(TPath)
@@ -183,6 +182,7 @@ class TContentArticleTr(models.Model):
     langcode = models.ForeignKey(TLocalization)
     ca_name = models.CharField(max_length=255)
     ca_desk = models.CharField(max_length=500, blank=True, null=True)
+    content = models.TextField(blank=True, null=True)
 
     def __unicode__(self):
         return self.ca_name

@@ -508,7 +508,7 @@ a.styled-button:active {
     background: rgba(0, 0, 0, 0) url(../../img/search.svg) no-repeat 2px 0 / 2.2em auto;
     border: none;
     padding: 9px 10px 9px 32px;
-    width: 55px;
+    width: 20px;
     -webkit-border-radius: 10em;
     -moz-border-radius: 10em;
     -webkit-transition: all .5s;
